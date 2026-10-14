@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manchester United · Season Dashboard</title>
+<style>
+  :root {
+    --bg: #f4f4f2; --surface: #ffffff; --ink: #111111; --muted: #6b6b6b; --line: #e4e4e1;
+    --red: #DA291C; --gold: #FBE122; --win: #15803d; --draw: #8a8a8a; --loss: #DA291C;
+    --radius: 12px; --pad: clamp(12px, 3vw, 24px);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #0c0c0c; --surface: #161616; --ink: #f5f5f5; --muted: #9a9a9a; --line: #262626; }
+  }
+  :root[data-theme="dark"] { --bg: #0c0c0c; --surface: #161616; --ink: #f5f5f5; --muted: #9a9a9a; --line: #262626; }
+
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  header { background: var(--red); color: #fff; border-bottom: 4px solid var(--gold); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: var(--pad); }
+  .top { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; }
+  h1 { font-size: clamp(18px, 3vw, 24px); margin: 0; font-weight: 700; letter-spacing: .01em; }
+  .sub { font-size: 12px; opacity: .85; }
+  .badge { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: var(--gold); color: #111; font-size: 11px; font-weight: 700; vertical-align: middle; }
+
+  .seasons { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .seasons::-webkit-scrollbar { display: none; }
+  .seasons button {
+    flex: none; border: 1px solid rgba(255,255,255,.4); background: transparent; color: #fff;
+    padding: 6px 12px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .seasons button[aria-pressed="true"] { background: #fff; color: var(--red); border-color: #fff; }
+
+  main { display: grid; gap: 16px; padding-top: var(--pad); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; min-width: 0; }
+  .card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 12px; font-weight: 600; }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; }
+  .kpi .v { font-size: clamp(22px, 4vw, 30px); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .kpi .l { font-size: 12px; color: var(--muted); }
+
+  .split { display: grid; gap: 16px; }
+  @media (min-width: 900px) { .split { grid-template-columns: 1.4fr 1fr; } }
+
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { padding: 8px 6px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  th:first-child, td:first-child, th.name, td.name { text-align: left; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tr.us td { background: rgba(218, 41, 28, .08); font-weight: 600; }
+  td.pts { font-weight: 700; }
+
+  .form { display: inline-flex; gap: 3px; }
+  .form i {
+    font-style: normal; width: 18px; height: 18px; border-radius: 4px; color: #fff;
+    display: inline-grid; place-items: center; font-size: 10px; font-weight: 700;
+  }
+  .form .W { background: var(--win); } .form .D { background: var(--draw); } .form .L { background: var(--loss); }
+
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  select {
+    font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--ink);
+  }
+  .pos { color: var(--muted); font-size: 12px; }
+
+  .bars { display: flex; align-items: flex-end; gap: 6px; height: 160px; padding-top: 8px; }
+  .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+  .bar-pair { flex: 1; min-height: 0; display: flex; align-items: flex-end; gap: 2px; width: 100%; justify-content: center; }
+  .bar { width: min(10px, 35%); border-radius: 3px 3px 0 0; min-height: 2px; }
+  .bar.gf { background: var(--red); } .bar.ga { background: var(--muted); opacity: .6; }
+  .bar-label { font-size: 11px; color: var(--muted); }
+  .legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .legend .gf::before { background: var(--red); } .legend .ga::before { background: var(--muted); opacity: .6; }
+
+  .note { font-size: 12px; color: var(--muted); padding: 0 var(--pad) 24px; }
+
+  @media (max-width: 599px) {
+    .hide-sm { display: none; }
+    th, td { padding: 7px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <div>
+      <h1>Manchester United <span class="badge" id="status">SAMPLE</span></h1>
+      <div class="sub" id="meta"></div>
+    </div>
+    <nav class="seasons" id="seasons" aria-label="Season"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <h2 id="kpi-title">Season overview</h2>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <div class="split">
+    <section class="card">
+      <h2>League table</h2>
+      <div class="scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th class="name">Club</th><th>P</th><th>W</th><th>D</th><th>L</th>
+              <th class="hide-sm">GF</th><th class="hide-sm">GA</th><th>GD</th><th>Pts</th><th class="hide-sm">Form</th>
+            </tr>
+          </thead>
+          <tbody id="standings"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Goals by month</h2>
+      <div class="bars" id="bars"></div>
+      <div class="legend"><span class="gf">Scored</span><span class="ga">Conceded</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="toolbar">
+      <h2 style="margin:0">Player stats</h2>
+      <label class="pos">Sort by
+        <select id="sort">
+          <option value="goals">Goals</option>
+          <option value="assists">Assists</option>
+          <option value="rating">Rating</option>
+          <option value="apps">Appearances</option>
+        </select>
+      </label>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th class="name">Player</th><th>Pos</th><th>Apps</th><th>G</th><th>A</th><th class="hide-sm">G+A / app</th><th>Rating</th></tr>
+        </thead>
+        <tbody id="players"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<p class="note">Figures shown are placeholder sample data, not real results. Swap in a live feed via <code>getSeason()</code>.</p>
+
+<script>
+  const MY_TEAM = "Manchester United";
+  const MONTHS = ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"];
+  const CLUBS = [MY_TEAM, "Club A", "Club B", "Club C", "Club D", "Club E", "Club F", "Club G"];
+  const POSITIONS = ["GK", "DF", "DF", "DF", "MF", "MF", "FW", "FW"];
+
+  const SEASONS = [
+    { id: "2026-27", played: 9,  seed: 7,  live: true },
+    { id: "2025-26", played: 38, seed: 19 },
+    { id: "2024-25", played: 38, seed: 23 }
+  ];
+
+  // Deterministic PRNG so each season always renders the same sample data.
+  function rng(seed) {
+    let s = seed;
+    return () => (s = (s * 1664525 + 1013904223) % 4294967296) / 4294967296;
+  }
+
+  function buildSeason({ id, played, seed, live }) {
+    const r = rng(seed);
+    const int = (a, b) => Math.floor(a + r() * (b - a + 1));
+
+    const standings = CLUBS.map(team => {
+      let w = 0, d = 0, l = 0, gf = 0, ga = 0;
+      const results = [];
+      for (let i = 0; i < played; i++) {
+        const a = int(0, 3), b = int(0, 3);
+        gf += a; ga += b;
+        const res = a > b ? "W" : a < b ? "L" : "D";
+        results.push(res);
+        if (res === "W") w++; else if (res === "L") l++; else d++;
+      }
+      return { team, p: played, w, d, l, gf, ga, gd: gf - ga, pts: w * 3 + d, form: results.slice(-5) };
+    }).sort((x, y) => y.pts - x.pts || y.gd - x.gd || y.gf - x.gf);
+
+    const players = Array.from({ length: 14 }, (_, i) => {
+      const pos = POSITIONS[i % POSITIONS.length];
+      const apps = int(Math.floor(played / 3), played);
+      const goals = pos === "FW" ? int(0, 12) : pos === "MF" ? int(0, 5) : 0;
+      const assists = pos === "GK" ? 0 : int(0, 8);
+      return {
+        name: `Player ${String(i + 1).padStart(2, "0")}`,
+        pos, apps, goals, assists,
+        rating: (6 + r() * 2.5).toFixed(2)
+      };
+    });
+
+    const monthCount = played >= 38 ? 10 : Math.max(1, Math.round(played / 4));
+    const monthly = MONTHS.slice(0, monthCount).map(m => ({ m, gf: int(0, 9), ga: int(0, 7) }));
+
+    return {
+      id, label: id.replace("-", "/"), live: !!live, played,
+      standings, players, monthly
+    };
+  }
+
+  // Swap this for a live feed later. Must return the same shape as buildSeason().
+  function getSeason(id) {
+    const cfg = SEASONS.find(s => s.id === id);
+    return buildSeason(cfg);
+  }
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmtGD = n => (n > 0 ? "+" : "") + n;
+
+  const $ = id => document.getElementById(id);
+  let current = SEASONS[0].id;
+  let sortKey = "goals";
+
+  function renderSeasonButtons() {
+    $("seasons").innerHTML = SEASONS.map(s =>
+      `<button type="button" data-id="${s.id}" aria-pressed="${s.id === current}">${s.id.replace("-", "/")}</button>`
+    ).join("");
+  }
+
+  function renderKpis(s) {
+    const idx = s.standings.findIndex(r => r.team === MY_TEAM);
+    const me = s.standings[idx];
+    $("kpi-title").textContent = `${s.label} · ${s.live ? "In progress" : "Final"}`;
+    $("kpis").innerHTML = [
+      ["Position", `${idx + 1}`],
+      ["Points", me.pts],
+      ["Record", `${me.w}-${me.d}-${me.l}`],
+      ["Goals", `${me.gf}:${me.ga}`],
+      ["Goal diff", fmtGD(me.gd)],
+      ["Pts / game", (me.pts / me.p || 0).toFixed(2)]
+    ].map(([l, v]) => `<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${l}</div></div>`).join("");
+    $("meta").textContent = `${s.label} · ${s.played} of 38 matchweeks played`;
+  }
+
+  function renderStandings(s) {
+    $("standings").innerHTML = s.standings.map((r, i) => `
+      <tr class="${r.team === MY_TEAM ? "us" : ""}">
+        <td>${i + 1}</td>
+        <td class="name">${esc(r.team)}</td>
+        <td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
+        <td class="hide-sm">${r.gf}</td><td class="hide-sm">${r.ga}</td>
+        <td>${fmtGD(r.gd)}</td>
+        <td class="pts">${r.pts}</td>
+        <td class="hide-sm"><span class="form">${r.form.map(f => `<i class="${f}">${f}</i>`).join("")}</span></td>
+      </tr>`).join("");
+  }
+
+  function renderBars(s) {
+    const max = Math.max(1, ...s.monthly.flatMap(m => [m.gf, m.ga]));
+    $("bars").innerHTML = s.monthly.map(m => `
+      <div class="bar-group" title="${m.m}: ${m.gf} scored, ${m.ga} conceded">
+        <div class="bar-pair">
+          <div class="bar gf" style="height:${(m.gf / max) * 100}%"></div>
+          <div class="bar ga" style="height:${(m.ga / max) * 100}%"></div>
+        </div>
+        <div class="bar-label">${m.m}</div>
+      </div>`).join("");
+  }
+
+  function renderPlayers(s) {
+    const rows = [...s.players].sort((a, b) => {
+      const av = sortKey === "rating" ? +a.rating : a[sortKey];
+      const bv = sortKey === "rating" ? +b.rating : b[sortKey];
+      return bv - av;
+    });
+    $("players").innerHTML = rows.map(p => {
+      const perApp = p.apps ? ((p.goals + p.assists) / p.apps).toFixed(2) : "0.00";
+      return `
+      <tr>
+        <td class="name">${esc(p.name)}</td>
+        <td><span class="pos">${p.pos}</span></td>
+        <td>${p.apps}</td><td>${p.goals}</td><td>${p.assists}</td>
+        <td class="hide-sm">${perApp}</td>
+        <td>${p.rating}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  function render() {
+    const s = getSeason(current);
+    renderKpis(s);
+    renderStandings(s);
+    renderBars(s);
+    renderPlayers(s);
+  }
+
+  $("seasons").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-id]");
+    if (!btn || btn.dataset.id === current) return;
+    current = btn.dataset.id;
+    renderSeasonButtons();
+    render();
+  });
+
+  $("sort").addEventListener("change", e => {
+    sortKey = e.target.value;
+    renderPlayers(getSeason(current));
+  });
+
+  renderSeasonButtons();
+  render();
+</script>
+</body>
+</html>
