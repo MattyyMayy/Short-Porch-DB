@@ -141,6 +141,28 @@
 
   <section class="card">
     <div class="toolbar">
+      <h2 style="margin:0">Player stats</h2>
+      <label class="pos">Sort by
+        <select id="sort">
+          <option value="goals">Goals</option>
+          <option value="assists">Assists</option>
+          <option value="rating">Rating</option>
+          <option value="apps">Appearances</option>
+        </select>
+      </label>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th class="name">Player</th><th>Pos</th><th>Apps</th><th>G</th><th>A</th><th class="hide-sm">G+A / app</th><th>Rating</th></tr>
+        </thead>
+        <tbody id="players"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="toolbar">
       <h2 style="margin:0">Results &amp; fixtures</h2>
       <label class="pos">Show
         <select id="filter">
@@ -162,79 +184,45 @@
 
 </main>
 
-<p class="note">Premier League data from <a href="https://github.com/openfootball/football.json">openfootball</a> (free, no API key). Results are added by volunteers and can lag a few days behind.</p>
+<p class="note" id="note">Data from <a href="https://www.api-football.com/">API-Football</a>, refreshed every 3 hours.</p>
 
 <script>
-  const FEED = "https://raw.githubusercontent.com/openfootball/football.json/master";
-  const MY_TEAM = "Manchester United FC";
+  // Data is written to data/ by .github/workflows/update-data.yml, which calls
+  // API-Football with a key kept in GitHub secrets. This page never sees the key.
+  const DATA = "data";
+  const MY_TEAM_ID = 33; // Manchester United
   const MONTHS = ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"];
-  const SEASONS = ["2026-27", "2025-26", "2024-25"];
-
-  // The feed writes most scores as { ft: [h, a] } but some goalless draws as a bare [0, 0].
-  const scoreOf = m => Array.isArray(m.score) ? m.score : (m.score && m.score.ft) || null;
-  const shortName = n => n.replace(/^AFC /, "").replace(/ A?FC$/, "");
   const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const monthOf = date => MONTH_NAMES[+date.slice(5, 7) - 1];
-  const fmtDate = (date, opts) => new Date(date + "T12:00:00Z").toLocaleDateString("en-GB", { timeZone: "UTC", ...opts });
-  const today = new Date().toISOString().slice(0, 10);
+  const POS = { Goalkeeper: "GK", Defender: "DF", Midfielder: "MF", Attacker: "FW" };
+  const NOT_PLAYED = { PST: "Postponed", CANC: "Cancelled", ABD: "Abandoned", SUSP: "Suspended", INT: "Interrupted" };
 
-  function buildSeason(id, data) {
-    const matches = [...data.matches].sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
-    const played = matches.filter(scoreOf);
+  const shortName = n => n.replace(/^AFC /, "").replace(/ A?FC$/, "");
+  const fmtDate = (iso, opts) => new Date(iso).toLocaleDateString("en-GB", opts);
+  const fmtTime = iso => new Date(iso).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
 
-    const rows = {};
-    const row = team => rows[team] || (rows[team] = { team, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, results: [] });
-    matches.forEach(m => { row(m.team1); row(m.team2); });
-
-    for (const m of played) {
-      const [h, a] = scoreOf(m);
-      for (const [team, f, ag] of [[m.team1, h, a], [m.team2, a, h]]) {
-        const r = row(team);
-        const res = f > ag ? "W" : f < ag ? "L" : "D";
-        r.p++; r.gf += f; r.ga += ag; r.results.push(res);
-        if (res === "W") r.w++; else if (res === "L") r.l++; else r.d++;
-      }
-    }
-
-    const standings = Object.values(rows)
-      .map(r => ({ ...r, gd: r.gf - r.ga, pts: r.w * 3 + r.d, form: r.results.slice(-5) }))
-      .sort((x, y) => y.pts - x.pts || y.gd - x.gd || y.gf - x.gf || x.team.localeCompare(y.team));
-
-    const fixtures = matches
-      .filter(m => m.team1 === MY_TEAM || m.team2 === MY_TEAM)
-      .map(m => {
-        const home = m.team1 === MY_TEAM;
-        const sc = scoreOf(m);
-        const [f, a] = sc ? (home ? sc : [sc[1], sc[0]]) : [null, null];
-        return {
-          date: m.date, time: m.time, home,
-          opponent: home ? m.team2 : m.team1,
-          gf: f, ga: a,
-          result: sc ? (f > a ? "W" : f < a ? "L" : "D") : null
-        };
-      });
-
-    const done = fixtures.filter(x => x.result);
-    const lastMonth = done.length ? MONTHS.indexOf(monthOf(done[done.length - 1].date)) : -1;
-    const monthly = MONTHS.slice(0, lastMonth + 1).map(m => {
-      const inMonth = done.filter(x => monthOf(x.date) === m);
-      return { m, gf: inMonth.reduce((s, x) => s + x.gf, 0), ga: inMonth.reduce((s, x) => s + x.ga, 0) };
+  function getJSON(path) {
+    return fetch(path, { cache: "no-cache" }).then(res => {
+      if (!res.ok) throw new Error(res.status === 404 ? "no data yet" : `HTTP ${res.status}`);
+      return res.json();
     });
+  }
 
-    return {
-      id, label: id.replace("-", "/"),
-      live: played.length < matches.length,
-      lastResult: played.length ? played[played.length - 1].date : null,
-      standings, fixtures, monthly
-    };
+  function withMonthly(s) {
+    const done = s.fixtures.filter(x => x.result);
+    const monthOf = x => MONTH_NAMES[new Date(x.kickoff).getMonth()];
+    const last = done.length ? MONTHS.indexOf(monthOf(done[done.length - 1])) : -1;
+    s.monthly = MONTHS.slice(0, last + 1).map(m => {
+      const inMonth = done.filter(x => monthOf(x) === m);
+      return { m, gf: inMonth.reduce((t, x) => t + x.gf, 0), ga: inMonth.reduce((t, x) => t + x.ga, 0) };
+    });
+    return s;
   }
 
   const cache = {};
   function getSeason(id) {
     if (!cache[id]) {
-      cache[id] = fetch(`${FEED}/${id}/en.1.json`)
-        .then(res => { if (!res.ok) throw new Error(`Feed returned ${res.status}`); return res.json(); })
-        .then(data => buildSeason(id, data))
+      cache[id] = getJSON(`${DATA}/${id}.json`)
+        .then(withMonthly)
         .catch(err => { delete cache[id]; throw err; });
     }
     return cache[id];
@@ -242,39 +230,46 @@
 
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmtGD = n => (n > 0 ? "+" : "") + n;
+  const label = id => `${id}/${String(+id + 1).slice(2)}`;
 
   const $ = id => document.getElementById(id);
-  let current = SEASONS[0];
+  let seasons = [];
+  let current = null;
   let filter = "all";
+  let sortKey = "goals";
   let season = null;
   let requestId = 0;
 
   function renderSeasonButtons() {
-    $("seasons").innerHTML = SEASONS.map(id =>
-      `<button type="button" data-id="${id}" aria-pressed="${id === current}">${id.replace("-", "/")}</button>`
+    $("seasons").innerHTML = seasons.map(id =>
+      `<button type="button" data-id="${id}" aria-pressed="${id === current}">${label(id)}</button>`
     ).join("");
   }
 
   function renderKpis(s) {
-    const idx = s.standings.findIndex(r => r.team === MY_TEAM);
+    const idx = s.standings.findIndex(r => r.teamId === MY_TEAM_ID);
     const me = s.standings[idx];
     $("kpi-title").textContent = `${s.label} · ${s.live ? "In progress" : "Final"}`;
+    if (!me) {
+      $("kpis").innerHTML = `<p class="pos">No league table for this season yet.</p>`;
+      $("meta").textContent = s.label;
+      return;
+    }
     $("kpis").innerHTML = [
-      ["Position", `${idx + 1}`],
+      ["Position", `${me.rank}`],
       ["Points", me.pts],
       ["Record", `${me.w}-${me.d}-${me.l}`],
       ["Goals", `${me.gf}:${me.ga}`],
       ["Goal diff", fmtGD(me.gd)],
       ["Pts / game", (me.pts / me.p || 0).toFixed(2)]
     ].map(([l, v]) => `<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${l}</div></div>`).join("");
-    const upTo = s.lastResult ? ` · results to ${fmtDate(s.lastResult, { day: "numeric", month: "short", year: "numeric" })}` : "";
-    $("meta").textContent = `${s.label} · ${me.p} of 38 played${upTo}`;
+    $("meta").textContent = `${s.label} · ${me.p} of 38 played`;
   }
 
   function renderStandings(s) {
-    $("standings").innerHTML = s.standings.map((r, i) => `
-      <tr class="${r.team === MY_TEAM ? "us" : ""}">
-        <td>${i + 1}</td>
+    $("standings").innerHTML = s.standings.map(r => `
+      <tr class="${r.teamId === MY_TEAM_ID ? "us" : ""}">
+        <td>${r.rank}</td>
         <td class="name">${esc(shortName(r.team))}</td>
         <td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
         <td class="hide-sm">${r.gf}</td><td class="hide-sm">${r.ga}</td>
@@ -300,6 +295,22 @@
       </div>`).join("");
   }
 
+  function renderPlayers(s) {
+    if (!s.players.length) {
+      $("players").innerHTML = `<tr><td class="empty" colspan="7">No player stats yet.</td></tr>`;
+      return;
+    }
+    const rows = [...s.players].sort((a, b) => (b[sortKey] ?? -1) - (a[sortKey] ?? -1) || b.apps - a.apps);
+    $("players").innerHTML = rows.map(p => `
+      <tr>
+        <td class="name">${esc(p.name)}</td>
+        <td><span class="pos">${esc(POS[p.pos] || p.pos || "")}</span></td>
+        <td>${p.apps}</td><td>${p.goals}</td><td>${p.assists}</td>
+        <td class="hide-sm">${((p.goals + p.assists) / p.apps).toFixed(2)}</td>
+        <td>${p.rating == null ? "–" : p.rating.toFixed(2)}</td>
+      </tr>`).join("");
+  }
+
   function renderMatches(s) {
     const rows = s.fixtures.filter(x =>
       filter === "all" || (filter === "results" ? x.result : !x.result));
@@ -308,11 +319,11 @@
       return;
     }
     $("matches").innerHTML = rows.map(x => {
-      const date = fmtDate(x.date, { weekday: "short", day: "numeric", month: "short" });
-      const score = x.result ? `${x.gf}–${x.ga}` : esc(x.time || "TBC");
+      const date = fmtDate(x.kickoff, { weekday: "short", day: "numeric", month: "short" });
+      const score = x.result ? `${x.gf}–${x.ga}` : NOT_PLAYED[x.status] ? "–" : x.status === "TBD" ? "TBC" : fmtTime(x.kickoff);
       const result = x.result
         ? `<span class="res ${x.result}">${x.result}</span>`
-        : `<span class="pos">${x.date < today ? "Awaiting" : "–"}</span>`;
+        : `<span class="pos">${NOT_PLAYED[x.status] || (x.status === "NS" || x.status === "TBD" ? "–" : "Live")}</span>`;
       return `
       <tr class="${x.result ? "" : "upcoming"}">
         <td class="name">${date}</td>
@@ -326,6 +337,14 @@
 
   function setStatus(text) { $("status").textContent = text; }
 
+  function showError(message) {
+    season = null;
+    setStatus("OFFLINE");
+    $("meta").textContent = message;
+    $("kpis").innerHTML = `<p class="pos">${esc(message)}</p>`;
+    $("standings").innerHTML = $("bars").innerHTML = $("players").innerHTML = $("matches").innerHTML = "";
+  }
+
   async function render() {
     const id = ++requestId;
     setStatus("LOADING");
@@ -333,18 +352,17 @@
       const s = await getSeason(current);
       if (id !== requestId) return;
       season = s;
-      setStatus(s.live ? "LIVE FEED" : "FINAL");
+      setStatus(s.live ? "LIVE" : "FINAL");
       renderKpis(s);
       renderStandings(s);
       renderBars(s);
+      renderPlayers(s);
       renderMatches(s);
+      const updated = new Date(s.updated).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
+      $("note").innerHTML = `Data from <a href="https://www.api-football.com/">API-Football</a>, refreshed every 3 hours. Last change ${esc(updated)}.`;
     } catch (err) {
       if (id !== requestId) return;
-      season = null;
-      setStatus("OFFLINE");
-      $("meta").textContent = `Couldn't load ${current.replace("-", "/")}: ${err.message}`;
-      $("kpis").innerHTML = `<p class="pos">Data feed unavailable. Check your connection and pick the season again to retry.</p>`;
-      $("standings").innerHTML = $("bars").innerHTML = $("matches").innerHTML = "";
+      showError(`Couldn't load ${label(current)}: ${err.message}. Pick the season again to retry.`);
     }
   }
 
@@ -356,13 +374,27 @@
     render();
   });
 
+  $("sort").addEventListener("change", e => {
+    sortKey = e.target.value;
+    if (season) renderPlayers(season);
+  });
+
   $("filter").addEventListener("change", e => {
     filter = e.target.value;
     if (season) renderMatches(season);
   });
 
-  renderSeasonButtons();
-  render();
+  getJSON(`${DATA}/index.json`)
+    .then(index => {
+      seasons = index.seasons;
+      if (!seasons.length) throw new Error("no data yet");
+      current = seasons[0];
+      renderSeasonButtons();
+      render();
+    })
+    .catch(err => showError(location.protocol === "file:"
+      ? "Open this page through GitHub Pages or a local web server; browsers block data files opened straight from disk."
+      : `Couldn't load data: ${err.message}. Run the "Update data" workflow on GitHub.`));
 </script>
 </body>
 </html>
