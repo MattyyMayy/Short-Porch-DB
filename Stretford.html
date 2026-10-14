@@ -85,6 +85,11 @@
   .legend .gf::before { background: var(--red); } .legend .ga::before { background: var(--muted); opacity: .6; }
 
   .note { font-size: 12px; color: var(--muted); padding: 0 var(--pad) 24px; }
+  .note a { color: inherit; }
+  .empty { text-align: left; color: var(--muted); white-space: normal; }
+  .res { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 4px; color: #fff; font-size: 11px; font-weight: 700; }
+  .res.W { background: var(--win); } .res.D { background: var(--draw); } .res.L { background: var(--loss); }
+  tr.upcoming td { color: var(--muted); }
 
   @media (max-width: 599px) {
     .hide-sm { display: none; }
@@ -97,7 +102,7 @@
 <header>
   <div class="wrap top">
     <div>
-      <h1>Manchester United <span class="badge" id="status">SAMPLE</span></h1>
+      <h1>Manchester United <span class="badge" id="status">LOADING</span></h1>
       <div class="sub" id="meta"></div>
     </div>
     <nav class="seasons" id="seasons" aria-label="Season"></nav>
@@ -136,102 +141,117 @@
 
   <section class="card">
     <div class="toolbar">
-      <h2 style="margin:0">Player stats</h2>
-      <label class="pos">Sort by
-        <select id="sort">
-          <option value="goals">Goals</option>
-          <option value="assists">Assists</option>
-          <option value="rating">Rating</option>
-          <option value="apps">Appearances</option>
+      <h2 style="margin:0">Results &amp; fixtures</h2>
+      <label class="pos">Show
+        <select id="filter">
+          <option value="all">All matches</option>
+          <option value="results">Results</option>
+          <option value="fixtures">Fixtures</option>
         </select>
       </label>
     </div>
     <div class="scroll">
       <table>
         <thead>
-          <tr><th class="name">Player</th><th>Pos</th><th>Apps</th><th>G</th><th>A</th><th class="hide-sm">G+A / app</th><th>Rating</th></tr>
+          <tr><th class="name">Date</th><th class="name">Opponent</th><th>H/A</th><th>Score</th><th>Result</th></tr>
         </thead>
-        <tbody id="players"></tbody>
+        <tbody id="matches"></tbody>
       </table>
     </div>
   </section>
 
 </main>
 
-<p class="note">Figures shown are placeholder sample data, not real results. Swap in a live feed via <code>getSeason()</code>.</p>
+<p class="note">Premier League data from <a href="https://github.com/openfootball/football.json">openfootball</a> (free, no API key). Results are added by volunteers and can lag a few days behind.</p>
 
 <script>
-  const MY_TEAM = "Manchester United";
+  const FEED = "https://raw.githubusercontent.com/openfootball/football.json/master";
+  const MY_TEAM = "Manchester United FC";
   const MONTHS = ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"];
-  const CLUBS = [MY_TEAM, "Club A", "Club B", "Club C", "Club D", "Club E", "Club F", "Club G"];
-  const POSITIONS = ["GK", "DF", "DF", "DF", "MF", "MF", "FW", "FW"];
+  const SEASONS = ["2026-27", "2025-26", "2024-25"];
 
-  const SEASONS = [
-    { id: "2026-27", played: 9,  seed: 7,  live: true },
-    { id: "2025-26", played: 38, seed: 19 },
-    { id: "2024-25", played: 38, seed: 23 }
-  ];
+  // The feed writes most scores as { ft: [h, a] } but some goalless draws as a bare [0, 0].
+  const scoreOf = m => Array.isArray(m.score) ? m.score : (m.score && m.score.ft) || null;
+  const shortName = n => n.replace(/^AFC /, "").replace(/ A?FC$/, "");
+  const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const monthOf = date => MONTH_NAMES[+date.slice(5, 7) - 1];
+  const fmtDate = (date, opts) => new Date(date + "T12:00:00Z").toLocaleDateString("en-GB", { timeZone: "UTC", ...opts });
+  const today = new Date().toISOString().slice(0, 10);
 
-  // Deterministic PRNG so each season always renders the same sample data.
-  function rng(seed) {
-    let s = seed;
-    return () => (s = (s * 1664525 + 1013904223) % 4294967296) / 4294967296;
-  }
+  function buildSeason(id, data) {
+    const matches = [...data.matches].sort((a, b) => (a.date + (a.time || "")).localeCompare(b.date + (b.time || "")));
+    const played = matches.filter(scoreOf);
 
-  function buildSeason({ id, played, seed, live }) {
-    const r = rng(seed);
-    const int = (a, b) => Math.floor(a + r() * (b - a + 1));
+    const rows = {};
+    const row = team => rows[team] || (rows[team] = { team, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, results: [] });
+    matches.forEach(m => { row(m.team1); row(m.team2); });
 
-    const standings = CLUBS.map(team => {
-      let w = 0, d = 0, l = 0, gf = 0, ga = 0;
-      const results = [];
-      for (let i = 0; i < played; i++) {
-        const a = int(0, 3), b = int(0, 3);
-        gf += a; ga += b;
-        const res = a > b ? "W" : a < b ? "L" : "D";
-        results.push(res);
-        if (res === "W") w++; else if (res === "L") l++; else d++;
+    for (const m of played) {
+      const [h, a] = scoreOf(m);
+      for (const [team, f, ag] of [[m.team1, h, a], [m.team2, a, h]]) {
+        const r = row(team);
+        const res = f > ag ? "W" : f < ag ? "L" : "D";
+        r.p++; r.gf += f; r.ga += ag; r.results.push(res);
+        if (res === "W") r.w++; else if (res === "L") r.l++; else r.d++;
       }
-      return { team, p: played, w, d, l, gf, ga, gd: gf - ga, pts: w * 3 + d, form: results.slice(-5) };
-    }).sort((x, y) => y.pts - x.pts || y.gd - x.gd || y.gf - x.gf);
+    }
 
-    const players = Array.from({ length: 14 }, (_, i) => {
-      const pos = POSITIONS[i % POSITIONS.length];
-      const apps = int(Math.floor(played / 3), played);
-      const goals = pos === "FW" ? int(0, 12) : pos === "MF" ? int(0, 5) : 0;
-      const assists = pos === "GK" ? 0 : int(0, 8);
-      return {
-        name: `Player ${String(i + 1).padStart(2, "0")}`,
-        pos, apps, goals, assists,
-        rating: (6 + r() * 2.5).toFixed(2)
-      };
+    const standings = Object.values(rows)
+      .map(r => ({ ...r, gd: r.gf - r.ga, pts: r.w * 3 + r.d, form: r.results.slice(-5) }))
+      .sort((x, y) => y.pts - x.pts || y.gd - x.gd || y.gf - x.gf || x.team.localeCompare(y.team));
+
+    const fixtures = matches
+      .filter(m => m.team1 === MY_TEAM || m.team2 === MY_TEAM)
+      .map(m => {
+        const home = m.team1 === MY_TEAM;
+        const sc = scoreOf(m);
+        const [f, a] = sc ? (home ? sc : [sc[1], sc[0]]) : [null, null];
+        return {
+          date: m.date, time: m.time, home,
+          opponent: home ? m.team2 : m.team1,
+          gf: f, ga: a,
+          result: sc ? (f > a ? "W" : f < a ? "L" : "D") : null
+        };
+      });
+
+    const done = fixtures.filter(x => x.result);
+    const lastMonth = done.length ? MONTHS.indexOf(monthOf(done[done.length - 1].date)) : -1;
+    const monthly = MONTHS.slice(0, lastMonth + 1).map(m => {
+      const inMonth = done.filter(x => monthOf(x.date) === m);
+      return { m, gf: inMonth.reduce((s, x) => s + x.gf, 0), ga: inMonth.reduce((s, x) => s + x.ga, 0) };
     });
 
-    const monthCount = played >= 38 ? 10 : Math.max(1, Math.round(played / 4));
-    const monthly = MONTHS.slice(0, monthCount).map(m => ({ m, gf: int(0, 9), ga: int(0, 7) }));
-
     return {
-      id, label: id.replace("-", "/"), live: !!live, played,
-      standings, players, monthly
+      id, label: id.replace("-", "/"),
+      live: played.length < matches.length,
+      lastResult: played.length ? played[played.length - 1].date : null,
+      standings, fixtures, monthly
     };
   }
 
-  // Swap this for a live feed later. Must return the same shape as buildSeason().
+  const cache = {};
   function getSeason(id) {
-    const cfg = SEASONS.find(s => s.id === id);
-    return buildSeason(cfg);
+    if (!cache[id]) {
+      cache[id] = fetch(`${FEED}/${id}/en.1.json`)
+        .then(res => { if (!res.ok) throw new Error(`Feed returned ${res.status}`); return res.json(); })
+        .then(data => buildSeason(id, data))
+        .catch(err => { delete cache[id]; throw err; });
+    }
+    return cache[id];
   }
 
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fmtGD = n => (n > 0 ? "+" : "") + n;
 
   const $ = id => document.getElementById(id);
-  let current = SEASONS[0].id;
-  let sortKey = "goals";
+  let current = SEASONS[0];
+  let filter = "all";
+  let season = null;
+  let requestId = 0;
 
   function renderSeasonButtons() {
-    $("seasons").innerHTML = SEASONS.map(s =>
-      `<button type="button" data-id="${s.id}" aria-pressed="${s.id === current}">${s.id.replace("-", "/")}</button>`
+    $("seasons").innerHTML = SEASONS.map(id =>
+      `<button type="button" data-id="${id}" aria-pressed="${id === current}">${id.replace("-", "/")}</button>`
     ).join("");
   }
 
@@ -247,14 +267,15 @@
       ["Goal diff", fmtGD(me.gd)],
       ["Pts / game", (me.pts / me.p || 0).toFixed(2)]
     ].map(([l, v]) => `<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${l}</div></div>`).join("");
-    $("meta").textContent = `${s.label} · ${s.played} of 38 matchweeks played`;
+    const upTo = s.lastResult ? ` · results to ${fmtDate(s.lastResult, { day: "numeric", month: "short", year: "numeric" })}` : "";
+    $("meta").textContent = `${s.label} · ${me.p} of 38 played${upTo}`;
   }
 
   function renderStandings(s) {
     $("standings").innerHTML = s.standings.map((r, i) => `
       <tr class="${r.team === MY_TEAM ? "us" : ""}">
         <td>${i + 1}</td>
-        <td class="name">${esc(r.team)}</td>
+        <td class="name">${esc(shortName(r.team))}</td>
         <td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
         <td class="hide-sm">${r.gf}</td><td class="hide-sm">${r.ga}</td>
         <td>${fmtGD(r.gd)}</td>
@@ -264,6 +285,10 @@
   }
 
   function renderBars(s) {
+    if (!s.monthly.length) {
+      $("bars").innerHTML = `<p class="pos">No results yet.</p>`;
+      return;
+    }
     const max = Math.max(1, ...s.monthly.flatMap(m => [m.gf, m.ga]));
     $("bars").innerHTML = s.monthly.map(m => `
       <div class="bar-group" title="${m.m}: ${m.gf} scored, ${m.ga} conceded">
@@ -275,44 +300,65 @@
       </div>`).join("");
   }
 
-  function renderPlayers(s) {
-    const rows = [...s.players].sort((a, b) => {
-      const av = sortKey === "rating" ? +a.rating : a[sortKey];
-      const bv = sortKey === "rating" ? +b.rating : b[sortKey];
-      return bv - av;
-    });
-    $("players").innerHTML = rows.map(p => {
-      const perApp = p.apps ? ((p.goals + p.assists) / p.apps).toFixed(2) : "0.00";
+  function renderMatches(s) {
+    const rows = s.fixtures.filter(x =>
+      filter === "all" || (filter === "results" ? x.result : !x.result));
+    if (!rows.length) {
+      $("matches").innerHTML = `<tr><td class="empty" colspan="5">No ${filter === "fixtures" ? "fixtures" : "matches"} to show.</td></tr>`;
+      return;
+    }
+    $("matches").innerHTML = rows.map(x => {
+      const date = fmtDate(x.date, { weekday: "short", day: "numeric", month: "short" });
+      const score = x.result ? `${x.gf}–${x.ga}` : esc(x.time || "TBC");
+      const result = x.result
+        ? `<span class="res ${x.result}">${x.result}</span>`
+        : `<span class="pos">${x.date < today ? "Awaiting" : "–"}</span>`;
       return `
-      <tr>
-        <td class="name">${esc(p.name)}</td>
-        <td><span class="pos">${p.pos}</span></td>
-        <td>${p.apps}</td><td>${p.goals}</td><td>${p.assists}</td>
-        <td class="hide-sm">${perApp}</td>
-        <td>${p.rating}</td>
+      <tr class="${x.result ? "" : "upcoming"}">
+        <td class="name">${date}</td>
+        <td class="name">${esc(shortName(x.opponent))}</td>
+        <td>${x.home ? "H" : "A"}</td>
+        <td>${score}</td>
+        <td>${result}</td>
       </tr>`;
     }).join("");
   }
 
-  function render() {
-    const s = getSeason(current);
-    renderKpis(s);
-    renderStandings(s);
-    renderBars(s);
-    renderPlayers(s);
+  function setStatus(text) { $("status").textContent = text; }
+
+  async function render() {
+    const id = ++requestId;
+    setStatus("LOADING");
+    try {
+      const s = await getSeason(current);
+      if (id !== requestId) return;
+      season = s;
+      setStatus(s.live ? "LIVE FEED" : "FINAL");
+      renderKpis(s);
+      renderStandings(s);
+      renderBars(s);
+      renderMatches(s);
+    } catch (err) {
+      if (id !== requestId) return;
+      season = null;
+      setStatus("OFFLINE");
+      $("meta").textContent = `Couldn't load ${current.replace("-", "/")}: ${err.message}`;
+      $("kpis").innerHTML = `<p class="pos">Data feed unavailable. Check your connection and pick the season again to retry.</p>`;
+      $("standings").innerHTML = $("bars").innerHTML = $("matches").innerHTML = "";
+    }
   }
 
   $("seasons").addEventListener("click", e => {
     const btn = e.target.closest("button[data-id]");
-    if (!btn || btn.dataset.id === current) return;
+    if (!btn || (btn.dataset.id === current && season)) return;
     current = btn.dataset.id;
     renderSeasonButtons();
     render();
   });
 
-  $("sort").addEventListener("change", e => {
-    sortKey = e.target.value;
-    renderPlayers(getSeason(current));
+  $("filter").addEventListener("change", e => {
+    filter = e.target.value;
+    if (season) renderMatches(season);
   });
 
   renderSeasonButtons();
