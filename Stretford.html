@@ -184,13 +184,12 @@
 
 </main>
 
-<p class="note" id="note">Data from <a href="https://www.api-football.com/">API-Football</a>, refreshed every 3 hours.</p>
+<p class="note" id="note"></p>
 
 <script>
   // Data is written to data/ by .github/workflows/update-data.yml, which calls
   // API-Football with a key kept in GitHub secrets. This page never sees the key.
   const DATA = "data";
-  const MY_TEAM_ID = 33; // Manchester United
   const MONTHS = ["Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"];
   const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const POS = { Goalkeeper: "GK", Defender: "DF", Midfielder: "MF", Attacker: "FW" };
@@ -247,7 +246,7 @@
   }
 
   function renderKpis(s) {
-    const idx = s.standings.findIndex(r => r.teamId === MY_TEAM_ID);
+    const idx = s.standings.findIndex(r => r.us);
     const me = s.standings[idx];
     $("kpi-title").textContent = `${s.label} · ${s.live ? "In progress" : "Final"}`;
     if (!me) {
@@ -268,7 +267,7 @@
 
   function renderStandings(s) {
     $("standings").innerHTML = s.standings.map(r => `
-      <tr class="${r.teamId === MY_TEAM_ID ? "us" : ""}">
+      <tr class="${r.us ? "us" : ""}">
         <td>${r.rank}</td>
         <td class="name">${esc(shortName(r.team))}</td>
         <td>${r.p}</td><td>${r.w}</td><td>${r.d}</td><td>${r.l}</td>
@@ -297,7 +296,10 @@
 
   function renderPlayers(s) {
     if (!s.players.length) {
-      $("players").innerHTML = `<tr><td class="empty" colspan="7">No player stats yet.</td></tr>`;
+      const why = s.source === "openfootball"
+        ? "Player stats for this season need a paid API-Football plan."
+        : "No player stats for this season.";
+      $("players").innerHTML = `<tr><td class="empty" colspan="7">${why}</td></tr>`;
       return;
     }
     const rows = [...s.players].sort((a, b) => (b[sortKey] ?? -1) - (a[sortKey] ?? -1) || b.apps - a.apps);
@@ -359,7 +361,11 @@
       renderPlayers(s);
       renderMatches(s);
       const updated = new Date(s.updated).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
-      $("note").innerHTML = `Data from <a href="https://www.api-football.com/">API-Football</a>, refreshed every 3 hours. Last change ${esc(updated)}.`;
+      const source = s.source === "openfootball"
+        ? `<a href="https://github.com/openfootball/football.json">openfootball</a> (results are added by volunteers and can lag a few days)`
+        : `<a href="https://www.api-football.com/">API-Football</a>`;
+      const partial = s.playersPartial ? " Player list is limited to the first 3 pages the free plan allows." : "";
+      $("note").innerHTML = `${s.label} data from ${source}. Last change ${esc(updated)}.${partial}`;
     } catch (err) {
       if (id !== requestId) return;
       showError(`Couldn't load ${label(current)}: ${err.message}. Pick the season again to retry.`);
