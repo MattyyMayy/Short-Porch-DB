@@ -22,9 +22,7 @@ jobs:
         with:
           node-version: 22
 
-      - name: Fetch from API-Football
-        env:
-          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+      - name: Fetch from MLB Stats API
         run: node scripts/fetch-data.mjs
 
       - name: Commit changes
@@ -37,5 +35,5 @@ jobs:
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Update match data"
+          git commit -m "Update Yankees data"
           git push

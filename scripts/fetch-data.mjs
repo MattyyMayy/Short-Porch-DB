@@ -1,202 +1,155 @@
-// Fetches Manchester United data and writes it to data/ as JSON for
-// Stretford.html to read. Runs in GitHub Actions so the API key stays secret.
+// Fetches New York Yankees data from the MLB Stats API and writes it to data/
+// as JSON for ShortPorch.html to read. Runs in GitHub Actions on a schedule.
+// The API is free and needs no key.
 //
-// Two sources, because API-Football's free plan only covers older seasons:
-//  - openfootball (free, no key): table, results and fixtures, no player stats.
-//  - API-Football (key in API_FOOTBALL_KEY): table, results and player stats.
-//
-// Usage: API_FOOTBALL_KEY=... node scripts/fetch-data.mjs
+// Usage: node scripts/fetch-data.mjs
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 
-const API = process.env.API_FOOTBALL_URL || "https://v3.football.api-sports.io";
-const OPENFOOTBALL = process.env.OPENFOOTBALL_URL || "https://raw.githubusercontent.com/openfootball/football.json/master";
-const KEY = process.env.API_FOOTBALL_KEY;
-const LEAGUE = 39; // Premier League
-const TEAM = 33;   // Manchester United
-const OPENFOOTBALL_TEAM = "Manchester United FC";
+const API = process.env.MLB_API_URL || "https://statsapi.mlb.com/api/v1";
+const TEAM = 147;      // New York Yankees
+const LEAGUE = 103;    // American League
+const DIVISION = 201;  // AL East
 const OUT = new URL("../data/", import.meta.url);
 
-// Seasons are named by their starting year: 2026 = 2026/27. The first entry
-// is the current season and is refreshed on every run; the others are only
-// fetched once, when their file is missing.
-const SEASONS = [
-  { season: 2026, source: "openfootball" },
-  { season: 2025, source: "openfootball" },
-  { season: 2024, source: "api-football" },
-  { season: 2023, source: "api-football" },
-  { season: 2022, source: "api-football" }
-];
+// Regular season plus the four postseason rounds; spring training and
+// exhibitions are left out.
+const GAME_TYPES = new Set(["R", "F", "D", "L", "W"]);
+const NOT_PLAYED = /postponed|cancel|suspended/i;
 
-// Free plan limits: 10 requests a minute, and at most 3 pages of players.
-const DELAY_MS = 7000;
-const MAX_PLAYER_PAGES = 3;
-const FINISHED = new Set(["FT", "AET", "PEN"]);
+// The first season is the current one and is refreshed on every run; the
+// others are only fetched once, when their file is missing. A new season
+// starts with spring training, so roll over in March.
+const now = new Date();
+const CURRENT = now.getUTCMonth() >= 2 ? now.getUTCFullYear() : now.getUTCFullYear() - 1;
+const SEASONS = [0, 1, 2, 3, 4].map(n => CURRENT - n);
 
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const resultOf = (f, a) => (f > a ? "W" : f < a ? "L" : "D");
+const resultOf = (f, a) => (f > a ? "W" : f < a ? "L" : "T");
+const num = v => (v == null || v === "" || v === "-" || v === ".---" ? null : Number(v));
 let calls = 0;
 
-// ---- API-Football ----
-
 async function api(path) {
-  if (calls++) await sleep(DELAY_MS);
-  const res = await fetch(`${API}/${path}`, { headers: { "x-apisports-key": KEY } });
+  calls++;
+  const res = await fetch(`${API}/${path}`, { headers: { "user-agent": "short-porch-db" } });
   if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
-  const body = await res.json();
-  // Errors come back with HTTP 200 and an "errors" object or array.
-  const errors = Array.isArray(body.errors) ? body.errors : Object.values(body.errors || {});
-  if (errors.length) throw new Error(`${path}: ${errors.join("; ")}`);
-  return body;
+  return res.json();
 }
 
-async function apiStandings(season) {
-  const body = await api(`standings?league=${LEAGUE}&season=${season}`);
-  const table = body.response[0]?.league?.standings?.[0] || [];
-  return table.map(r => ({
-    rank: r.rank,
+function split(teamRecord, type) {
+  const s = teamRecord.records?.splitRecords?.find(r => r.type === type);
+  return s ? `${s.wins}-${s.losses}` : null;
+}
+
+async function standings(season) {
+  const body = await api(`standings?leagueId=${LEAGUE}&season=${season}&standingsTypes=regularSeason&hydrate=team`);
+  return (body.records || []).flatMap(rec => (rec.teamRecords || []).map(r => ({
     team: r.team.name,
+    abbr: r.team.abbreviation || null,
     us: r.team.id === TEAM,
-    p: r.all.played, w: r.all.win, d: r.all.draw, l: r.all.lose,
-    gf: r.all.goals.for, ga: r.all.goals.against,
-    gd: r.goalsDiff, pts: r.points,
-    form: (r.form || "").split("").filter(c => "WDL".includes(c))
+    division: rec.division?.id === DIVISION,
+    divRank: num(r.divisionRank),
+    leagueRank: num(r.leagueRank),
+    w: r.wins, l: r.losses,
+    pct: r.winningPercentage,
+    gb: r.gamesBack,
+    wcgb: r.wildCardGamesBack ?? null,
+    rs: r.runsScored, ra: r.runsAllowed,
+    rd: r.runDifferential ?? r.runsScored - r.runsAllowed,
+    home: split(r, "home"),
+    away: split(r, "away"),
+    l10: split(r, "lastTen"),
+    streak: r.streak?.streakCode || null,
+    clinched: r.clinchIndicator || null
+  })));
+}
+
+async function schedule(season) {
+  const body = await api(`schedule?sportId=1&teamId=${TEAM}&startDate=${season}-02-01&endDate=${season}-12-15`);
+  return (body.dates || [])
+    .flatMap(d => d.games || [])
+    .filter(g => GAME_TYPES.has(g.gameType))
+    .map(g => {
+      const home = g.teams.home.team.id === TEAM;
+      const us = home ? g.teams.home : g.teams.away;
+      const them = home ? g.teams.away : g.teams.home;
+      const state = g.status?.detailedState || "";
+      const done = g.status?.abstractGameState === "Final" && !NOT_PLAYED.test(state) && us.score != null && them.score != null;
+      return {
+        id: g.gamePk,
+        date: g.officialDate || g.gameDate.slice(0, 10),
+        start: g.gameDate,
+        timeTBD: !!g.status?.startTimeTBD,
+        type: g.gameType,
+        series: g.gameType === "R" ? null : g.seriesDescription || null,
+        game: g.doubleHeader !== "N" ? g.gameNumber : null,
+        state: g.status?.abstractGameState || "Preview",
+        status: state,
+        home,
+        opponent: them.team.name,
+        rf: done ? us.score : null,
+        ra: done ? them.score : null,
+        result: done ? resultOf(us.score, them.score) : null
+      };
+    })
+    .sort((a, b) => a.start.localeCompare(b.start));
+}
+
+async function playerStats(season, group) {
+  const body = await api(`stats?stats=season&group=${group}&gameType=R&season=${season}&teamId=${TEAM}&sportId=1&playerPool=ALL&limit=200`);
+  return (body.stats?.[0]?.splits || []).map(sp => ({
+    id: sp.player.id,
+    name: sp.player.fullName,
+    pos: sp.position?.abbreviation || null,
+    s: sp.stat
   }));
 }
 
-async function apiFixtures(season) {
-  const body = await api(`fixtures?league=${LEAGUE}&season=${season}&team=${TEAM}`);
-  return body.response
-    .map(f => {
-      const home = f.teams.home.id === TEAM;
-      const done = FINISHED.has(f.fixture.status.short);
-      const gf = done ? (home ? f.goals.home : f.goals.away) : null;
-      const ga = done ? (home ? f.goals.away : f.goals.home) : null;
-      return {
-        kickoff: f.fixture.date,
-        status: f.fixture.status.short,
-        home,
-        opponent: home ? f.teams.away.name : f.teams.home.name,
-        gf, ga,
-        result: done ? resultOf(gf, ga) : null
-      };
-    })
-    .sort((a, b) => a.kickoff.localeCompare(b.kickoff));
+async function hitters(season) {
+  return (await playerStats(season, "hitting"))
+    .filter(p => p.s.plateAppearances > 0)
+    .map(({ s, ...p }) => ({
+      ...p,
+      g: s.gamesPlayed, pa: s.plateAppearances, ab: s.atBats,
+      h: s.hits, hr: s.homeRuns, rbi: s.rbi, r: s.runs, sb: s.stolenBases,
+      bb: s.baseOnBalls, so: s.strikeOuts,
+      avg: num(s.avg), obp: num(s.obp), slg: num(s.slg), ops: num(s.ops)
+    }));
 }
 
-async function apiPlayers(season) {
-  const out = [];
-  let total = 1;
-  for (let page = 1; page <= Math.min(total, MAX_PLAYER_PAGES); page++) {
-    const body = await api(`players?team=${TEAM}&season=${season}&league=${LEAGUE}&page=${page}`);
-    total = body.paging?.total || 1;
-    for (const { player, statistics } of body.response) {
-      const s = statistics.find(x => x.league?.id === LEAGUE && x.team?.id === TEAM);
-      const apps = s?.games?.appearences || 0; // sic: the API spells it this way
-      if (!apps) continue;
-      out.push({
-        name: player.name,
-        pos: s.games.position,
-        apps,
-        minutes: s.games.minutes || 0,
-        goals: s.goals.total || 0,
-        assists: s.goals.assists || 0,
-        rating: s.games.rating ? Number(s.games.rating) : null
-      });
-    }
-  }
-  return { players: out, partial: total > MAX_PLAYER_PAGES };
+// "180.1" innings means 180 and one third.
+const outs = ip => {
+  const [whole, part = "0"] = String(ip ?? "0").split(".");
+  return Number(whole) * 3 + Number(part);
+};
+
+async function pitchers(season) {
+  return (await playerStats(season, "pitching"))
+    .filter(p => outs(p.s.inningsPitched) > 0)
+    .map(({ s, ...p }) => ({
+      ...p,
+      g: s.gamesPlayed, gs: s.gamesStarted,
+      w: s.wins, l: s.losses, sv: s.saves, hld: s.holds,
+      ip: String(s.inningsPitched), outs: outs(s.inningsPitched),
+      so: s.strikeOuts, bb: s.baseOnBalls,
+      era: num(s.era), whip: num(s.whip)
+    }));
 }
 
-async function fromApiFootball(season) {
-  if (!KEY) throw new Error("API_FOOTBALL_KEY is not set");
-  const standings = await apiStandings(season);
-  const fixtures = await apiFixtures(season);
-  const { players, partial } = await apiPlayers(season);
-
-  // The docs don't say which end of "form" is the latest match, so check it
-  // against our own results and flip every row to oldest-first if needed.
-  const ours = standings.find(r => r.us);
-  const last = fixtures.filter(f => f.result).slice(-ours?.form.length || 0).map(f => f.result).join("");
-  if (ours && ours.form.join("") !== last && [...ours.form].reverse().join("") === last) {
-    standings.forEach(r => r.form.reverse());
-  }
-
-  return { standings, fixtures, players, playersPartial: partial };
-}
-
-// ---- openfootball ----
-
-// openfootball gives UK local kick-off times; convert them to UTC.
-function londonToISO(date, time) {
-  const guess = new Date(`${date}T${time}:00Z`);
-  const london = new Date(guess.toLocaleString("en-US", { timeZone: "Europe/London" }));
-  const utc = new Date(guess.toLocaleString("en-US", { timeZone: "UTC" }));
-  return new Date(guess.getTime() - (london - utc)).toISOString();
-}
-
-async function fromOpenfootball(season) {
-  const id = `${season}-${String(season + 1).slice(2)}`;
-  const res = await fetch(`${OPENFOOTBALL}/${id}/en.1.json`);
-  if (!res.ok) throw new Error(`openfootball ${id}: HTTP ${res.status}`);
-  const matches = (await res.json()).matches
-    .map(m => ({
-      ...m,
-      // Most scores are { ft: [h, a] } but some goalless draws are a bare [0, 0].
-      ft: Array.isArray(m.score) ? m.score : m.score?.ft || null,
-      kickoff: m.time ? londonToISO(m.date, m.time) : `${m.date}T12:00:00.000Z`
-    }))
-    .sort((a, b) => a.kickoff.localeCompare(b.kickoff));
-
-  const rows = {};
-  const row = team => rows[team] || (rows[team] = { team, us: team === OPENFOOTBALL_TEAM, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, results: [] });
-  for (const m of matches) {
-    row(m.team1); row(m.team2);
-    if (!m.ft) continue;
-    const [h, a] = m.ft;
-    for (const [team, f, ag] of [[m.team1, h, a], [m.team2, a, h]]) {
-      const r = row(team);
-      const res = resultOf(f, ag);
-      r.p++; r.gf += f; r.ga += ag; r.results.push(res);
-      if (res === "W") r.w++; else if (res === "L") r.l++; else r.d++;
-    }
-  }
-
-  const standings = Object.values(rows)
-    .map(({ results, ...r }) => ({ ...r, gd: r.gf - r.ga, pts: r.w * 3 + r.d, form: results.slice(-5) }))
-    .sort((x, y) => y.pts - x.pts || y.gd - x.gd || y.gf - x.gf || x.team.localeCompare(y.team))
-    .map((r, i) => ({ rank: i + 1, ...r }));
-
-  const fixtures = matches
-    .filter(m => m.team1 === OPENFOOTBALL_TEAM || m.team2 === OPENFOOTBALL_TEAM)
-    .map(m => {
-      const home = m.team1 === OPENFOOTBALL_TEAM;
-      const [gf, ga] = m.ft ? (home ? m.ft : [m.ft[1], m.ft[0]]) : [null, null];
-      return {
-        kickoff: m.kickoff,
-        status: m.ft ? "FT" : m.time ? "NS" : "TBD",
-        home,
-        opponent: home ? m.team2 : m.team1,
-        gf, ga,
-        result: m.ft ? resultOf(gf, ga) : null
-      };
-    });
-
-  return { standings, fixtures, players: [], playersPartial: false };
-}
-
-// ---- main ----
-
-async function fetchSeason({ season, source }) {
-  const data = await (source === "api-football" ? fromApiFootball(season) : fromOpenfootball(season));
+async function fetchSeason(season) {
+  const [table, games, bats, arms] = await Promise.all([
+    standings(season), schedule(season), hitters(season), pitchers(season)
+  ]);
   return {
     season,
-    label: `${season}/${String(season + 1).slice(2)}`,
-    source,
+    label: String(season),
+    source: "mlb-statsapi",
     updated: new Date().toISOString(),
-    live: data.fixtures.some(f => !f.result),
-    ...data
+    live: games.some(g => !g.result && !NOT_PLAYED.test(g.status)),
+    standings: table,
+    games,
+    hitters: bats,
+    pitchers: arms
   };
 }
 
@@ -212,28 +165,34 @@ await mkdir(OUT, { recursive: true });
 
 const failures = [];
 let changed = false;
-for (const [i, entry] of SEASONS.entries()) {
-  const file = new URL(`${entry.season}.json`, OUT);
+for (const [i, season] of SEASONS.entries()) {
+  const file = new URL(`${season}.json`, OUT);
   if (i > 0 && existsSync(file)) continue;
   try {
-    const data = await fetchSeason(entry);
+    const data = await fetchSeason(season);
+    // Before Opening Day the current season has no games yet; skip it so the
+    // page opens on the last season instead of an empty one.
+    if (!data.games.length) {
+      console.log(`${season}: no games found, skipped.`);
+      continue;
+    }
     changed = (await save(file, data)) || changed;
-    console.log(`${data.label} (${entry.source}): ${data.standings.length} clubs, ${data.fixtures.length} fixtures, ${data.players.length} players${data.playersPartial ? " (partial)" : ""}`);
+    console.log(`${season}: ${data.standings.length} teams, ${data.games.length} games, ${data.hitters.length} hitters, ${data.pitchers.length} pitchers`);
   } catch (err) {
-    failures.push(`${entry.season}: ${err.message}`);
-    console.error(`${entry.season}: ${err.message}`);
+    failures.push(`${season}: ${err.message}`);
+    console.error(`${season}: ${err.message}`);
   }
 }
 
 // The page builds its season buttons from this list.
-const seasons = SEASONS.map(s => s.season).filter(s => existsSync(new URL(`${s}.json`, OUT))).map(String);
+const seasons = SEASONS.filter(s => existsSync(new URL(`${s}.json`, OUT))).map(String);
 const indexFile = new URL("index.json", OUT);
 const previous = existsSync(indexFile) ? JSON.parse(await readFile(indexFile, "utf8")) : null;
 if (changed || JSON.stringify(previous?.seasons) !== JSON.stringify(seasons)) {
   await writeFile(indexFile, JSON.stringify({ seasons, updated: new Date().toISOString() }, null, 1) + "\n");
 }
 
-console.log(`${calls} API-Football calls.`);
+console.log(`${calls} MLB Stats API calls.`);
 if (failures.length) {
   console.error(`Failed: ${failures.join(" | ")}`);
   process.exit(1);
