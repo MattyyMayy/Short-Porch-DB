@@ -153,9 +153,27 @@
   .res.W { background: var(--win); } .res.T { background: var(--tie); } .res.L { background: var(--loss); }
   .tag { display: inline-block; margin-left: 6px; padding: 0 5px; border: 2px solid var(--muted); color: var(--muted); font-size: 16px; text-transform: uppercase; }
   tr.upcoming td { color: var(--muted); }
+  td.box { padding-top: 4px; padding-bottom: 4px; }
+  table.line { width: auto; margin-left: auto; border-collapse: collapse; }
+  table.line th, table.line td {
+    padding: 0 4px; min-width: 18px; text-align: center; border: 0; font-size: 18px; line-height: 1.05; background: none !important; box-shadow: none !important;
+  }
+  table.line th { color: var(--muted); }
+  table.line th:first-child, table.line td:first-child { text-align: left; padding-right: 8px; }
+  table.line .rhe { border-left: 2px solid var(--line); padding-left: 6px; }
+  table.line tr.me td { color: var(--ink); font-weight: bold; }
+  table.line tbody tr:first-child td { border-bottom: 2px dotted var(--line); }
+  tr.upcoming table.line td { color: var(--muted); }
 
+  .show-sm { display: none; }
   @media (max-width: 599px) {
     .hide-sm { display: none; }
+    .show-sm { display: inline; }
+    table.line th, table.line td { padding: 0 2px; min-width: 14px; }
+    table.line th:first-child, table.line td:first-child { padding-right: 4px; }
+    table.line .rhe { padding-left: 4px; }
+    .tag { margin-left: 3px; padding: 0 3px; font-size: 14px; }
+    #games > tr > td { padding-left: 3px; padding-right: 3px; }
     th, td { padding: 4px 4px; }
     body { font-size: 19px; }
   }
@@ -248,7 +266,7 @@
     <div class="scroll">
       <table>
         <thead>
-          <tr><th class="name">Date</th><th class="name">Opponent</th><th>H/A</th><th>Score</th><th>Result</th></tr>
+          <tr><th class="name">Date</th><th class="name">Opponent</th><th class="hide-sm">H/A</th><th>Box score</th><th>Result</th></tr>
         </thead>
         <tbody id="games"></tbody>
       </table>
@@ -455,6 +473,20 @@
       </tr>`).join("");
   }
 
+  // Scoreboard-style line score: away team on top, innings, then R/H/E.
+  // Innings hide on narrow screens, leaving R/H/E.
+  function lineScore(g) {
+    const { away, home } = g.line;
+    const n = Math.max(9, away.innings.length, home.innings.length);
+    const nums = Array.from({ length: n }, (_, i) => i + 1);
+    const cell = (v, i, side) => v ?? (side === home && g.result && i === home.innings.length - 1 ? "x" : "");
+    const row = (t, isUs) => `<tr class="${isUs ? "me" : ""}"><td>${esc(t.team)}</td>`
+      + nums.map(i => `<td class="inn hide-sm">${cell(t.innings[i - 1], i - 1, t)}</td>`).join("")
+      + `<td class="rhe">${t.r ?? ""}</td><td>${t.h ?? ""}</td><td>${t.e ?? ""}</td></tr>`;
+    return `<table class="line"><thead><tr><th></th>${nums.map(i => `<th class="inn hide-sm">${i}</th>`).join("")}<th class="rhe">R</th><th>H</th><th>E</th></tr></thead>`
+      + `<tbody>${row(away, !g.home)}${row(home, g.home)}</tbody></table>`;
+  }
+
   function renderGames(s) {
     const rows = s.games.filter(g =>
       filter === "all" || (filter === "results" ? g.result : !g.result));
@@ -463,21 +495,25 @@
       return;
     }
     $("games").innerHTML = rows.map(g => {
-      const date = fmtDate(g.date, { weekday: "short", month: "short", day: "numeric" });
+      // Phones drop the weekday and use team abbreviations so the box score fits.
+      const date = `<span class="hide-sm">${fmtDate(g.date, { weekday: "short" })}, </span>${fmtDate(g.date, { month: "short", day: "numeric" })}`;
+      const opp = `<span class="hide-sm">${esc(shortName(g.opponent))}</span>`
+        + `<span class="show-sm">${g.home ? "vs" : "@"} ${esc(g.oppAbbr || shortName(g.opponent))}</span>`;
       const tags = [g.series && (ROUND[g.type] || g.series), g.game && `Gm ${g.game}`].filter(Boolean)
         .map(t => `<span class="tag">${esc(t)}</span>`).join("");
       const live = !g.result && g.state === "Live";
       const off = NOT_PLAYED.test(g.status);
-      const score = g.result ? `${g.rf}–${g.ra}` : off || live ? "–" : g.timeTBD ? "TBD" : fmtTime(g.start);
+      const score = g.line ? lineScore(g)
+        : g.result ? `${g.rf}–${g.ra}` : off || live ? "–" : g.timeTBD ? "TBD" : fmtTime(g.start);
       const result = g.result
         ? `<span class="res ${g.result}">${g.result}</span>`
         : `<span class="pos">${off ? esc(g.status) : live ? "Live" : "–"}</span>`;
       return `
       <tr class="${g.result ? "" : "upcoming"}">
         <td class="name">${date}</td>
-        <td class="name">${esc(shortName(g.opponent))}${tags}</td>
-        <td>${g.home ? "vs" : "@"}</td>
-        <td>${score}</td>
+        <td class="name">${opp}${tags}</td>
+        <td class="hide-sm">${g.home ? "vs" : "@"}</td>
+        <td class="box">${score}</td>
         <td>${result}</td>
       </tr>`;
     }).join("");

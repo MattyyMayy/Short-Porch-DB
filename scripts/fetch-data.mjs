@@ -18,6 +18,10 @@ const OUT = new URL("../data/", import.meta.url);
 const GAME_TYPES = new Set(["R", "F", "D", "L", "W"]);
 const NOT_PLAYED = /postponed|cancel|suspended/i;
 
+// Bump when the shape of the season files changes, so past seasons (which
+// are otherwise only fetched once) are fetched again.
+const DATA_VERSION = 2;
+
 // The first season is the current one and is refreshed on every run; the
 // others are only fetched once, when their file is missing. A new season
 // starts with spring training, so roll over in March.
@@ -64,8 +68,23 @@ async function standings(season) {
   })));
 }
 
+// Inning-by-inning runs plus R/H/E, away team first as on a scoreboard.
+// An inning a team didn't bat in (a home win in the 9th) is null.
+function lineScore(g) {
+  const ls = g.linescore;
+  if (!ls?.innings?.length || !ls.teams) return null;
+  const side = s => ({
+    team: g.teams[s].team.abbreviation || g.teams[s].team.name,
+    innings: ls.innings.map(i => i[s]?.runs ?? null),
+    r: ls.teams[s].runs ?? g.teams[s].score ?? null,
+    h: ls.teams[s].hits ?? null,
+    e: ls.teams[s].errors ?? null
+  });
+  return { away: side("away"), home: side("home") };
+}
+
 async function schedule(season) {
-  const body = await api(`schedule?sportId=1&teamId=${TEAM}&startDate=${season}-02-01&endDate=${season}-12-15`);
+  const body = await api(`schedule?sportId=1&teamId=${TEAM}&startDate=${season}-02-01&endDate=${season}-12-15&hydrate=team,linescore`);
   return (body.dates || [])
     .flatMap(d => d.games || [])
     .filter(g => GAME_TYPES.has(g.gameType))
@@ -87,9 +106,11 @@ async function schedule(season) {
         status: state,
         home,
         opponent: them.team.name,
+        oppAbbr: them.team.abbreviation || null,
         rf: done ? us.score : null,
         ra: done ? them.score : null,
-        result: done ? resultOf(us.score, them.score) : null
+        result: done ? resultOf(us.score, them.score) : null,
+        line: done || g.status?.abstractGameState === "Live" ? lineScore(g) : null
       };
     })
     .sort((a, b) => a.start.localeCompare(b.start));
@@ -144,6 +165,7 @@ async function fetchSeason(season) {
     season,
     label: String(season),
     source: "mlb-statsapi",
+    version: DATA_VERSION,
     updated: new Date().toISOString(),
     live: games.some(g => !g.result && !NOT_PLAYED.test(g.status)),
     standings: table,
@@ -165,11 +187,13 @@ await mkdir(OUT, { recursive: true });
 
 const failures = [];
 let changed = false;
-// A file left over from another source (the old football data) is fetched again.
+// A file left over from another source (the old football data) or an older
+// data version is fetched again.
 async function isCurrent(file) {
   if (!existsSync(file)) return false;
   try {
-    return JSON.parse(await readFile(file, "utf8")).source === "mlb-statsapi";
+    const d = JSON.parse(await readFile(file, "utf8"));
+    return d.source === "mlb-statsapi" && d.version === DATA_VERSION;
   } catch {
     return false;
   }
