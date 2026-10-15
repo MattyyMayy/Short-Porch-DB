@@ -1,0 +1,990 @@
+{
+ "season": 2023,
+ "label": "2023/24",
+ "source": "api-football",
+ "updated": "2026-10-15T17:08:02.814Z",
+ "live": false,
+ "standings": [
+  {
+   "rank": 1,
+   "team": "Manchester City",
+   "us": false,
+   "p": 38,
+   "w": 28,
+   "d": 7,
+   "l": 3,
+   "gf": 96,
+   "ga": 34,
+   "gd": 62,
+   "pts": 91,
+   "form": [
+    "W",
+    "W",
+    "W",
+    "W",
+    "W"
+   ]
+  },
+  {
+   "rank": 2,
+   "team": "Arsenal",
+   "us": false,
+   "p": 38,
+   "w": 28,
+   "d": 5,
+   "l": 5,
+   "gf": 91,
+   "ga": 29,
+   "gd": 62,
+   "pts": 89,
+   "form": [
+    "W",
+    "W",
+    "W",
+    "W",
+    "W"
+   ]
+  },
+  {
+   "rank": 3,
+   "team": "Liverpool",
+   "us": false,
+   "p": 38,
+   "w": 24,
+   "d": 10,
+   "l": 4,
+   "gf": 86,
+   "ga": 41,
+   "gd": 45,
+   "pts": 82,
+   "form": [
+    "L",
+    "D",
+    "W",
+    "D",
+    "W"
+   ]
+  },
+  {
+   "rank": 4,
+   "team": "Aston Villa",
+   "us": false,
+   "p": 38,
+   "w": 20,
+   "d": 8,
+   "l": 10,
+   "gf": 76,
+   "ga": 61,
+   "gd": 15,
+   "pts": 68,
+   "form": [
+    "W",
+    "D",
+    "L",
+    "D",
+    "L"
+   ]
+  },
+  {
+   "rank": 5,
+   "team": "Tottenham",
+   "us": false,
+   "p": 38,
+   "w": 20,
+   "d": 6,
+   "l": 12,
+   "gf": 74,
+   "ga": 61,
+   "gd": 13,
+   "pts": 66,
+   "form": [
+    "L",
+    "L",
+    "W",
+    "L",
+    "W"
+   ]
+  },
+  {
+   "rank": 6,
+   "team": "Chelsea",
+   "us": false,
+   "p": 38,
+   "w": 18,
+   "d": 9,
+   "l": 11,
+   "gf": 77,
+   "ga": 63,
+   "gd": 14,
+   "pts": 63,
+   "form": [
+    "W",
+    "W",
+    "W",
+    "W",
+    "W"
+   ]
+  },
+  {
+   "rank": 7,
+   "team": "Newcastle",
+   "us": false,
+   "p": 38,
+   "w": 18,
+   "d": 6,
+   "l": 14,
+   "gf": 85,
+   "ga": 62,
+   "gd": 23,
+   "pts": 60,
+   "form": [
+    "W",
+    "W",
+    "D",
+    "L",
+    "W"
+   ]
+  },
+  {
+   "rank": 8,
+   "team": "Manchester United",
+   "us": true,
+   "p": 38,
+   "w": 18,
+   "d": 6,
+   "l": 14,
+   "gf": 57,
+   "ga": 58,
+   "gd": -1,
+   "pts": 60,
+   "form": [
+    "D",
+    "L",
+    "L",
+    "W",
+    "W"
+   ]
+  },
+  {
+   "rank": 9,
+   "team": "West Ham",
+   "us": false,
+   "p": 38,
+   "w": 14,
+   "d": 10,
+   "l": 14,
+   "gf": 60,
+   "ga": 74,
+   "gd": -14,
+   "pts": 52,
+   "form": [
+    "L",
+    "D",
+    "L",
+    "W",
+    "L"
+   ]
+  },
+  {
+   "rank": 10,
+   "team": "Crystal Palace",
+   "us": false,
+   "p": 38,
+   "w": 13,
+   "d": 10,
+   "l": 15,
+   "gf": 57,
+   "ga": 58,
+   "gd": -1,
+   "pts": 49,
+   "form": [
+    "W",
+    "D",
+    "W",
+    "W",
+    "W"
+   ]
+  },
+  {
+   "rank": 11,
+   "team": "Brighton",
+   "us": false,
+   "p": 38,
+   "w": 12,
+   "d": 12,
+   "l": 14,
+   "gf": 55,
+   "ga": 62,
+   "gd": -7,
+   "pts": 48,
+   "form": [
+    "L",
+    "W",
+    "D",
+    "L",
+    "L"
+   ]
+  },
+  {
+   "rank": 12,
+   "team": "Bournemouth",
+   "us": false,
+   "p": 38,
+   "w": 13,
+   "d": 9,
+   "l": 16,
+   "gf": 54,
+   "ga": 67,
+   "gd": -13,
+   "pts": 48,
+   "form": [
+    "W",
+    "W",
+    "L",
+    "L",
+    "L"
+   ]
+  },
+  {
+   "rank": 13,
+   "team": "Fulham",
+   "us": false,
+   "p": 38,
+   "w": 13,
+   "d": 8,
+   "l": 17,
+   "gf": 55,
+   "ga": 61,
+   "gd": -6,
+   "pts": 47,
+   "form": [
+    "L",
+    "D",
+    "D",
+    "L",
+    "W"
+   ]
+  },
+  {
+   "rank": 14,
+   "team": "Wolves",
+   "us": false,
+   "p": 38,
+   "w": 13,
+   "d": 7,
+   "l": 18,
+   "gf": 50,
+   "ga": 65,
+   "gd": -15,
+   "pts": 46,
+   "form": [
+    "L",
+    "W",
+    "L",
+    "L",
+    "L"
+   ]
+  },
+  {
+   "rank": 15,
+   "team": "Everton",
+   "us": false,
+   "p": 38,
+   "w": 13,
+   "d": 9,
+   "l": 16,
+   "gf": 40,
+   "ga": 51,
+   "gd": -11,
+   "pts": 40,
+   "form": [
+    "W",
+    "W",
+    "D",
+    "W",
+    "L"
+   ]
+  },
+  {
+   "rank": 16,
+   "team": "Brentford",
+   "us": false,
+   "p": 38,
+   "w": 10,
+   "d": 9,
+   "l": 19,
+   "gf": 56,
+   "ga": 65,
+   "gd": -9,
+   "pts": 39,
+   "form": [
+    "W",
+    "L",
+    "D",
+    "W",
+    "L"
+   ]
+  },
+  {
+   "rank": 17,
+   "team": "Nottingham Forest",
+   "us": false,
+   "p": 38,
+   "w": 9,
+   "d": 9,
+   "l": 20,
+   "gf": 49,
+   "ga": 67,
+   "gd": -18,
+   "pts": 32,
+   "form": [
+    "L",
+    "L",
+    "W",
+    "L",
+    "W"
+   ]
+  },
+  {
+   "rank": 18,
+   "team": "Luton",
+   "us": false,
+   "p": 38,
+   "w": 6,
+   "d": 8,
+   "l": 24,
+   "gf": 52,
+   "ga": 85,
+   "gd": -33,
+   "pts": 26,
+   "form": [
+    "L",
+    "L",
+    "D",
+    "L",
+    "L"
+   ]
+  },
+  {
+   "rank": 19,
+   "team": "Burnley",
+   "us": false,
+   "p": 38,
+   "w": 5,
+   "d": 9,
+   "l": 24,
+   "gf": 41,
+   "ga": 78,
+   "gd": -37,
+   "pts": 24,
+   "form": [
+    "W",
+    "D",
+    "L",
+    "L",
+    "L"
+   ]
+  },
+  {
+   "rank": 20,
+   "team": "Sheffield Utd",
+   "us": false,
+   "p": 38,
+   "w": 3,
+   "d": 7,
+   "l": 28,
+   "gf": 35,
+   "ga": 104,
+   "gd": -69,
+   "pts": 16,
+   "form": [
+    "L",
+    "L",
+    "L",
+    "L",
+    "L"
+   ]
+  }
+ ],
+ "fixtures": [
+  {
+   "kickoff": "2023-08-14T19:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Wolves",
+   "gf": 1,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-08-19T16:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Tottenham",
+   "gf": 0,
+   "ga": 2,
+   "result": "L"
+  },
+  {
+   "kickoff": "2023-08-26T14:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Nottingham Forest",
+   "gf": 3,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-09-03T15:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Arsenal",
+   "gf": 1,
+   "ga": 3,
+   "result": "L"
+  },
+  {
+   "kickoff": "2023-09-16T14:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Brighton",
+   "gf": 1,
+   "ga": 3,
+   "result": "L"
+  },
+  {
+   "kickoff": "2023-09-23T19:00:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Burnley",
+   "gf": 1,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-09-30T14:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Crystal Palace",
+   "gf": 0,
+   "ga": 1,
+   "result": "L"
+  },
+  {
+   "kickoff": "2023-10-07T14:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Brentford",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-10-21T19:00:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Sheffield Utd",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-10-29T15:30:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Manchester City",
+   "gf": 0,
+   "ga": 3,
+   "result": "L"
+  },
+  {
+   "kickoff": "2023-11-04T12:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Fulham",
+   "gf": 1,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-11-11T15:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Luton",
+   "gf": 1,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-11-26T16:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Everton",
+   "gf": 3,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-12-02T20:00:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Newcastle",
+   "gf": 0,
+   "ga": 1,
+   "result": "L"
+  },
+  {
+   "kickoff": "2023-12-06T20:15:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Chelsea",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-12-09T15:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Bournemouth",
+   "gf": 0,
+   "ga": 3,
+   "result": "L"
+  },
+  {
+   "kickoff": "2023-12-17T16:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Liverpool",
+   "gf": 0,
+   "ga": 0,
+   "result": "D"
+  },
+  {
+   "kickoff": "2023-12-23T12:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "West Ham",
+   "gf": 0,
+   "ga": 2,
+   "result": "L"
+  },
+  {
+   "kickoff": "2023-12-26T20:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Aston Villa",
+   "gf": 3,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2023-12-30T17:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Nottingham Forest",
+   "gf": 1,
+   "ga": 2,
+   "result": "L"
+  },
+  {
+   "kickoff": "2024-01-14T16:30:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Tottenham",
+   "gf": 2,
+   "ga": 2,
+   "result": "D"
+  },
+  {
+   "kickoff": "2024-02-01T20:15:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Wolves",
+   "gf": 4,
+   "ga": 3,
+   "result": "W"
+  },
+  {
+   "kickoff": "2024-02-04T14:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "West Ham",
+   "gf": 3,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2024-02-11T16:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Aston Villa",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2024-02-18T16:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Luton",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2024-02-24T15:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Fulham",
+   "gf": 1,
+   "ga": 2,
+   "result": "L"
+  },
+  {
+   "kickoff": "2024-03-03T15:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Manchester City",
+   "gf": 1,
+   "ga": 3,
+   "result": "L"
+  },
+  {
+   "kickoff": "2024-03-09T12:30:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Everton",
+   "gf": 2,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2024-03-30T20:00:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Brentford",
+   "gf": 1,
+   "ga": 1,
+   "result": "D"
+  },
+  {
+   "kickoff": "2024-04-04T19:15:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Chelsea",
+   "gf": 3,
+   "ga": 4,
+   "result": "L"
+  },
+  {
+   "kickoff": "2024-04-07T14:30:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Liverpool",
+   "gf": 2,
+   "ga": 2,
+   "result": "D"
+  },
+  {
+   "kickoff": "2024-04-13T16:30:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Bournemouth",
+   "gf": 2,
+   "ga": 2,
+   "result": "D"
+  },
+  {
+   "kickoff": "2024-04-24T19:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Sheffield Utd",
+   "gf": 4,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2024-04-27T14:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Burnley",
+   "gf": 1,
+   "ga": 1,
+   "result": "D"
+  },
+  {
+   "kickoff": "2024-05-06T19:00:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Crystal Palace",
+   "gf": 0,
+   "ga": 4,
+   "result": "L"
+  },
+  {
+   "kickoff": "2024-05-12T15:30:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Arsenal",
+   "gf": 0,
+   "ga": 1,
+   "result": "L"
+  },
+  {
+   "kickoff": "2024-05-15T19:00:00+00:00",
+   "status": "FT",
+   "home": true,
+   "opponent": "Newcastle",
+   "gf": 3,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2024-05-19T15:00:00+00:00",
+   "status": "FT",
+   "home": false,
+   "opponent": "Brighton",
+   "gf": 2,
+   "ga": 0,
+   "result": "W"
+  }
+ ],
+ "players": [
+  {
+   "name": "H. Maguire",
+   "pos": "Defender",
+   "apps": 25,
+   "minutes": 1667,
+   "goals": 2,
+   "assists": 2,
+   "rating": 7.154545
+  },
+  {
+   "name": "H. Mejbri",
+   "pos": "Midfielder",
+   "apps": 5,
+   "minutes": 129,
+   "goals": 1,
+   "assists": 0,
+   "rating": 6.875
+  },
+  {
+   "name": "A. Garnacho",
+   "pos": "Attacker",
+   "apps": 36,
+   "minutes": 2578,
+   "goals": 7,
+   "assists": 4,
+   "rating": 7.069444
+  },
+  {
+   "name": "J. Sancho",
+   "pos": "Attacker",
+   "apps": 3,
+   "minutes": 76,
+   "goals": 0,
+   "assists": 0,
+   "rating": 6.533333
+  },
+  {
+   "name": "Reguilón",
+   "pos": "Defender",
+   "apps": 9,
+   "minutes": 410,
+   "goals": 0,
+   "assists": 4,
+   "rating": 6.95625
+  },
+  {
+   "name": "R. Varane",
+   "pos": "Defender",
+   "apps": 22,
+   "minutes": 1373,
+   "goals": 1,
+   "assists": 0,
+   "rating": 6.904761
+  },
+  {
+   "name": "L. Shaw",
+   "pos": "Defender",
+   "apps": 12,
+   "minutes": 962,
+   "goals": 0,
+   "assists": 0,
+   "rating": 6.941666
+  },
+  {
+   "name": "A. Martial",
+   "pos": "Attacker",
+   "apps": 13,
+   "minutes": 445,
+   "goals": 1,
+   "assists": 0,
+   "rating": 6.676923
+  },
+  {
+   "name": "Matheus Cunha",
+   "pos": "Attacker",
+   "apps": 32,
+   "minutes": 2453,
+   "goals": 12,
+   "assists": 7,
+   "rating": 7.184375
+  },
+  {
+   "name": "Lisandro Martínez",
+   "pos": "Defender",
+   "apps": 11,
+   "minutes": 656,
+   "goals": 0,
+   "assists": 1,
+   "rating": 6.6
+  },
+  {
+   "name": "Antony",
+   "pos": "Attacker",
+   "apps": 29,
+   "minutes": 1322,
+   "goals": 1,
+   "assists": 1,
+   "rating": 6.864285
+  },
+  {
+   "name": "A. Wan-Bissaka",
+   "pos": "Defender",
+   "apps": 22,
+   "minutes": 1782,
+   "goals": 0,
+   "assists": 2,
+   "rating": 6.977272
+  },
+  {
+   "name": "M. Mount",
+   "pos": "Midfielder",
+   "apps": 14,
+   "minutes": 541,
+   "goals": 1,
+   "assists": 0,
+   "rating": 6.776923
+  },
+  {
+   "name": "A. Diallo",
+   "pos": "Attacker",
+   "apps": 9,
+   "minutes": 387,
+   "goals": 1,
+   "assists": 1,
+   "rating": 7
+  },
+  {
+   "name": "O. Forson",
+   "pos": "Attacker",
+   "apps": 13,
+   "minutes": 87,
+   "goals": 0,
+   "assists": 1,
+   "rating": 6.6
+  },
+  {
+   "name": "K. Mainoo",
+   "pos": "Midfielder",
+   "apps": 29,
+   "minutes": 1939,
+   "goals": 3,
+   "assists": 1,
+   "rating": 6.945833
+  },
+  {
+   "name": "R. Højlund",
+   "pos": "Attacker",
+   "apps": 30,
+   "minutes": 2169,
+   "goals": 10,
+   "assists": 2,
+   "rating": 6.836666
+  },
+  {
+   "name": "Willy Kambwala Ndengushi",
+   "pos": "Defender",
+   "apps": 16,
+   "minutes": 336,
+   "goals": 0,
+   "assists": 0,
+   "rating": 6.371428
+  },
+  {
+   "name": "C. Eriksen",
+   "pos": "Midfielder",
+   "apps": 33,
+   "minutes": 1160,
+   "goals": 1,
+   "assists": 2,
+   "rating": 6.868181
+  },
+  {
+   "name": "D. van de Beek",
+   "pos": "Midfielder",
+   "apps": 1,
+   "minutes": 2,
+   "goals": 0,
+   "assists": 0,
+   "rating": null
+  },
+  {
+   "name": "S. McTominay",
+   "pos": "Midfielder",
+   "apps": 34,
+   "minutes": 1919,
+   "goals": 7,
+   "assists": 1,
+   "rating": 6.946875
+  },
+  {
+   "name": "M. Rashford",
+   "pos": "Attacker",
+   "apps": 33,
+   "minutes": 2278,
+   "goals": 7,
+   "assists": 2,
+   "rating": 6.848484
+  },
+  {
+   "name": "J. Evans",
+   "pos": "Defender",
+   "apps": 23,
+   "minutes": 1391,
+   "goals": 0,
+   "assists": 1,
+   "rating": 6.866666
+  },
+  {
+   "name": "F. Pellistri",
+   "pos": "Midfielder",
+   "apps": 9,
+   "minutes": 165,
+   "goals": 0,
+   "assists": 1,
+   "rating": 6.766666
+  },
+  {
+   "name": "Daniel Gore",
+   "pos": "Midfielder",
+   "apps": 1,
+   "minutes": 0,
+   "goals": 0,
+   "assists": 0,
+   "rating": null
+  },
+  {
+   "name": "E. Wheatley",
+   "pos": "Attacker",
+   "apps": 3,
+   "minutes": 12,
+   "goals": 0,
+   "assists": 0,
+   "rating": 6.2
+  }
+ ],
+ "playersPartial": true
+}

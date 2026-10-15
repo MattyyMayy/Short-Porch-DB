@@ -1,0 +1,755 @@
+{
+ "season": 2025,
+ "label": "2025/26",
+ "source": "openfootball",
+ "updated": "2026-10-15T17:06:57.699Z",
+ "live": false,
+ "standings": [
+  {
+   "rank": 1,
+   "team": "Arsenal FC",
+   "us": false,
+   "p": 38,
+   "w": 26,
+   "d": 7,
+   "l": 5,
+   "gf": 71,
+   "ga": 27,
+   "gd": 44,
+   "pts": 85,
+   "form": [
+    "W",
+    "W",
+    "W",
+    "W",
+    "W"
+   ]
+  },
+  {
+   "rank": 2,
+   "team": "Manchester City FC",
+   "us": false,
+   "p": 38,
+   "w": 23,
+   "d": 9,
+   "l": 6,
+   "gf": 77,
+   "ga": 35,
+   "gd": 42,
+   "pts": 78,
+   "form": [
+    "D",
+    "W",
+    "W",
+    "D",
+    "L"
+   ]
+  },
+  {
+   "rank": 3,
+   "team": "Manchester United FC",
+   "us": true,
+   "p": 38,
+   "w": 20,
+   "d": 11,
+   "l": 7,
+   "gf": 69,
+   "ga": 50,
+   "gd": 19,
+   "pts": 71,
+   "form": [
+    "W",
+    "W",
+    "D",
+    "W",
+    "W"
+   ]
+  },
+  {
+   "rank": 4,
+   "team": "Aston Villa FC",
+   "us": false,
+   "p": 38,
+   "w": 19,
+   "d": 8,
+   "l": 11,
+   "gf": 56,
+   "ga": 49,
+   "gd": 7,
+   "pts": 65,
+   "form": [
+    "L",
+    "L",
+    "D",
+    "W",
+    "W"
+   ]
+  },
+  {
+   "rank": 5,
+   "team": "Liverpool FC",
+   "us": false,
+   "p": 38,
+   "w": 17,
+   "d": 9,
+   "l": 12,
+   "gf": 63,
+   "ga": 53,
+   "gd": 10,
+   "pts": 60,
+   "form": [
+    "W",
+    "L",
+    "D",
+    "L",
+    "D"
+   ]
+  },
+  {
+   "rank": 6,
+   "team": "AFC Bournemouth",
+   "us": false,
+   "p": 38,
+   "w": 13,
+   "d": 18,
+   "l": 7,
+   "gf": 58,
+   "ga": 54,
+   "gd": 4,
+   "pts": 57,
+   "form": [
+    "D",
+    "W",
+    "W",
+    "D",
+    "D"
+   ]
+  },
+  {
+   "rank": 7,
+   "team": "Sunderland AFC",
+   "us": false,
+   "p": 38,
+   "w": 14,
+   "d": 12,
+   "l": 12,
+   "gf": 42,
+   "ga": 48,
+   "gd": -6,
+   "pts": 54,
+   "form": [
+    "L",
+    "D",
+    "D",
+    "W",
+    "W"
+   ]
+  },
+  {
+   "rank": 8,
+   "team": "Brighton & Hove Albion FC",
+   "us": false,
+   "p": 38,
+   "w": 14,
+   "d": 11,
+   "l": 13,
+   "gf": 52,
+   "ga": 46,
+   "gd": 6,
+   "pts": 53,
+   "form": [
+    "W",
+    "L",
+    "W",
+    "L",
+    "L"
+   ]
+  },
+  {
+   "rank": 9,
+   "team": "Brentford FC",
+   "us": false,
+   "p": 38,
+   "w": 14,
+   "d": 11,
+   "l": 13,
+   "gf": 55,
+   "ga": 52,
+   "gd": 3,
+   "pts": 53,
+   "form": [
+    "L",
+    "W",
+    "L",
+    "D",
+    "D"
+   ]
+  },
+  {
+   "rank": 10,
+   "team": "Chelsea FC",
+   "us": false,
+   "p": 38,
+   "w": 14,
+   "d": 10,
+   "l": 14,
+   "gf": 58,
+   "ga": 52,
+   "gd": 6,
+   "pts": 52,
+   "form": [
+    "L",
+    "L",
+    "D",
+    "W",
+    "L"
+   ]
+  },
+  {
+   "rank": 11,
+   "team": "Fulham FC",
+   "us": false,
+   "p": 38,
+   "w": 15,
+   "d": 7,
+   "l": 16,
+   "gf": 47,
+   "ga": 51,
+   "gd": -4,
+   "pts": 52,
+   "form": [
+    "W",
+    "L",
+    "L",
+    "D",
+    "W"
+   ]
+  },
+  {
+   "rank": 12,
+   "team": "Newcastle United FC",
+   "us": false,
+   "p": 38,
+   "w": 14,
+   "d": 7,
+   "l": 17,
+   "gf": 53,
+   "ga": 55,
+   "gd": -2,
+   "pts": 49,
+   "form": [
+    "L",
+    "W",
+    "D",
+    "W",
+    "L"
+   ]
+  },
+  {
+   "rank": 13,
+   "team": "Everton FC",
+   "us": false,
+   "p": 38,
+   "w": 13,
+   "d": 10,
+   "l": 15,
+   "gf": 47,
+   "ga": 50,
+   "gd": -3,
+   "pts": 49,
+   "form": [
+    "L",
+    "D",
+    "D",
+    "L",
+    "L"
+   ]
+  },
+  {
+   "rank": 14,
+   "team": "Leeds United FC",
+   "us": false,
+   "p": 38,
+   "w": 11,
+   "d": 14,
+   "l": 13,
+   "gf": 49,
+   "ga": 56,
+   "gd": -7,
+   "pts": 47,
+   "form": [
+    "D",
+    "W",
+    "D",
+    "W",
+    "L"
+   ]
+  },
+  {
+   "rank": 15,
+   "team": "Crystal Palace FC",
+   "us": false,
+   "p": 38,
+   "w": 11,
+   "d": 12,
+   "l": 15,
+   "gf": 41,
+   "ga": 51,
+   "gd": -10,
+   "pts": 45,
+   "form": [
+    "L",
+    "D",
+    "L",
+    "D",
+    "L"
+   ]
+  },
+  {
+   "rank": 16,
+   "team": "Nottingham Forest FC",
+   "us": false,
+   "p": 38,
+   "w": 11,
+   "d": 11,
+   "l": 16,
+   "gf": 48,
+   "ga": 51,
+   "gd": -3,
+   "pts": 44,
+   "form": [
+    "W",
+    "W",
+    "D",
+    "L",
+    "D"
+   ]
+  },
+  {
+   "rank": 17,
+   "team": "Tottenham Hotspur FC",
+   "us": false,
+   "p": 38,
+   "w": 10,
+   "d": 11,
+   "l": 17,
+   "gf": 48,
+   "ga": 57,
+   "gd": -9,
+   "pts": 41,
+   "form": [
+    "W",
+    "W",
+    "D",
+    "L",
+    "W"
+   ]
+  },
+  {
+   "rank": 18,
+   "team": "West Ham United FC",
+   "us": false,
+   "p": 38,
+   "w": 10,
+   "d": 9,
+   "l": 19,
+   "gf": 46,
+   "ga": 65,
+   "gd": -19,
+   "pts": 39,
+   "form": [
+    "W",
+    "L",
+    "L",
+    "L",
+    "W"
+   ]
+  },
+  {
+   "rank": 19,
+   "team": "Burnley FC",
+   "us": false,
+   "p": 38,
+   "w": 4,
+   "d": 10,
+   "l": 24,
+   "gf": 38,
+   "ga": 75,
+   "gd": -37,
+   "pts": 22,
+   "form": [
+    "L",
+    "L",
+    "D",
+    "L",
+    "D"
+   ]
+  },
+  {
+   "rank": 20,
+   "team": "Wolverhampton Wanderers FC",
+   "us": false,
+   "p": 38,
+   "w": 3,
+   "d": 11,
+   "l": 24,
+   "gf": 27,
+   "ga": 68,
+   "gd": -41,
+   "pts": 20,
+   "form": [
+    "L",
+    "D",
+    "L",
+    "D",
+    "D"
+   ]
+  }
+ ],
+ "fixtures": [
+  {
+   "kickoff": "2025-08-17T15:30:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Arsenal FC",
+   "gf": 0,
+   "ga": 1,
+   "result": "L"
+  },
+  {
+   "kickoff": "2025-08-24T15:30:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Fulham FC",
+   "gf": 1,
+   "ga": 1,
+   "result": "D"
+  },
+  {
+   "kickoff": "2025-08-30T14:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Burnley FC",
+   "gf": 3,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2025-09-14T15:30:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Manchester City FC",
+   "gf": 0,
+   "ga": 3,
+   "result": "L"
+  },
+  {
+   "kickoff": "2025-09-20T16:30:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Chelsea FC",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2025-09-27T11:30:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Brentford FC",
+   "gf": 1,
+   "ga": 3,
+   "result": "L"
+  },
+  {
+   "kickoff": "2025-10-04T14:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Sunderland AFC",
+   "gf": 2,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2025-10-19T15:30:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Liverpool FC",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2025-10-25T16:30:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Brighton & Hove Albion FC",
+   "gf": 4,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2025-11-01T15:00:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Nottingham Forest FC",
+   "gf": 2,
+   "ga": 2,
+   "result": "D"
+  },
+  {
+   "kickoff": "2025-11-08T12:30:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Tottenham Hotspur FC",
+   "gf": 2,
+   "ga": 2,
+   "result": "D"
+  },
+  {
+   "kickoff": "2025-11-24T20:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Everton FC",
+   "gf": 0,
+   "ga": 1,
+   "result": "L"
+  },
+  {
+   "kickoff": "2025-11-30T12:00:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Crystal Palace FC",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2025-12-04T20:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "West Ham United FC",
+   "gf": 1,
+   "ga": 1,
+   "result": "D"
+  },
+  {
+   "kickoff": "2025-12-08T20:00:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Wolverhampton Wanderers FC",
+   "gf": 4,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2025-12-15T20:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "AFC Bournemouth",
+   "gf": 4,
+   "ga": 4,
+   "result": "D"
+  },
+  {
+   "kickoff": "2025-12-21T16:30:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Aston Villa FC",
+   "gf": 1,
+   "ga": 2,
+   "result": "L"
+  },
+  {
+   "kickoff": "2025-12-26T20:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Newcastle United FC",
+   "gf": 1,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2025-12-30T20:15:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Wolverhampton Wanderers FC",
+   "gf": 1,
+   "ga": 1,
+   "result": "D"
+  },
+  {
+   "kickoff": "2026-01-04T12:30:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Leeds United FC",
+   "gf": 1,
+   "ga": 1,
+   "result": "D"
+  },
+  {
+   "kickoff": "2026-01-07T20:15:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Burnley FC",
+   "gf": 2,
+   "ga": 2,
+   "result": "D"
+  },
+  {
+   "kickoff": "2026-01-17T12:30:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Manchester City FC",
+   "gf": 2,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-01-25T16:30:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Arsenal FC",
+   "gf": 3,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-02-01T14:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Fulham FC",
+   "gf": 3,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-02-07T12:30:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Tottenham Hotspur FC",
+   "gf": 2,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-02-10T20:15:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "West Ham United FC",
+   "gf": 1,
+   "ga": 1,
+   "result": "D"
+  },
+  {
+   "kickoff": "2026-02-23T20:00:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Everton FC",
+   "gf": 1,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-03-01T14:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Crystal Palace FC",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-03-04T20:15:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Newcastle United FC",
+   "gf": 1,
+   "ga": 2,
+   "result": "L"
+  },
+  {
+   "kickoff": "2026-03-15T14:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Aston Villa FC",
+   "gf": 3,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-03-20T20:00:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "AFC Bournemouth",
+   "gf": 2,
+   "ga": 2,
+   "result": "D"
+  },
+  {
+   "kickoff": "2026-04-13T19:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Leeds United FC",
+   "gf": 1,
+   "ga": 2,
+   "result": "L"
+  },
+  {
+   "kickoff": "2026-04-18T19:00:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Chelsea FC",
+   "gf": 1,
+   "ga": 0,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-04-27T19:00:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Brentford FC",
+   "gf": 2,
+   "ga": 1,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-05-03T14:30:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Liverpool FC",
+   "gf": 3,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-05-09T14:00:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Sunderland AFC",
+   "gf": 0,
+   "ga": 0,
+   "result": "D"
+  },
+  {
+   "kickoff": "2026-05-17T11:30:00.000Z",
+   "status": "FT",
+   "home": true,
+   "opponent": "Nottingham Forest FC",
+   "gf": 3,
+   "ga": 2,
+   "result": "W"
+  },
+  {
+   "kickoff": "2026-05-24T15:00:00.000Z",
+   "status": "FT",
+   "home": false,
+   "opponent": "Brighton & Hove Albion FC",
+   "gf": 3,
+   "ga": 0,
+   "result": "W"
+  }
+ ],
+ "players": [],
+ "playersPartial": false
+}
