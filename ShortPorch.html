@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Short Porch DB · New York Yankees</title>
+<style>
+  :root {
+    --bg: #f4f5f7; --surface: #ffffff; --ink: #0f1420; --muted: #646b78; --line: #e2e5ea;
+    --navy: #0C2340; --gray: #C4CED3; --accent: #0C2340; --win: #15803d; --tie: #8a8a8a; --loss: #c8102e;
+    --radius: 12px; --pad: clamp(12px, 3vw, 24px);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #0a0d14; --surface: #131824; --ink: #f2f4f8; --muted: #98a0ae; --line: #232a38; --accent: #8fb0d9; }
+  }
+  :root[data-theme="dark"] { --bg: #0a0d14; --surface: #131824; --ink: #f2f4f8; --muted: #98a0ae; --line: #232a38; --accent: #8fb0d9; }
+
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+
+  /* Pinstripes */
+  header {
+    color: #fff; border-bottom: 4px solid var(--gray);
+    background: repeating-linear-gradient(90deg, var(--navy) 0 22px, rgba(255,255,255,.07) 22px 23px), var(--navy);
+  }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: var(--pad); }
+  .top { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: center; justify-content: space-between; }
+  .brand { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .75; font-weight: 600; }
+  h1 { font-size: clamp(18px, 3vw, 24px); margin: 0; font-weight: 700; letter-spacing: .01em; }
+  .sub { font-size: 12px; opacity: .85; }
+  .badge { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: #fff; color: var(--navy); font-size: 11px; font-weight: 700; vertical-align: middle; }
+
+  .seasons { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  .seasons::-webkit-scrollbar { display: none; }
+  .seasons button {
+    flex: none; border: 1px solid rgba(255,255,255,.4); background: transparent; color: #fff;
+    padding: 6px 12px; border-radius: 999px; font: inherit; font-weight: 600; cursor: pointer;
+  }
+  .seasons button[aria-pressed="true"] { background: #fff; color: var(--navy); border-color: #fff; }
+
+  main { display: grid; gap: 16px; padding-top: var(--pad); }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; min-width: 0; }
+  .card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 12px; font-weight: 600; }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 12px; }
+  .kpi .v { font-size: clamp(22px, 4vw, 30px); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .kpi .l { font-size: 12px; color: var(--muted); }
+
+  .split { display: grid; gap: 16px; }
+  @media (min-width: 900px) { .split { grid-template-columns: 1.4fr 1fr; } }
+
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  th, td { padding: 8px 6px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+  th:first-child, td:first-child, th.name, td.name { text-align: left; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tr.us td { background: rgba(12, 35, 64, .09); font-weight: 600; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) tr.us td { background: rgba(143, 176, 217, .12); } }
+  :root[data-theme="dark"] tr.us td { background: rgba(143, 176, 217, .12); }
+  .clinch { color: var(--muted); font-size: 11px; margin-left: 4px; }
+
+  .streak { font-weight: 700; }
+  .streak.W { color: var(--win); } .streak.L { color: var(--loss); }
+
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; }
+  select {
+    font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--ink);
+  }
+  .pos { color: var(--muted); font-size: 12px; }
+
+  .bars { display: flex; align-items: flex-end; gap: 6px; height: 160px; padding-top: 8px; }
+  .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+  .bar-pair { flex: 1; min-height: 0; display: flex; align-items: flex-end; gap: 2px; width: 100%; justify-content: center; }
+  .bar { width: min(10px, 35%); border-radius: 3px 3px 0 0; min-height: 2px; }
+  .bar.rf { background: var(--accent); } .bar.ra { background: var(--muted); opacity: .5; }
+  .bar-label { font-size: 11px; color: var(--muted); }
+  .legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 8px; }
+  .legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .legend .rf::before { background: var(--accent); } .legend .ra::before { background: var(--muted); opacity: .5; }
+
+  .note { font-size: 12px; color: var(--muted); padding: 0 var(--pad) 24px; max-width: 1200px; margin: 0 auto; }
+  .note a { color: inherit; }
+  .empty { text-align: left; color: var(--muted); white-space: normal; }
+  .res { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 4px; color: #fff; font-size: 11px; font-weight: 700; }
+  .res.W { background: var(--win); } .res.T { background: var(--tie); } .res.L { background: var(--loss); }
+  .tag { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .03em; }
+  tr.upcoming td { color: var(--muted); }
+
+  @media (max-width: 599px) {
+    .hide-sm { display: none; }
+    th, td { padding: 7px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <div>
+      <div class="brand">Short Porch DB</div>
+      <h1>New York Yankees <span class="badge" id="status">LOADING</span></h1>
+      <div class="sub" id="meta"></div>
+    </div>
+    <nav class="seasons" id="seasons" aria-label="Season"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <h2 id="kpi-title">Season overview</h2>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <div class="split">
+    <section class="card">
+      <div class="toolbar">
+        <h2 style="margin:0">Standings</h2>
+        <label class="pos">Show
+          <select id="view">
+            <option value="division">AL East</option>
+            <option value="league">American League</option>
+          </select>
+        </label>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead id="standings-head"></thead>
+          <tbody id="standings"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Runs by month</h2>
+      <div class="bars" id="bars"></div>
+      <div class="legend"><span class="rf">Scored</span><span class="ra">Allowed</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="toolbar">
+      <h2 style="margin:0">Player stats</h2>
+      <div class="controls">
+        <label class="pos">Group
+          <select id="group">
+            <option value="hitters">Hitting</option>
+            <option value="pitchers">Pitching</option>
+          </select>
+        </label>
+        <label class="pos">Sort by
+          <select id="sort"></select>
+        </label>
+      </div>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead id="players-head"></thead>
+        <tbody id="players"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="toolbar">
+      <h2 style="margin:0">Results &amp; schedule</h2>
+      <label class="pos">Show
+        <select id="filter">
+          <option value="all">All games</option>
+          <option value="results">Results</option>
+          <option value="upcoming">Upcoming</option>
+        </select>
+      </label>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th class="name">Date</th><th class="name">Opponent</th><th>H/A</th><th>Score</th><th>Result</th></tr>
+        </thead>
+        <tbody id="games"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<p class="note" id="note"></p>
+
+<script>
+  // Data is written to data/ by .github/workflows/update-data.yml, which reads
+  // the MLB Stats API (statsapi.mlb.com) on a schedule.
+  const DATA = "data";
+  const MONTHS = ["Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"];
+  const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const GAMES_PER_SEASON = 162;
+  const ROUND = { F: "Wild Card", D: "ALDS", L: "ALCS", W: "World Series" };
+  const NOT_PLAYED = /postponed|cancel|suspended/i;
+
+  // Rate stats need a minimum sample; players below it sort after those above.
+  const MIN_PA = 50;
+  const MIN_OUTS = 60; // 20 innings
+
+  const avg3 = v => v == null ? "–" : v.toFixed(3).replace(/^0/, "");
+  const fix2 = v => v == null ? "–" : v.toFixed(2);
+
+  const STATS = {
+    hitters: {
+      sorts: [
+        ["ops", "OPS"], ["hr", "Home runs"], ["rbi", "RBI"], ["avg", "Average"], ["sb", "Stolen bases"], ["pa", "Plate appearances"]
+      ],
+      rate: new Set(["ops", "avg"]),
+      qualified: p => p.pa >= MIN_PA,
+      head: `<tr><th class="name">Player</th><th>Pos</th><th>G</th><th class="hide-sm">PA</th><th>AVG</th><th>HR</th><th>RBI</th><th class="hide-sm">SB</th><th class="hide-sm">OBP</th><th class="hide-sm">SLG</th><th>OPS</th></tr>`,
+      row: p => `<td>${p.g}</td><td class="hide-sm">${p.pa}</td><td>${avg3(p.avg)}</td><td>${p.hr}</td><td>${p.rbi}</td><td class="hide-sm">${p.sb}</td><td class="hide-sm">${avg3(p.obp)}</td><td class="hide-sm">${avg3(p.slg)}</td><td>${avg3(p.ops)}</td>`
+    },
+    pitchers: {
+      sorts: [
+        ["outs", "Innings"], ["era", "ERA"], ["so", "Strikeouts"], ["whip", "WHIP"], ["w", "Wins"], ["sv", "Saves"]
+      ],
+      rate: new Set(["era", "whip"]),
+      ascending: new Set(["era", "whip"]),
+      qualified: p => p.outs >= MIN_OUTS,
+      head: `<tr><th class="name">Player</th><th>G</th><th class="hide-sm">GS</th><th>IP</th><th>W-L</th><th class="hide-sm">SV</th><th>ERA</th><th class="hide-sm">WHIP</th><th>K</th><th class="hide-sm">BB</th></tr>`,
+      row: p => `<td>${p.g}</td><td class="hide-sm">${p.gs}</td><td>${esc(p.ip)}</td><td>${p.w}-${p.l}</td><td class="hide-sm">${p.sv}</td><td>${fix2(p.era)}</td><td class="hide-sm">${fix2(p.whip)}</td><td>${p.so}</td><td class="hide-sm">${p.bb}</td>`
+    }
+  };
+
+  const CITY = { "New York": "NY", "Los Angeles": "LA", "Chicago": "CHI" };
+  const shortName = t => t.replace(/^(New York|Los Angeles|Chicago) /, (m, city) => `${CITY[city]} `);
+  const fmtDate = (iso, opts) => new Date(`${iso}T12:00:00`).toLocaleDateString("en-US", opts);
+  const fmtTime = iso => new Date(iso).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  const SUFFIX = ["th", "st", "nd", "rd"];
+  const ordinal = n => n + (SUFFIX[(n % 100 - 20) % 10] || SUFFIX[n % 100] || SUFFIX[0]);
+
+  function getJSON(path) {
+    return fetch(path, { cache: "no-cache" }).then(res => {
+      if (!res.ok) throw new Error(res.status === 404 ? "no data yet" : `HTTP ${res.status}`);
+      return res.json();
+    });
+  }
+
+  function withMonthly(s) {
+    const done = s.games.filter(g => g.result);
+    const monthOf = g => MONTH_NAMES[+g.date.slice(5, 7) - 1];
+    const used = new Set(done.map(monthOf));
+    const first = MONTHS.findIndex(m => used.has(m));
+    const last = MONTHS.findLastIndex(m => used.has(m));
+    s.monthly = first < 0 ? [] : MONTHS.slice(first, last + 1).map(m => {
+      const inMonth = done.filter(g => monthOf(g) === m);
+      return { m, rf: inMonth.reduce((t, g) => t + g.rf, 0), ra: inMonth.reduce((t, g) => t + g.ra, 0), n: inMonth.length };
+    });
+    return s;
+  }
+
+  const cache = {};
+  function getSeason(id) {
+    if (!cache[id]) {
+      cache[id] = getJSON(`${DATA}/${id}.json`)
+        .then(withMonthly)
+        .catch(err => { delete cache[id]; throw err; });
+    }
+    return cache[id];
+  }
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmtDiff = n => (n > 0 ? "+" : "") + n;
+  const fmtGB = v => (v == null || v === "-" || v === "0.0" ? "–" : v);
+
+  const $ = id => document.getElementById(id);
+  let seasons = [];
+  let current = null;
+  let filter = "all";
+  let view = "division";
+  let group = "hitters";
+  let sortKey = STATS.hitters.sorts[0][0];
+  let season = null;
+  let requestId = 0;
+
+  function renderSeasonButtons() {
+    $("seasons").innerHTML = seasons.map(id =>
+      `<button type="button" data-id="${id}" aria-pressed="${id === current}">${id}</button>`
+    ).join("");
+  }
+
+  function renderKpis(s) {
+    const me = s.standings.find(r => r.us);
+    $("kpi-title").textContent = `${s.label} · ${s.live ? "In progress" : "Final"}`;
+    if (!me) {
+      $("kpis").innerHTML = `<p class="pos">No standings for this season yet.</p>`;
+      $("meta").textContent = s.label;
+      return;
+    }
+    const played = me.w + me.l;
+    $("kpis").innerHTML = [
+      ["Record", `${me.w}-${me.l}`],
+      ["Win %", me.pct],
+      ["AL East", me.divRank ? ordinal(me.divRank) : "–"],
+      ["Games back", fmtGB(me.gb)],
+      ["Run diff", fmtDiff(me.rd)],
+      ["Runs / game", played ? (me.rs / played).toFixed(2) : "–"],
+      ["Streak", me.streak || "–"],
+      ["Last 10", me.l10 || "–"]
+    ].map(([l, v]) => `<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${l}</div></div>`).join("");
+    const post = s.games.filter(g => g.type !== "R" && g.result);
+    const postNote = post.length ? ` · Postseason ${post.filter(g => g.result === "W").length}-${post.filter(g => g.result === "L").length}` : "";
+    $("meta").textContent = `${s.label} · ${played} of ${GAMES_PER_SEASON} played${postNote}`;
+  }
+
+  function renderStandings(s) {
+    const league = view === "league";
+    $("standings-head").innerHTML = `<tr><th>#</th><th class="name">Team</th><th>W</th><th>L</th><th>PCT</th><th>${league ? "WCGB" : "GB"}</th>
+      <th class="hide-sm">Home</th><th class="hide-sm">Away</th><th class="hide-sm">L10</th><th>Strk</th><th class="hide-sm">RD</th></tr>`;
+    const rows = league
+      ? s.standings.slice().sort((a, b) => (a.leagueRank ?? 99) - (b.leagueRank ?? 99) || parseFloat(b.pct) - parseFloat(a.pct))
+      : s.standings.filter(r => r.division).sort((a, b) => (a.divRank ?? 99) - (b.divRank ?? 99));
+    if (!rows.length) {
+      $("standings").innerHTML = `<tr><td class="empty" colspan="11">No standings for this season.</td></tr>`;
+      return;
+    }
+    $("standings").innerHTML = rows.map((r, i) => {
+      const streakType = (r.streak || "")[0];
+      return `
+      <tr class="${r.us ? "us" : ""}">
+        <td>${league ? r.leagueRank ?? i + 1 : r.divRank ?? i + 1}</td>
+        <td class="name">${esc(shortName(r.team))}${r.clinched ? `<span class="clinch">${esc(r.clinched)}</span>` : ""}</td>
+        <td>${r.w}</td><td>${r.l}</td><td>${esc(r.pct)}</td>
+        <td>${esc(fmtGB(league ? r.wcgb : r.gb))}</td>
+        <td class="hide-sm">${esc(r.home || "–")}</td><td class="hide-sm">${esc(r.away || "–")}</td><td class="hide-sm">${esc(r.l10 || "–")}</td>
+        <td><span class="streak ${streakType}">${esc(r.streak || "–")}</span></td>
+        <td class="hide-sm">${fmtDiff(r.rd)}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  function renderBars(s) {
+    if (!s.monthly.length) {
+      $("bars").innerHTML = `<p class="pos">No results yet.</p>`;
+      return;
+    }
+    const max = Math.max(1, ...s.monthly.flatMap(m => [m.rf, m.ra]));
+    $("bars").innerHTML = s.monthly.map(m => `
+      <div class="bar-group" title="${m.m}: ${m.rf} scored, ${m.ra} allowed in ${m.n} games">
+        <div class="bar-pair">
+          <div class="bar rf" style="height:${(m.rf / max) * 100}%"></div>
+          <div class="bar ra" style="height:${(m.ra / max) * 100}%"></div>
+        </div>
+        <div class="bar-label">${m.m}</div>
+      </div>`).join("");
+  }
+
+  function renderSortOptions() {
+    $("sort").innerHTML = STATS[group].sorts.map(([k, l]) =>
+      `<option value="${k}"${k === sortKey ? " selected" : ""}>${l}</option>`).join("");
+  }
+
+  function renderPlayers(s) {
+    const cfg = STATS[group];
+    $("players-head").innerHTML = cfg.head;
+    const list = s[group] || [];
+    if (!list.length) {
+      $("players").innerHTML = `<tr><td class="empty" colspan="11">No ${group === "hitters" ? "hitting" : "pitching"} stats for this season.</td></tr>`;
+      return;
+    }
+    const dir = cfg.ascending?.has(sortKey) ? 1 : -1;
+    const rate = cfg.rate.has(sortKey);
+    const rows = [...list].sort((a, b) => {
+      if (rate && cfg.qualified(a) !== cfg.qualified(b)) return cfg.qualified(a) ? -1 : 1;
+      const av = a[sortKey], bv = b[sortKey];
+      if (av == null || bv == null) return (av == null) - (bv == null);
+      return dir * (av - bv) || (b.pa ?? b.outs) - (a.pa ?? a.outs);
+    });
+    $("players").innerHTML = rows.map(p => `
+      <tr>
+        <td class="name">${esc(p.name)}</td>
+        ${group === "hitters" ? `<td><span class="pos">${esc(p.pos || "")}</span></td>` : ""}
+        ${cfg.row(p)}
+      </tr>`).join("");
+  }
+
+  function renderGames(s) {
+    const rows = s.games.filter(g =>
+      filter === "all" || (filter === "results" ? g.result : !g.result));
+    if (!rows.length) {
+      $("games").innerHTML = `<tr><td class="empty" colspan="5">No ${filter === "upcoming" ? "upcoming games" : "games"} to show.</td></tr>`;
+      return;
+    }
+    $("games").innerHTML = rows.map(g => {
+      const date = fmtDate(g.date, { weekday: "short", month: "short", day: "numeric" });
+      const tags = [g.series && (ROUND[g.type] || g.series), g.game && `Gm ${g.game}`].filter(Boolean)
+        .map(t => `<span class="tag">${esc(t)}</span>`).join("");
+      const live = !g.result && g.state === "Live";
+      const off = NOT_PLAYED.test(g.status);
+      const score = g.result ? `${g.rf}–${g.ra}` : off || live ? "–" : g.timeTBD ? "TBD" : fmtTime(g.start);
+      const result = g.result
+        ? `<span class="res ${g.result}">${g.result}</span>`
+        : `<span class="pos">${off ? esc(g.status) : live ? "Live" : "–"}</span>`;
+      return `
+      <tr class="${g.result ? "" : "upcoming"}">
+        <td class="name">${date}</td>
+        <td class="name">${esc(shortName(g.opponent))}${tags}</td>
+        <td>${g.home ? "vs" : "@"}</td>
+        <td>${score}</td>
+        <td>${result}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  function setStatus(text) { $("status").textContent = text; }
+
+  function showError(message) {
+    season = null;
+    setStatus("OFFLINE");
+    $("meta").textContent = message;
+    $("kpis").innerHTML = `<p class="pos">${esc(message)}</p>`;
+    $("standings").innerHTML = $("bars").innerHTML = $("players").innerHTML = $("games").innerHTML = "";
+  }
+
+  async function render() {
+    const id = ++requestId;
+    setStatus("LOADING");
+    try {
+      const s = await getSeason(current);
+      if (id !== requestId) return;
+      season = s;
+      setStatus(s.live ? "LIVE" : "FINAL");
+      renderKpis(s);
+      renderStandings(s);
+      renderBars(s);
+      renderPlayers(s);
+      renderGames(s);
+      const updated = new Date(s.updated).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+      $("note").innerHTML = `${esc(s.label)} data from the <a href="https://statsapi.mlb.com/">MLB Stats API</a>. Player stats are regular season only. Last change ${esc(updated)}. `
+        + `Data © ${new Date().getFullYear()} MLB Advanced Media, L.P. Use of any content on this page acknowledges agreement to the terms posted at <a href="http://gdx.mlb.com/components/copyright.txt">gdx.mlb.com/components/copyright.txt</a>.`;
+    } catch (err) {
+      if (id !== requestId) return;
+      showError(`Couldn't load ${current}: ${err.message}. Pick the season again to retry.`);
+    }
+  }
+
+  $("seasons").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-id]");
+    if (!btn || (btn.dataset.id === current && season)) return;
+    current = btn.dataset.id;
+    renderSeasonButtons();
+    render();
+  });
+
+  $("view").addEventListener("change", e => {
+    view = e.target.value;
+    if (season) renderStandings(season);
+  });
+
+  $("group").addEventListener("change", e => {
+    group = e.target.value;
+    sortKey = STATS[group].sorts[0][0];
+    renderSortOptions();
+    if (season) renderPlayers(season);
+  });
+
+  $("sort").addEventListener("change", e => {
+    sortKey = e.target.value;
+    if (season) renderPlayers(season);
+  });
+
+  $("filter").addEventListener("change", e => {
+    filter = e.target.value;
+    if (season) renderGames(season);
+  });
+
+  renderSortOptions();
+  getJSON(`${DATA}/index.json`)
+    .then(index => {
+      seasons = index.seasons;
+      if (!seasons.length) throw new Error("no data yet");
+      current = seasons[0];
+      renderSeasonButtons();
+      render();
+    })
+    .catch(err => showError(location.protocol === "file:"
+      ? "Open this page through GitHub Pages or a local web server; browsers block data files opened straight from disk."
+      : `Couldn't load data: ${err.message}. Run the "Update data" workflow on GitHub.`));
+</script>
+</body>
+</html>
