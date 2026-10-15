@@ -165,9 +165,19 @@ await mkdir(OUT, { recursive: true });
 
 const failures = [];
 let changed = false;
+// A file left over from another source (the old football data) is fetched again.
+async function isCurrent(file) {
+  if (!existsSync(file)) return false;
+  try {
+    return JSON.parse(await readFile(file, "utf8")).source === "mlb-statsapi";
+  } catch {
+    return false;
+  }
+}
+
 for (const [i, season] of SEASONS.entries()) {
   const file = new URL(`${season}.json`, OUT);
-  if (i > 0 && existsSync(file)) continue;
+  if (i > 0 && await isCurrent(file)) continue;
   try {
     const data = await fetchSeason(season);
     // Before Opening Day the current season has no games yet; skip it so the
