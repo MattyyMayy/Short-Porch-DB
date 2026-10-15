@@ -2,7 +2,8 @@
  "season": 2024,
  "label": "2024",
  "source": "mlb-statsapi",
- "updated": "2026-10-15T17:27:10.441Z",
+ "version": 2,
+ "updated": "2026-10-15T22:28:41.602Z",
  "live": false,
  "standings": [
   {
@@ -334,9 +335,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Houston Astros",
+   "oppAbbr": "HOU",
    "rf": 5,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      3,
+      1,
+      1,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "HOU",
+     "innings": [
+      3,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 13,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746412,
@@ -350,9 +388,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Houston Astros",
+   "oppAbbr": "HOU",
    "rf": 7,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      4,
+      1
+     ],
+     "r": 7,
+     "h": 12,
+     "e": 0
+    },
+    "home": {
+     "team": "HOU",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 7,
+     "e": 2
+    }
+   }
   },
   {
    "id": 746410,
@@ -366,9 +441,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Houston Astros",
+   "oppAbbr": "HOU",
    "rf": 5,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      3,
+      1,
+      0
+     ],
+     "r": 5,
+     "h": 8,
+     "e": 3
+    },
+    "home": {
+     "team": "HOU",
+     "innings": [
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 4,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746413,
@@ -382,9 +494,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Houston Astros",
+   "oppAbbr": "HOU",
    "rf": 4,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 4,
+     "h": 10,
+     "e": 1
+    },
+    "home": {
+     "team": "HOU",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 12,
+     "e": 0
+    }
+   }
   },
   {
    "id": 747218,
@@ -398,9 +547,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Arizona Diamondbacks",
+   "oppAbbr": "AZ",
    "rf": 5,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 8,
+     "e": 1
+    },
+    "home": {
+     "team": "AZ",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 4,
+     "e": 2
+    }
+   }
   },
   {
    "id": 747220,
@@ -414,9 +600,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Arizona Diamondbacks",
+   "oppAbbr": "AZ",
    "rf": 0,
    "ra": 7,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 3,
+     "e": 1
+    },
+    "home": {
+     "team": "AZ",
+     "innings": [
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      1,
+      null
+     ],
+     "r": 7,
+     "h": 11,
+     "e": 0
+    }
+   }
   },
   {
    "id": 747219,
@@ -430,9 +653,50 @@
    "status": "Final",
    "home": false,
    "opponent": "Arizona Diamondbacks",
+   "oppAbbr": "AZ",
    "rf": 6,
    "ra": 5,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2
+     ],
+     "r": 6,
+     "h": 8,
+     "e": 1
+    },
+    "home": {
+     "team": "AZ",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      2,
+      1
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745764,
@@ -446,9 +710,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 0,
    "ra": 3,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "TOR",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      2
+     ],
+     "r": 3,
+     "h": 7,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745766,
@@ -462,9 +763,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 9,
    "ra": 8,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TOR",
+     "innings": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      3,
+      0,
+      3
+     ],
+     "r": 8,
+     "h": 12,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      3,
+      3,
+      0,
+      0,
+      2,
+      1,
+      0,
+      0,
+      null
+     ],
+     "r": 9,
+     "h": 10,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745765,
@@ -478,9 +816,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 8,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TOR",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 5,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      5,
+      0,
+      0,
+      1,
+      0,
+      2,
+      null
+     ],
+     "r": 8,
+     "h": 8,
+     "e": 2
+    }
+   }
   },
   {
    "id": 745761,
@@ -494,9 +869,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Miami Marlins",
+   "oppAbbr": "MIA",
    "rf": 7,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "MIA",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 2,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      6,
+      1,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 7,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745762,
@@ -510,9 +922,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Miami Marlins",
+   "oppAbbr": "MIA",
    "rf": 3,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "MIA",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      null
+     ],
+     "r": 3,
+     "h": 7,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745763,
@@ -526,9 +975,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Miami Marlins",
+   "oppAbbr": "MIA",
    "rf": 2,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "MIA",
+     "innings": [
+      0,
+      0,
+      4,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 5,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746656,
@@ -542,9 +1028,11 @@
    "status": "Postponed",
    "home": false,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": null,
    "ra": null,
-   "result": null
+   "result": null,
+   "line": null
   },
   {
    "id": 746656,
@@ -558,9 +1046,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 3,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 10,
+     "e": 1
+    },
+    "home": {
+     "team": "CLE",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746658,
@@ -574,9 +1099,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 8,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      0,
+      4,
+      2,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 8,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "CLE",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 2,
+     "h": 7,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746648,
@@ -590,9 +1152,48 @@
    "status": "Final",
    "home": false,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 7,
    "ra": 8,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      3,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2
+     ],
+     "r": 7,
+     "h": 12,
+     "e": 2
+    },
+    "home": {
+     "team": "CLE",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      3
+     ],
+     "r": 8,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 744951,
@@ -606,9 +1207,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 1,
    "ra": 3,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "TOR",
+     "innings": [
+      0,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 3,
+     "h": 4,
+     "e": 0
+    }
+   }
   },
   {
    "id": 744944,
@@ -622,9 +1260,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 4,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      1
+     ],
+     "r": 4,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "TOR",
+     "innings": [
+      0,
+      0,
+      1,
+      2,
+      0,
+      2,
+      0,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 744948,
@@ -638,9 +1313,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 6,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      4
+     ],
+     "r": 6,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "TOR",
+     "innings": [
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745758,
@@ -654,9 +1366,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 5,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TB",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      2,
+      0
+     ],
+     "r": 3,
+     "h": 14,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      5,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745760,
@@ -670,9 +1419,48 @@
    "status": "Final",
    "home": true,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 0,
    "ra": 2,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "TB",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 2,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 4,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745759,
@@ -686,9 +1474,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 5,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TB",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0
+     ],
+     "r": 4,
+     "h": 5,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      4,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 2
+    }
+   }
   },
   {
    "id": 745757,
@@ -702,9 +1527,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Oakland Athletics",
+   "oppAbbr": "OAK",
    "rf": 0,
    "ra": 2,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "OAK",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 2,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 3,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745754,
@@ -718,9 +1580,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Oakland Athletics",
+   "oppAbbr": "OAK",
    "rf": 4,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "OAK",
+     "innings": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 7,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      4,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 4,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745753,
@@ -734,9 +1633,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Oakland Athletics",
+   "oppAbbr": "OAK",
    "rf": 7,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "OAK",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 4,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      0,
+      2,
+      1,
+      1,
+      1,
+      0,
+      null
+     ],
+     "r": 7,
+     "h": 11,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745755,
@@ -750,9 +1686,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Oakland Athletics",
+   "oppAbbr": "OAK",
    "rf": 1,
    "ra": 3,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "OAK",
+     "innings": [
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 11,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746000,
@@ -766,9 +1739,50 @@
    "status": "Final",
    "home": false,
    "opponent": "Milwaukee Brewers",
+   "oppAbbr": "MIL",
    "rf": 6,
    "ra": 7,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      1,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 6,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "MIL",
+     "innings": [
+      0,
+      2,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1
+     ],
+     "r": 7,
+     "h": 10,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745998,
@@ -782,9 +1796,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Milwaukee Brewers",
+   "oppAbbr": "MIL",
    "rf": 15,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      3,
+      0,
+      3,
+      0,
+      1,
+      4,
+      0,
+      0,
+      4
+     ],
+     "r": 15,
+     "h": 19,
+     "e": 0
+    },
+    "home": {
+     "team": "MIL",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 3,
+     "h": 5,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746001,
@@ -798,9 +1849,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Milwaukee Brewers",
+   "oppAbbr": "MIL",
    "rf": 15,
    "ra": 5,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      3,
+      7,
+      2,
+      2,
+      0
+     ],
+     "r": 15,
+     "h": 18,
+     "e": 0
+    },
+    "home": {
+     "team": "MIL",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      4,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 11,
+     "e": 0
+    }
+   }
   },
   {
    "id": 747046,
@@ -814,9 +1902,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 0,
    "ra": 2,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 7,
+     "e": 1
+    },
+    "home": {
+     "team": "BAL",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      null
+     ],
+     "r": 2,
+     "h": 4,
+     "e": 0
+    }
+   }
   },
   {
    "id": 747047,
@@ -830,9 +1955,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 2,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 1
+    },
+    "home": {
+     "team": "BAL",
+     "innings": [
+      0,
+      1,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 747048,
@@ -846,9 +2008,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 2,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "BAL",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 3,
+     "e": 0
+    }
+   }
   },
   {
    "id": 747044,
@@ -862,9 +2061,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 2,
    "ra": 7,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "BAL",
+     "innings": [
+      0,
+      0,
+      1,
+      2,
+      4,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 7,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745756,
@@ -878,9 +2114,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Detroit Tigers",
+   "oppAbbr": "DET",
    "rf": 2,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "DET",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 5,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745750,
@@ -894,9 +2167,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Detroit Tigers",
+   "oppAbbr": "DET",
    "rf": 5,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "DET",
+     "innings": [
+      1,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 7,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      4,
+      0,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745751,
@@ -910,9 +2220,44 @@
    "status": "Completed Early",
    "home": true,
    "opponent": "Detroit Tigers",
+   "oppAbbr": "DET",
    "rf": 5,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "DET",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      3,
+      null
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745752,
@@ -926,9 +2271,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Houston Astros",
+   "oppAbbr": "HOU",
    "rf": 10,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "HOU",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 3,
+     "h": 3,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      3,
+      0,
+      1,
+      2,
+      1,
+      1,
+      2,
+      0,
+      null
+     ],
+     "r": 10,
+     "h": 13,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745749,
@@ -942,9 +2324,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Houston Astros",
+   "oppAbbr": "HOU",
    "rf": 9,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "HOU",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     "r": 4,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      1,
+      2,
+      0,
+      0,
+      3,
+      0,
+      1,
+      null
+     ],
+     "r": 9,
+     "h": 11,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745748,
@@ -958,9 +2377,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Houston Astros",
+   "oppAbbr": "HOU",
    "rf": 3,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "HOU",
+     "innings": [
+      3,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 11,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745094,
@@ -974,9 +2430,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 2,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 2,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "TB",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745096,
@@ -990,9 +2483,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 2,
    "ra": 7,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 0
+    },
+    "home": {
+     "team": "TB",
+     "innings": [
+      1,
+      0,
+      3,
+      0,
+      0,
+      0,
+      3,
+      0,
+      null
+     ],
+     "r": 7,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745092,
@@ -1006,9 +2536,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 10,
    "ra": 6,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      1,
+      2,
+      2,
+      0,
+      0,
+      4,
+      0
+     ],
+     "r": 10,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "TB",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      5,
+      0,
+      1
+     ],
+     "r": 6,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745909,
@@ -1022,9 +2589,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Minnesota Twins",
+   "oppAbbr": "MIN",
    "rf": 5,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 13,
+     "e": 0
+    },
+    "home": {
+     "team": "MIN",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 7,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745908,
@@ -1038,9 +2642,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Minnesota Twins",
+   "oppAbbr": "MIN",
    "rf": 4,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 13,
+     "e": 1
+    },
+    "home": {
+     "team": "MIN",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 4,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745907,
@@ -1054,9 +2695,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Minnesota Twins",
+   "oppAbbr": "MIN",
    "rf": 5,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      3,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 2
+    },
+    "home": {
+     "team": "MIN",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 3,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745747,
@@ -1070,9 +2748,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Chicago White Sox",
+   "oppAbbr": "CWS",
    "rf": 4,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "CWS",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 2,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      2,
+      0,
+      1,
+      0,
+      0,
+      null
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745744,
@@ -1086,9 +2801,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Chicago White Sox",
+   "oppAbbr": "CWS",
    "rf": 6,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "CWS",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      2,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 6,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745745,
@@ -1102,9 +2854,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Chicago White Sox",
+   "oppAbbr": "CWS",
    "rf": 7,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "CWS",
+     "innings": [
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      0,
+      3,
+      2,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 7,
+     "h": 10,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745746,
@@ -1118,9 +2907,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Seattle Mariners",
+   "oppAbbr": "SEA",
    "rf": 4,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "SEA",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      4
+     ],
+     "r": 5,
+     "h": 7,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 4,
+     "h": 12,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745742,
@@ -1134,9 +2960,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Seattle Mariners",
+   "oppAbbr": "SEA",
    "rf": 3,
    "ra": 6,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "SEA",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      2,
+      1,
+      1
+     ],
+     "r": 6,
+     "h": 10,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745743,
@@ -1150,9 +3013,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Seattle Mariners",
+   "oppAbbr": "SEA",
    "rf": 7,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "SEA",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      2,
+      null
+     ],
+     "r": 7,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745741,
@@ -1166,9 +3066,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Seattle Mariners",
+   "oppAbbr": "SEA",
    "rf": 5,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "SEA",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 3,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      3,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 11,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745415,
@@ -1182,9 +3119,46 @@
    "status": "Final",
    "home": false,
    "opponent": "San Diego Padres",
+   "oppAbbr": "SD",
    "rf": 8,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      5,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 8,
+     "h": 10,
+     "e": 0
+    },
+    "home": {
+     "team": "SD",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 3,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745411,
@@ -1198,9 +3172,46 @@
    "status": "Final",
    "home": false,
    "opponent": "San Diego Padres",
+   "oppAbbr": "SD",
    "rf": 4,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "SD",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 1,
+     "h": 4,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745413,
@@ -1214,9 +3225,46 @@
    "status": "Final",
    "home": false,
    "opponent": "San Diego Padres",
+   "oppAbbr": "SD",
    "rf": 2,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1
+     ],
+     "r": 2,
+     "h": 8,
+     "e": 1
+    },
+    "home": {
+     "team": "SD",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      4,
+      1,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746229,
@@ -1230,9 +3278,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Los Angeles Angels",
+   "oppAbbr": "LAA",
    "rf": 3,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "LAA",
+     "innings": [
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      null
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746228,
@@ -1246,9 +3331,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Los Angeles Angels",
+   "oppAbbr": "LAA",
    "rf": 2,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "LAA",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 3,
+     "e": 2
+    }
+   }
   },
   {
    "id": 746225,
@@ -1262,9 +3384,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Los Angeles Angels",
+   "oppAbbr": "LAA",
    "rf": 8,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      5,
+      1,
+      0
+     ],
+     "r": 8,
+     "h": 5,
+     "e": 1
+    },
+    "home": {
+     "team": "LAA",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 4,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745331,
@@ -1278,9 +3437,46 @@
    "status": "Final",
    "home": false,
    "opponent": "San Francisco Giants",
+   "oppAbbr": "SF",
    "rf": 6,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      3,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0
+     ],
+     "r": 6,
+     "h": 8,
+     "e": 1
+    },
+    "home": {
+     "team": "SF",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 2
+    }
+   }
   },
   {
    "id": 745332,
@@ -1294,9 +3490,46 @@
    "status": "Final",
    "home": false,
    "opponent": "San Francisco Giants",
+   "oppAbbr": "SF",
    "rf": 7,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0
+     ],
+     "r": 7,
+     "h": 11,
+     "e": 1
+    },
+    "home": {
+     "team": "SF",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745330,
@@ -1310,9 +3543,46 @@
    "status": "Final",
    "home": false,
    "opponent": "San Francisco Giants",
+   "oppAbbr": "SF",
    "rf": 7,
    "ra": 5,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      4
+     ],
+     "r": 7,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "SF",
+     "innings": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 11,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745739,
@@ -1326,9 +3596,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Minnesota Twins",
+   "oppAbbr": "MIN",
    "rf": 5,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "MIN",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 2,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      2,
+      null
+     ],
+     "r": 5,
+     "h": 6,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745740,
@@ -1342,9 +3649,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Minnesota Twins",
+   "oppAbbr": "MIN",
    "rf": 9,
    "ra": 5,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "MIN",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      1,
+      0
+     ],
+     "r": 5,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      4,
+      0,
+      0,
+      0,
+      4,
+      1,
+      0,
+      0,
+      null
+     ],
+     "r": 9,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745738,
@@ -1358,9 +3702,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Minnesota Twins",
+   "oppAbbr": "MIN",
    "rf": 8,
    "ra": 5,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "MIN",
+     "innings": [
+      1,
+      0,
+      1,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 10,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      3,
+      2,
+      1,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 8,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745737,
@@ -1374,9 +3755,50 @@
    "status": "Final",
    "home": true,
    "opponent": "Los Angeles Dodgers",
+   "oppAbbr": "LAD",
    "rf": 1,
    "ra": 2,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "LAD",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 2,
+     "h": 4,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 1,
+     "h": 5,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745735,
@@ -1390,9 +3812,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Los Angeles Dodgers",
+   "oppAbbr": "LAD",
    "rf": 3,
    "ra": 11,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "LAD",
+     "innings": [
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      4,
+      3
+     ],
+     "r": 11,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 3,
+     "h": 10,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745736,
@@ -1406,9 +3865,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Los Angeles Dodgers",
+   "oppAbbr": "LAD",
    "rf": 6,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "LAD",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      1,
+      0,
+      1,
+      0
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      0,
+      3,
+      0,
+      1,
+      null
+     ],
+     "r": 6,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746295,
@@ -1422,9 +3918,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 4,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "KC",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+     ],
+     "r": 2,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746296,
@@ -1438,9 +3971,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 10,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      0,
+      4,
+      0,
+      1,
+      3,
+      0,
+      0
+     ],
+     "r": 10,
+     "h": 10,
+     "e": 0
+    },
+    "home": {
+     "team": "KC",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 1,
+     "h": 5,
+     "e": 2
+    }
+   }
   },
   {
    "id": 746294,
@@ -1454,9 +4024,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 11,
    "ra": 5,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      6,
+      0,
+      0,
+      0,
+      2,
+      0,
+      3,
+      0,
+      0
+     ],
+     "r": 11,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "KC",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      3,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 11,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746299,
@@ -1470,9 +4077,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 3,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0
+     ],
+     "r": 3,
+     "h": 5,
+     "e": 0
+    },
+    "home": {
+     "team": "KC",
+     "innings": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746947,
@@ -1486,9 +4130,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 8,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      0,
+      3
+     ],
+     "r": 8,
+     "h": 10,
+     "e": 0
+    },
+    "home": {
+     "team": "BOS",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 5,
+     "e": 2
+    }
+   }
   },
   {
    "id": 746946,
@@ -1502,9 +4183,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 4,
    "ra": 8,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+     ],
+     "r": 4,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "BOS",
+     "innings": [
+      3,
+      2,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      null
+     ],
+     "r": 8,
+     "h": 12,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746945,
@@ -1518,9 +4236,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 3,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "BOS",
+     "innings": [
+      0,
+      2,
+      1,
+      0,
+      1,
+      0,
+      3,
+      2,
+      null
+     ],
+     "r": 9,
+     "h": 14,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745733,
@@ -1534,9 +4289,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 4,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "BAL",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 2,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      2,
+      0,
+      1,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 4,
+     "h": 6,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745732,
@@ -1550,9 +4342,48 @@
    "status": "Final",
    "home": true,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 6,
    "ra": 7,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "BAL",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      3,
+      0,
+      1,
+      0,
+      0,
+      2
+     ],
+     "r": 7,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      1,
+      1
+     ],
+     "r": 6,
+     "h": 9,
+     "e": 3
+    }
+   }
   },
   {
    "id": 745734,
@@ -1566,9 +4397,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 5,
    "ra": 17,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "BAL",
+     "innings": [
+      1,
+      6,
+      1,
+      0,
+      3,
+      1,
+      2,
+      2,
+      1
+     ],
+     "r": 17,
+     "h": 20,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      2,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 6,
+     "e": 2
+    }
+   }
   },
   {
    "id": 745729,
@@ -1582,9 +4450,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Atlanta Braves",
+   "oppAbbr": "ATL",
    "rf": 1,
    "ra": 8,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "ATL",
+     "innings": [
+      3,
+      1,
+      1,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 8,
+     "h": 14,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 3,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745731,
@@ -1598,9 +4503,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Atlanta Braves",
+   "oppAbbr": "ATL",
    "rf": 8,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "ATL",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      1,
+      1,
+      0,
+      3,
+      1,
+      0,
+      null
+     ],
+     "r": 8,
+     "h": 9,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745727,
@@ -1614,9 +4556,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Atlanta Braves",
+   "oppAbbr": "ATL",
    "rf": 1,
    "ra": 3,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "ATL",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745806,
@@ -1630,9 +4609,46 @@
    "status": "Final",
    "home": false,
    "opponent": "New York Mets",
+   "oppAbbr": "NYM",
    "rf": 7,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      5,
+      0
+     ],
+     "r": 7,
+     "h": 7,
+     "e": 2
+    },
+    "home": {
+     "team": "NYM",
+     "innings": [
+      1,
+      2,
+      0,
+      3,
+      0,
+      3,
+      0,
+      0,
+      null
+     ],
+     "r": 9,
+     "h": 12,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745808,
@@ -1646,9 +4662,46 @@
    "status": "Final",
    "home": false,
    "opponent": "New York Mets",
+   "oppAbbr": "NYM",
    "rf": 2,
    "ra": 12,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "NYM",
+     "innings": [
+      0,
+      0,
+      3,
+      0,
+      4,
+      3,
+      1,
+      1,
+      null
+     ],
+     "r": 12,
+     "h": 12,
+     "e": 1
+    }
+   }
   },
   {
    "id": 744919,
@@ -1662,9 +4715,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 2,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 3,
+     "e": 0
+    },
+    "home": {
+     "team": "TOR",
+     "innings": [
+      5,
+      3,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      null
+     ],
+     "r": 9,
+     "h": 11,
+     "e": 0
+    }
+   }
   },
   {
    "id": 744922,
@@ -1678,9 +4768,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 16,
    "ra": 5,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      6,
+      0,
+      2,
+      7
+     ],
+     "r": 16,
+     "h": 18,
+     "e": 0
+    },
+    "home": {
+     "team": "TOR",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      2,
+      1,
+      1,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 10,
+     "e": 1
+    }
+   }
   },
   {
    "id": 744921,
@@ -1694,9 +4821,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 3,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 3,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "TOR",
+     "innings": [
+      2,
+      0,
+      0,
+      1,
+      0,
+      5,
+      0,
+      1,
+      null
+     ],
+     "r": 9,
+     "h": 14,
+     "e": 1
+    }
+   }
   },
   {
    "id": 744916,
@@ -1710,9 +4874,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 8,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      2,
+      0,
+      0,
+      3,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 8,
+     "h": 12,
+     "e": 0
+    },
+    "home": {
+     "team": "TOR",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 4,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745730,
@@ -1726,9 +4927,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Cincinnati Reds",
+   "oppAbbr": "CIN",
    "rf": 4,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "CIN",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      4,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 5,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      1,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 6,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745728,
@@ -1742,9 +4980,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Cincinnati Reds",
+   "oppAbbr": "CIN",
    "rf": 2,
    "ra": 3,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "CIN",
+     "innings": [
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 3,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745726,
@@ -1758,9 +5033,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Cincinnati Reds",
+   "oppAbbr": "CIN",
    "rf": 4,
    "ra": 8,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "CIN",
+     "innings": [
+      0,
+      1,
+      1,
+      0,
+      3,
+      0,
+      3,
+      0,
+      0
+     ],
+     "r": 8,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 7,
+     "e": 2
+    }
+   }
   },
   {
    "id": 745725,
@@ -1774,9 +5086,48 @@
    "status": "Final",
    "home": true,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 3,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "BOS",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      2,
+      2
+     ],
+     "r": 5,
+     "h": 8,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 2
+    }
+   }
   },
   {
    "id": 745724,
@@ -1790,9 +5141,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 14,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "BOS",
+     "innings": [
+      0,
+      0,
+      3,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      2,
+      0,
+      7,
+      0,
+      4,
+      0,
+      null
+     ],
+     "r": 14,
+     "h": 14,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745723,
@@ -1806,9 +5194,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 0,
    "ra": 3,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "BOS",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 4,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745074,
@@ -1822,9 +5247,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 3,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 7,
+     "e": 1
+    },
+    "home": {
+     "team": "TB",
+     "innings": [
+      4,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      null
+     ],
+     "r": 5,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745069,
@@ -1838,9 +5300,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 2,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "TB",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 10,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745065,
@@ -1854,9 +5353,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 4,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 4,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "TB",
+     "innings": [
+      2,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 747012,
@@ -1870,9 +5406,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 4,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 4,
+     "h": 7,
+     "e": 1
+    },
+    "home": {
+     "team": "BAL",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 747013,
@@ -1886,9 +5459,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 6,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      4,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 6,
+     "h": 10,
+     "e": 0
+    },
+    "home": {
+     "team": "BAL",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 747009,
@@ -1902,9 +5512,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 5,
    "ra": 6,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      3
+     ],
+     "r": 5,
+     "h": 7,
+     "e": 1
+    },
+    "home": {
+     "team": "BAL",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      1,
+      0,
+      0,
+      0,
+      3
+     ],
+     "r": 6,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745721,
@@ -1918,9 +5565,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 6,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TB",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 7,
+     "e": 3
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      4,
+      1,
+      0,
+      1,
+      0,
+      0,
+      null
+     ],
+     "r": 6,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745720,
@@ -1934,9 +5618,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 1,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "TB",
+     "innings": [
+      0,
+      0,
+      1,
+      3,
+      2,
+      0,
+      2,
+      0,
+      1
+     ],
+     "r": 9,
+     "h": 11,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 1,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745722,
@@ -1950,9 +5671,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 4,
    "ra": 6,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "TB",
+     "innings": [
+      1,
+      0,
+      0,
+      2,
+      0,
+      0,
+      2,
+      0,
+      1
+     ],
+     "r": 6,
+     "h": 7,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0,
+      1
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745717,
@@ -1966,9 +5724,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Tampa Bay Rays",
+   "oppAbbr": "TB",
    "rf": 9,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TB",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 3,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      0,
+      2,
+      1,
+      0,
+      1,
+      3,
+      null
+     ],
+     "r": 9,
+     "h": 15,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745715,
@@ -1982,9 +5777,46 @@
    "status": "Final",
    "home": true,
    "opponent": "New York Mets",
+   "oppAbbr": "NYM",
    "rf": 2,
    "ra": 3,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYM",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 9,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745716,
@@ -1998,9 +5830,46 @@
    "status": "Final",
    "home": true,
    "opponent": "New York Mets",
+   "oppAbbr": "NYM",
    "rf": 3,
    "ra": 12,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYM",
+     "innings": [
+      0,
+      0,
+      1,
+      2,
+      2,
+      1,
+      0,
+      6,
+      0
+     ],
+     "r": 12,
+     "h": 14,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746933,
@@ -2014,9 +5883,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 7,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      2,
+      0,
+      4,
+      0,
+      0
+     ],
+     "r": 7,
+     "h": 13,
+     "e": 0
+    },
+    "home": {
+     "team": "BOS",
+     "innings": [
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+      2,
+      3,
+      null
+     ],
+     "r": 9,
+     "h": 14,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746931,
@@ -2030,9 +5936,48 @@
    "status": "Final",
    "home": false,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 11,
    "ra": 8,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      3,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      3
+     ],
+     "r": 11,
+     "h": 16,
+     "e": 1
+    },
+    "home": {
+     "team": "BOS",
+     "innings": [
+      3,
+      2,
+      0,
+      0,
+      1,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 8,
+     "h": 13,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746929,
@@ -2046,9 +5991,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 8,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      3,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      2,
+      1
+     ],
+     "r": 8,
+     "h": 10,
+     "e": 1
+    },
+    "home": {
+     "team": "BOS",
+     "innings": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 7,
+     "e": 3
+    }
+   }
   },
   {
    "id": 745547,
@@ -2062,9 +6044,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Philadelphia Phillies",
+   "oppAbbr": "PHI",
    "rf": 14,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      2,
+      0,
+      0,
+      4,
+      0,
+      2,
+      3,
+      2
+     ],
+     "r": 14,
+     "h": 14,
+     "e": 1
+    },
+    "home": {
+     "team": "PHI",
+     "innings": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745546,
@@ -2078,9 +6097,52 @@
    "status": "Final",
    "home": false,
    "opponent": "Philadelphia Phillies",
+   "oppAbbr": "PHI",
    "rf": 7,
    "ra": 6,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      3,
+      0,
+      0,
+      0,
+      1,
+      1
+     ],
+     "r": 7,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "PHI",
+     "innings": [
+      1,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "r": 6,
+     "h": 9,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745543,
@@ -2094,9 +6156,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Philadelphia Phillies",
+   "oppAbbr": "PHI",
    "rf": 6,
    "ra": 5,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      4,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 6,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "PHI",
+     "innings": [
+      0,
+      0,
+      0,
+      2,
+      1,
+      1,
+      0,
+      1,
+      0
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745719,
@@ -2110,9 +6209,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 5,
    "ra": 8,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "TOR",
+     "innings": [
+      3,
+      0,
+      4,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 8,
+     "h": 13,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 10,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745714,
@@ -2126,9 +6262,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 8,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TOR",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 8,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      2,
+      0,
+      0,
+      2,
+      0,
+      1,
+      1,
+      null
+     ],
+     "r": 8,
+     "h": 10,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745718,
@@ -2142,9 +6315,48 @@
    "status": "Final",
    "home": true,
    "opponent": "Toronto Blue Jays",
+   "oppAbbr": "TOR",
    "rf": 4,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TOR",
+     "innings": [
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 7,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      1,
+      0,
+      0,
+      1
+     ],
+     "r": 4,
+     "h": 10,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745713,
@@ -2158,9 +6370,11 @@
    "status": "Postponed",
    "home": true,
    "opponent": "Los Angeles Angels",
+   "oppAbbr": "LAA",
    "rf": null,
    "ra": null,
-   "result": null
+   "result": null,
+   "line": null
   },
   {
    "id": 745709,
@@ -2174,9 +6388,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Los Angeles Angels",
+   "oppAbbr": "LAA",
    "rf": 5,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "LAA",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      1,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745713,
@@ -2190,9 +6441,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Los Angeles Angels",
+   "oppAbbr": "LAA",
    "rf": 2,
    "ra": 8,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "LAA",
+     "innings": [
+      0,
+      6,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 8,
+     "h": 13,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745710,
@@ -2206,9 +6494,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Los Angeles Angels",
+   "oppAbbr": "LAA",
    "rf": 4,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "LAA",
+     "innings": [
+      1,
+      0,
+      1,
+      0,
+      6,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 9,
+     "h": 14,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      1
+     ],
+     "r": 4,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745708,
@@ -2222,9 +6547,11 @@
    "status": "Postponed",
    "home": true,
    "opponent": "Texas Rangers",
+   "oppAbbr": "TEX",
    "rf": null,
    "ra": null,
-   "result": null
+   "result": null,
+   "line": null
   },
   {
    "id": 745712,
@@ -2238,9 +6565,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Texas Rangers",
+   "oppAbbr": "TEX",
    "rf": 8,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TEX",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 5,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      2,
+      3,
+      1,
+      0,
+      0,
+      1,
+      null
+     ],
+     "r": 8,
+     "h": 12,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745708,
@@ -2254,9 +6618,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Texas Rangers",
+   "oppAbbr": "TEX",
    "rf": 4,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "TEX",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      5,
+      3,
+      0,
+      0
+     ],
+     "r": 9,
+     "h": 16,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      0
+     ],
+     "r": 4,
+     "h": 8,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745711,
@@ -2270,9 +6671,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Texas Rangers",
+   "oppAbbr": "TEX",
    "rf": 8,
    "ra": 7,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "TEX",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2,
+      3,
+      1
+     ],
+     "r": 7,
+     "h": 12,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      1,
+      0,
+      3,
+      1,
+      2,
+      0,
+      null
+     ],
+     "r": 8,
+     "h": 12,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746762,
@@ -2286,9 +6724,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Chicago White Sox",
+   "oppAbbr": "CWS",
    "rf": 2,
    "ra": 12,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "CWS",
+     "innings": [
+      2,
+      0,
+      0,
+      2,
+      1,
+      0,
+      6,
+      1,
+      null
+     ],
+     "r": 12,
+     "h": 18,
+     "e": 2
+    }
+   }
   },
   {
    "id": 746757,
@@ -2302,9 +6777,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Chicago White Sox",
+   "oppAbbr": "CWS",
    "rf": 4,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      1,
+      0,
+      1,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "CWS",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 1,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746759,
@@ -2318,9 +6830,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Chicago White Sox",
+   "oppAbbr": "CWS",
    "rf": 10,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      6,
+      0
+     ],
+     "r": 10,
+     "h": 12,
+     "e": 0
+    },
+    "home": {
+     "team": "CWS",
+     "innings": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746438,
@@ -2334,9 +6883,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Detroit Tigers",
+   "oppAbbr": "DET",
    "rf": 3,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 3,
+     "h": 5,
+     "e": 1
+    },
+    "home": {
+     "team": "DET",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 5,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746434,
@@ -2350,9 +6936,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Detroit Tigers",
+   "oppAbbr": "DET",
    "rf": 0,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "DET",
+     "innings": [
+      1,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 4,
+     "h": 10,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746431,
@@ -2366,9 +6989,48 @@
    "status": "Final",
    "home": false,
    "opponent": "Detroit Tigers",
+   "oppAbbr": "DET",
    "rf": 2,
    "ra": 3,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "DET",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      2
+     ],
+     "r": 3,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745707,
@@ -2382,9 +7044,52 @@
    "status": "Final",
    "home": true,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 5,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "CLE",
+     "innings": [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      6
+     ],
+     "r": 9,
+     "h": 12,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 5,
+     "h": 7,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745704,
@@ -2398,9 +7103,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 8,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "CLE",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 1,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      2,
+      3,
+      0,
+      0,
+      1,
+      0,
+      null
+     ],
+     "r": 8,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745705,
@@ -2414,9 +7156,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 6,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "CLE",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 1,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      4,
+      0,
+      0,
+      1,
+      null
+     ],
+     "r": 6,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745702,
@@ -2430,9 +7209,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Colorado Rockies",
+   "oppAbbr": "COL",
    "rf": 3,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "COL",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 4,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+      null
+     ],
+     "r": 3,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745703,
@@ -2446,9 +7262,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Colorado Rockies",
+   "oppAbbr": "COL",
    "rf": 2,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "COL",
+     "innings": [
+      1,
+      1,
+      4,
+      0,
+      1,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 9,
+     "h": 13,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745706,
@@ -2462,9 +7315,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Colorado Rockies",
+   "oppAbbr": "COL",
    "rf": 10,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "COL",
+     "innings": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      2,
+      0,
+      0,
+      0,
+      0,
+      3,
+      3,
+      null
+     ],
+     "r": 10,
+     "h": 12,
+     "e": 2
+    }
+   }
   },
   {
    "id": 744813,
@@ -2478,9 +7368,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Washington Nationals",
+   "oppAbbr": "WSH",
    "rf": 5,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      1,
+      0,
+      2,
+      0,
+      1,
+      0
+     ],
+     "r": 5,
+     "h": 12,
+     "e": 2
+    },
+    "home": {
+     "team": "WSH",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 2
+    }
+   }
   },
   {
    "id": 744811,
@@ -2494,9 +7421,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Washington Nationals",
+   "oppAbbr": "WSH",
    "rf": 2,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1
+     ],
+     "r": 2,
+     "h": 8,
+     "e": 4
+    },
+    "home": {
+     "team": "WSH",
+     "innings": [
+      0,
+      1,
+      0,
+      2,
+      0,
+      1,
+      0,
+      0,
+      null
+     ],
+     "r": 4,
+     "h": 7,
+     "e": 1
+    }
+   }
   },
   {
    "id": 744809,
@@ -2510,9 +7474,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Washington Nationals",
+   "oppAbbr": "WSH",
    "rf": 2,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 7,
+     "e": 0
+    },
+    "home": {
+     "team": "WSH",
+     "innings": [
+      2,
+      2,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 10,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745700,
@@ -2526,9 +7527,46 @@
    "status": "Final",
    "home": true,
    "opponent": "St. Louis Cardinals",
+   "oppAbbr": "STL",
    "rf": 6,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "STL",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 3,
+     "h": 10,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      3,
+      0,
+      0,
+      0,
+      0,
+      2,
+      null
+     ],
+     "r": 6,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745699,
@@ -2542,9 +7580,46 @@
    "status": "Final",
    "home": true,
    "opponent": "St. Louis Cardinals",
+   "oppAbbr": "STL",
    "rf": 5,
    "ra": 6,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "STL",
+     "innings": [
+      0,
+      0,
+      4,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 6,
+     "h": 7,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      4,
+      0
+     ],
+     "r": 5,
+     "h": 12,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745701,
@@ -2558,9 +7633,46 @@
    "status": "Final",
    "home": true,
    "opponent": "St. Louis Cardinals",
+   "oppAbbr": "STL",
    "rf": 7,
    "ra": 14,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "STL",
+     "innings": [
+      0,
+      1,
+      0,
+      4,
+      2,
+      0,
+      5,
+      0,
+      2
+     ],
+     "r": 14,
+     "h": 21,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      0,
+      0,
+      3,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 7,
+     "h": 11,
+     "e": 1
+    }
+   }
   },
   {
    "id": 744972,
@@ -2574,9 +7686,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Texas Rangers",
+   "oppAbbr": "TEX",
    "rf": 8,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      0,
+      5,
+      0,
+      1,
+      0
+     ],
+     "r": 8,
+     "h": 12,
+     "e": 0
+    },
+    "home": {
+     "team": "TEX",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      2,
+      0,
+      1
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 744968,
@@ -2590,9 +7739,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Texas Rangers",
+   "oppAbbr": "TEX",
    "rf": 4,
    "ra": 7,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      0
+     ],
+     "r": 4,
+     "h": 10,
+     "e": 1
+    },
+    "home": {
+     "team": "TEX",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      2,
+      4
+     ],
+     "r": 7,
+     "h": 6,
+     "e": 0
+    }
+   }
   },
   {
    "id": 744964,
@@ -2606,9 +7792,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Texas Rangers",
+   "oppAbbr": "TEX",
    "rf": 6,
    "ra": 10,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      4
+     ],
+     "r": 6,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "TEX",
+     "innings": [
+      1,
+      1,
+      0,
+      3,
+      0,
+      3,
+      2,
+      0,
+      null
+     ],
+     "r": 10,
+     "h": 14,
+     "e": 1
+    }
+   }
   },
   {
    "id": 746832,
@@ -2622,9 +7845,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Chicago Cubs",
+   "oppAbbr": "CHC",
    "rf": 3,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 7,
+     "e": 1
+    },
+    "home": {
+     "team": "CHC",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 1,
+     "e": 0
+    }
+   }
   },
   {
    "id": 746829,
@@ -2638,9 +7898,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Chicago Cubs",
+   "oppAbbr": "CHC",
    "rf": 2,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "CHC",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 4,
+     "e": 2
+    }
+   }
   },
   {
    "id": 746827,
@@ -2654,9 +7951,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Chicago Cubs",
+   "oppAbbr": "CHC",
    "rf": 1,
    "ra": 2,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "CHC",
+     "innings": [
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 2,
+     "h": 3,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745698,
@@ -2670,9 +8004,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 10,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "KC",
+     "innings": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 6,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      4,
+      3,
+      null
+     ],
+     "r": 10,
+     "h": 12,
+     "e": 3
+    }
+   }
   },
   {
    "id": 745694,
@@ -2686,9 +8057,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 0,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "KC",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      1,
+      0,
+      1,
+      1,
+      0
+     ],
+     "r": 5,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 3,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745697,
@@ -2702,9 +8110,50 @@
    "status": "Final",
    "home": true,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 4,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "KC",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 3,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1,
+      1
+     ],
+     "r": 4,
+     "h": 6,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745695,
@@ -2718,9 +8167,48 @@
    "status": "Final",
    "home": true,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 2,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "BOS",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 2,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745696,
@@ -2734,9 +8222,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 5,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "BOS",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      2,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      5,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745689,
@@ -2750,9 +8275,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 1,
    "ra": 7,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "BOS",
+     "innings": [
+      0,
+      0,
+      0,
+      3,
+      4,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 7,
+     "h": 9,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 5,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745693,
@@ -2766,9 +8328,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Boston Red Sox",
+   "oppAbbr": "BOS",
    "rf": 5,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "BOS",
+     "innings": [
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 8,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      3,
+      0,
+      0,
+      0,
+      1,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745205,
@@ -2782,9 +8381,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Seattle Mariners",
+   "oppAbbr": "SEA",
    "rf": 11,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      2,
+      0,
+      2,
+      1,
+      3,
+      0,
+      0,
+      1
+     ],
+     "r": 11,
+     "h": 12,
+     "e": 0
+    },
+    "home": {
+     "team": "SEA",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 2,
+     "h": 9,
+     "e": 2
+    }
+   }
   },
   {
    "id": 745199,
@@ -2798,9 +8434,48 @@
    "status": "Final",
    "home": false,
    "opponent": "Seattle Mariners",
+   "oppAbbr": "SEA",
    "rf": 2,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 2,
+     "h": 3,
+     "e": 0
+    },
+    "home": {
+     "team": "SEA",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745204,
@@ -2814,9 +8489,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Seattle Mariners",
+   "oppAbbr": "SEA",
    "rf": 2,
    "ra": 3,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "SEA",
+     "innings": [
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 3,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745606,
@@ -2830,9 +8542,48 @@
    "status": "Final",
    "home": false,
    "opponent": "Oakland Athletics",
+   "oppAbbr": "OAK",
    "rf": 4,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      3
+     ],
+     "r": 4,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "OAK",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 2,
+     "h": 3,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745610,
@@ -2846,9 +8597,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Oakland Athletics",
+   "oppAbbr": "OAK",
    "rf": 10,
    "ra": 0,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      1,
+      3,
+      0,
+      0,
+      0,
+      4,
+      0,
+      0
+     ],
+     "r": 10,
+     "h": 14,
+     "e": 0
+    },
+    "home": {
+     "team": "OAK",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 0,
+     "h": 5,
+     "e": 2
+    }
+   }
   },
   {
    "id": 745608,
@@ -2862,9 +8650,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Oakland Athletics",
+   "oppAbbr": "OAK",
    "rf": 7,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      2,
+      1,
+      0,
+      2,
+      0,
+      1,
+      0,
+      1
+     ],
+     "r": 7,
+     "h": 9,
+     "e": 1
+    },
+    "home": {
+     "team": "OAK",
+     "innings": [
+      2,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745688,
@@ -2878,9 +8703,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 3,
    "ra": 5,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "BAL",
+     "innings": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0
+     ],
+     "r": 5,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      2,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745690,
@@ -2894,9 +8756,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 7,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "BAL",
+     "innings": [
+      3,
+      0,
+      0,
+      4,
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 9,
+     "h": 17,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      4
+     ],
+     "r": 7,
+     "h": 10,
+     "e": 1
+    }
+   }
   },
   {
    "id": 745691,
@@ -2910,9 +8809,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Baltimore Orioles",
+   "oppAbbr": "BAL",
    "rf": 10,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "BAL",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 1,
+     "h": 7,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      6,
+      2,
+      1,
+      null
+     ],
+     "r": 10,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745692,
@@ -2926,9 +8862,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Pittsburgh Pirates",
+   "oppAbbr": "PIT",
    "rf": 2,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "PIT",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      2,
+      0
+     ],
+     "r": 4,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745685,
@@ -2942,9 +8915,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Pittsburgh Pirates",
+   "oppAbbr": "PIT",
    "rf": 4,
    "ra": 9,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "PIT",
+     "innings": [
+      0,
+      1,
+      0,
+      1,
+      2,
+      2,
+      0,
+      0,
+      3
+     ],
+     "r": 9,
+     "h": 8,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+     ],
+     "r": 4,
+     "h": 7,
+     "e": 0
+    }
+   }
   },
   {
    "id": 745686,
@@ -2958,9 +8968,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Pittsburgh Pirates",
+   "oppAbbr": "PIT",
    "rf": 6,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "PIT",
+     "innings": [
+      0,
+      0,
+      3,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 5,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      2,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0,
+      2,
+      null
+     ],
+     "r": 6,
+     "h": 5,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775334,
@@ -2974,9 +9021,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 6,
    "ra": 5,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "KC",
+     "innings": [
+      0,
+      1,
+      0,
+      2,
+      0,
+      2,
+      0,
+      0,
+      0
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      2,
+      1,
+      1,
+      0,
+      null
+     ],
+     "r": 6,
+     "h": 9,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775332,
@@ -2990,9 +9074,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 2,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "KC",
+     "innings": [
+      0,
+      0,
+      0,
+      4,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 11,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 2,
+     "h": 7,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775329,
@@ -3006,9 +9127,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 3,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+     ],
+     "r": 3,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "KC",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775331,
@@ -3022,9 +9180,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Kansas City Royals",
+   "oppAbbr": "KC",
    "rf": 3,
    "ra": 1,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 3,
+     "h": 8,
+     "e": 0
+    },
+    "home": {
+     "team": "KC",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 1,
+     "h": 6,
+     "e": 0
+    }
+   }
   },
   {
    "id": 775314,
@@ -3038,9 +9233,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 5,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "CLE",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+      0
+     ],
+     "r": 2,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      3,
+      1,
+      0,
+      0,
+      1,
+      0,
+      null
+     ],
+     "r": 5,
+     "h": 6,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775312,
@@ -3054,9 +9286,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 6,
    "ra": 3,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "CLE",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 3,
+     "h": 8,
+     "e": 2
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      1,
+      2,
+      0,
+      0,
+      0,
+      1,
+      2,
+      0,
+      null
+     ],
+     "r": 6,
+     "h": 11,
+     "e": 0
+    }
+   }
   },
   {
    "id": 775310,
@@ -3070,9 +9339,48 @@
    "status": "Final",
    "home": false,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 5,
    "ra": 7,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      3,
+      1,
+      0
+     ],
+     "r": 5,
+     "h": 6,
+     "e": 0
+    },
+    "home": {
+     "team": "CLE",
+     "innings": [
+      0,
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      0,
+      2,
+      2
+     ],
+     "r": 7,
+     "h": 12,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775311,
@@ -3086,9 +9394,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 8,
    "ra": 6,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      2,
+      1,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      2
+     ],
+     "r": 8,
+     "h": 10,
+     "e": 1
+    },
+    "home": {
+     "team": "CLE",
+     "innings": [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      3,
+      1,
+      0
+     ],
+     "r": 6,
+     "h": 11,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775309,
@@ -3102,9 +9447,48 @@
    "status": "Final",
    "home": false,
    "opponent": "Cleveland Guardians",
+   "oppAbbr": "CLE",
    "rf": 5,
    "ra": 2,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      3
+     ],
+     "r": 5,
+     "h": 9,
+     "e": 0
+    },
+    "home": {
+     "team": "CLE",
+     "innings": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 2,
+     "h": 7,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775300,
@@ -3118,9 +9502,48 @@
    "status": "Final",
    "home": false,
    "opponent": "Los Angeles Dodgers",
+   "oppAbbr": "LAD",
    "rf": 3,
    "ra": 6,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 3,
+     "h": 10,
+     "e": 1
+    },
+    "home": {
+     "team": "LAD",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      4
+     ],
+     "r": 6,
+     "h": 7,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775294,
@@ -3134,9 +9557,46 @@
    "status": "Final",
    "home": false,
    "opponent": "Los Angeles Dodgers",
+   "oppAbbr": "LAD",
    "rf": 2,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     "r": 2,
+     "h": 4,
+     "e": 0
+    },
+    "home": {
+     "team": "LAD",
+     "innings": [
+      0,
+      1,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0,
+      null
+     ],
+     "r": 4,
+     "h": 8,
+     "e": 0
+    }
+   }
   },
   {
    "id": 775298,
@@ -3150,9 +9610,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Los Angeles Dodgers",
+   "oppAbbr": "LAD",
    "rf": 2,
    "ra": 4,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "LAD",
+     "innings": [
+      2,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 5,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      2
+     ],
+     "r": 2,
+     "h": 5,
+     "e": 1
+    }
+   }
   },
   {
    "id": 775297,
@@ -3166,9 +9663,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Los Angeles Dodgers",
+   "oppAbbr": "LAD",
    "rf": 11,
    "ra": 4,
-   "result": "W"
+   "result": "W",
+   "line": {
+    "away": {
+     "team": "LAD",
+     "innings": [
+      2,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0,
+      0,
+      0
+     ],
+     "r": 4,
+     "h": 6,
+     "e": 1
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      0,
+      1,
+      4,
+      0,
+      0,
+      1,
+      0,
+      5,
+      null
+     ],
+     "r": 11,
+     "h": 9,
+     "e": 0
+    }
+   }
   },
   {
    "id": 775296,
@@ -3182,9 +9716,46 @@
    "status": "Final",
    "home": true,
    "opponent": "Los Angeles Dodgers",
+   "oppAbbr": "LAD",
    "rf": 6,
    "ra": 7,
-   "result": "L"
+   "result": "L",
+   "line": {
+    "away": {
+     "team": "LAD",
+     "innings": [
+      0,
+      0,
+      0,
+      0,
+      5,
+      0,
+      0,
+      2,
+      0
+     ],
+     "r": 7,
+     "h": 7,
+     "e": 0
+    },
+    "home": {
+     "team": "NYY",
+     "innings": [
+      3,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+     ],
+     "r": 6,
+     "h": 8,
+     "e": 2
+    }
+   }
   }
  ],
  "hitters": [
