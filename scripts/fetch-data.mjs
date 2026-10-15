@@ -1,5 +1,5 @@
 // Fetches New York Yankees data from the MLB Stats API and writes it to data/
-// as JSON for ShortPorch.html to read. Runs in GitHub Actions on a schedule.
+// as JSON for index.html to read. Runs in GitHub Actions on a schedule.
 // The API is free and needs no key.
 //
 // Usage: node scripts/fetch-data.mjs
