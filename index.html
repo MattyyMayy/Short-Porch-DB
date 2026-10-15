@@ -99,10 +99,11 @@
   .card h2 { font: 11px/1.4 var(--pixel); text-transform: uppercase; color: var(--ink); margin: 0 0 14px; }
   .card h2::before { content: "■ "; color: var(--loss); }
 
-  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(108px, 1fr)); gap: 12px; }
   .kpi { border: 2px dashed var(--line); padding: 8px 10px; }
   .kpi .v { font-size: clamp(34px, 5vw, 44px); line-height: 1; }
   .kpi .l { font-size: 18px; color: var(--muted); text-transform: uppercase; }
+  .kpi-note { grid-column: 1 / -1; margin: 0; font-size: 18px; color: var(--muted); }
 
   .split { display: grid; gap: 20px; }
   @media (min-width: 900px) { .split { grid-template-columns: 1.4fr 1fr; } }
@@ -382,18 +383,40 @@
       return;
     }
     const played = me.w + me.l;
+    const post = s.games.filter(g => g.type !== "R" && g.result);
+    const pw = post.filter(g => g.result === "W").length;
+    const pl = post.filter(g => g.result === "L").length;
+
+    // With a postseason, the tiles after it combine regular season and
+    // postseason. Rank and games back stay regular season only.
+    let pct = me.pct, rd = me.rd, rpg = played ? me.rs / played : null, streak = me.streak, l10 = me.l10;
+    if (post.length) {
+      const all = s.games.filter(g => g.result === "W" || g.result === "L");
+      const last = all[all.length - 1].result;
+      const run = all.length - 1 - all.findLastIndex(g => g.result !== last);
+      const ten = all.slice(-10);
+      const w = ten.filter(g => g.result === "W").length;
+      pct = ((me.w + pw) / (played + pw + pl)).toFixed(3).replace(/^0/, "");
+      rd = me.rd + post.reduce((t, g) => t + g.rf - g.ra, 0);
+      rpg = (me.rs + post.reduce((t, g) => t + g.rf, 0)) / (played + post.length);
+      streak = `${last}${run}`;
+      l10 = `${w}-${ten.length - w}`;
+    }
+
+    const both = post.length ? "*" : "";
     $("kpis").innerHTML = [
       ["Record", `${me.w}-${me.l}`],
-      ["Win %", me.pct],
+      ...(post.length ? [["Postseason", `${pw}-${pl}`]] : []),
+      ["Win %" + both, pct],
       ["AL East", me.divRank ? ordinal(me.divRank) : "–"],
       ["Games back", fmtGB(me.gb)],
-      ["Run diff", fmtDiff(me.rd)],
-      ["Runs / game", played ? (me.rs / played).toFixed(2) : "–"],
-      ["Streak", me.streak || "–"],
-      ["Last 10", me.l10 || "–"]
-    ].map(([l, v]) => `<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${l}</div></div>`).join("");
-    const post = s.games.filter(g => g.type !== "R" && g.result);
-    const postNote = post.length ? ` · Postseason ${post.filter(g => g.result === "W").length}-${post.filter(g => g.result === "L").length}` : "";
+      ["Run diff" + both, fmtDiff(rd)],
+      ["Runs / game" + both, rpg == null ? "–" : rpg.toFixed(2)],
+      ["Streak" + both, streak || "–"],
+      ["Last 10" + both, l10 || "–"]
+    ].map(([l, v]) => `<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${l}</div></div>`).join("")
+      + (post.length ? `<p class="kpi-note">* Regular season and postseason combined</p>` : "");
+    const postNote = post.length ? ` · Postseason ${pw}-${pl}` : "";
     $("meta").textContent = `${s.label} · ${played} of ${GAMES_PER_SEASON} played${postNote}`;
   }
 
