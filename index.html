@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Short Porch DB · New York Yankees</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
+<script>
+  try {
+    const t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch {}
+</script>
+<style>
+  :root {
+    --navy: #0C2340; --stripe: rgba(255, 255, 255, .16); --gray: #C4CED3;
+    --surface: #f4efe1; --ink: #0C2340; --muted: #5b6577; --line: #cfc7b0; --hi: rgba(12, 35, 64, .12);
+    --accent: #0C2340; --win: #1f8a3b; --tie: #7d7d7d; --loss: #c8102e;
+    --edge: #061224; --shadow: 6px 6px 0 rgba(0, 0, 0, .45);
+    --pixel: "Press Start 2P", "Courier New", monospace;
+    --term: "VT323", ui-monospace, "Courier New", monospace;
+    --pad: clamp(12px, 3vw, 24px);
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --surface: #0a1426; --ink: #e9edf4; --muted: #8e9bb2; --line: #22324d; --hi: rgba(143, 176, 217, .16); --accent: #8fb0d9; --edge: #000; }
+  }
+  :root[data-theme="dark"] { --surface: #0a1426; --ink: #e9edf4; --muted: #8e9bb2; --line: #22324d; --hi: rgba(143, 176, 217, .16); --accent: #8fb0d9; --edge: #000; }
+
+  *, *::before, *::after { box-sizing: inherit; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); background: var(--navy); }
+  /* Navy pinstripes behind the whole page, drawn on a 2px pixel grid. */
+  body {
+    margin: 0; min-height: 100vh; color: var(--ink);
+    background: repeating-linear-gradient(90deg, transparent 0 26px, var(--stripe) 26px 28px), var(--navy);
+    background-attachment: fixed;
+    font: 20px/1.2 var(--term);
+    -webkit-font-smoothing: none; font-smooth: never;
+  }
+
+  header { color: #fff; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: var(--pad); }
+  .top { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: center; justify-content: space-between; }
+  .tagline { font-size: clamp(24px, 3.5vw, 30px); line-height: 1.1; color: #fff; text-shadow: 2px 2px 0 var(--edge); margin-bottom: 4px; }
+  .tagline::before { content: "> "; color: var(--loss); }
+  h1 {
+    font: clamp(14px, 3vw, 24px)/1.5 var(--pixel); margin: 6px 0; text-transform: uppercase;
+    text-shadow: 3px 3px 0 var(--edge); display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  }
+  .ball { width: 28px; height: 28px; flex: none; filter: drop-shadow(3px 3px 0 var(--edge)); }
+  .sub { font-size: 20px; color: var(--gray); }
+  .badge {
+    display: inline-block; padding: 4px 6px 3px; background: #fff; color: var(--navy);
+    font: 10px/1 var(--pixel); text-shadow: none; box-shadow: 3px 3px 0 var(--edge);
+  }
+  .badge.live { animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: .35; } }
+  @media (prefers-reduced-motion: reduce) { .badge.live { animation: none; } }
+
+  .actions { display: flex; align-items: center; gap: 12px; min-width: 0; max-width: 100%; }
+  .lights {
+    flex: none; width: 78px; height: 66px; padding: 3px 4px; margin: 0 3px 3px 0; cursor: pointer;
+    background: var(--navy); border: 3px solid #fff; box-shadow: 3px 3px 0 var(--edge);
+  }
+  .lights:hover { background: #17345c; }
+  .lights:active { transform: translate(3px, 3px); box-shadow: none; }
+  .lights:focus-visible, .seasons button:focus-visible, select:focus-visible { outline: 3px dashed var(--loss); outline-offset: 3px; }
+  .flood { display: block; width: 100%; height: 100%; }
+  .flood .frame { fill: #C4CED3; }
+  .flood .pole { fill: #7d8aa0; }
+  .flood .frieze { fill: #f2f1ea; }
+  .flood .lamp { fill: #2a3346; }
+  .flood .ray { fill: #ffe14d; visibility: hidden; }
+  .lights[aria-pressed="true"] .flood { filter: drop-shadow(0 0 6px rgba(255, 236, 140, .95)); }
+  .lights[aria-pressed="true"] .flood .lamp { fill: #fff8c4; }
+  .lights[aria-pressed="true"] .flood .ray { visibility: visible; animation: flicker 1.6s steps(1) infinite; }
+  @keyframes flicker { 50% { opacity: .45; } }
+  @media (prefers-reduced-motion: reduce) { .lights[aria-pressed="true"] .flood .ray { animation: none; } }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .seasons { display: flex; gap: 8px; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 0 6px 6px 0; }
+  .seasons::-webkit-scrollbar { display: none; }
+  .seasons button {
+    flex: none; border: 3px solid #fff; background: var(--navy); color: #fff;
+    padding: 6px 10px 5px; font: 10px/1 var(--pixel); cursor: pointer; box-shadow: 3px 3px 0 var(--edge);
+  }
+  .seasons button:hover { background: #17345c; }
+  .seasons button[aria-pressed="true"] { background: #fff; color: var(--navy); transform: translate(3px, 3px); box-shadow: none; }
+
+  main { display: grid; gap: 20px; padding-top: 4px; }
+  .card {
+    background: var(--surface); border: 4px solid var(--edge); padding: 16px; min-width: 0;
+    box-shadow: var(--shadow);
+  }
+  .card h2 { font: 11px/1.4 var(--pixel); text-transform: uppercase; color: var(--ink); margin: 0 0 14px; }
+  .card h2::before { content: "■ "; color: var(--loss); }
+
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+  .kpi { border: 2px dashed var(--line); padding: 8px 10px; }
+  .kpi .v { font-size: clamp(34px, 5vw, 44px); line-height: 1; }
+  .kpi .l { font-size: 18px; color: var(--muted); text-transform: uppercase; }
+
+  .split { display: grid; gap: 20px; }
+  @media (min-width: 900px) { .split { grid-template-columns: 1.4fr 1fr; } }
+
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 5px 7px; text-align: right; border-bottom: 2px dotted var(--line); white-space: nowrap; }
+  th { font-size: 18px; color: var(--muted); font-weight: normal; text-transform: uppercase; border-bottom: 3px solid var(--ink); }
+  th:first-child, td:first-child, th.name, td.name { text-align: left; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover td { background: var(--hi); }
+  tr.us td { background: var(--hi); }
+  tr.us td:first-child { box-shadow: inset 4px 0 0 var(--loss); }
+  .clinch { color: var(--muted); margin-left: 4px; }
+
+  .streak.W { color: var(--win); } .streak.L { color: var(--loss); }
+
+  .toolbar { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+  .toolbar h2 { margin: 0 !important; }
+  .controls { display: flex; gap: 10px; flex-wrap: wrap; }
+  select {
+    font: 20px/1 var(--term); padding: 3px 6px; border: 3px solid var(--ink); border-radius: 0;
+    background: var(--surface); color: var(--ink); box-shadow: 3px 3px 0 var(--edge); cursor: pointer;
+  }
+  .pos { color: var(--muted); }
+
+  .bars {
+    display: flex; align-items: flex-end; gap: 6px; height: 180px; padding-top: 8px;
+    border-bottom: 3px solid var(--ink);
+    background: repeating-linear-gradient(0deg, transparent 0 34px, var(--line) 34px 36px);
+  }
+  .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+  .bar-pair { flex: 1; min-height: 0; display: flex; align-items: flex-end; gap: 3px; width: 100%; justify-content: center; }
+  /* Bars snap to 6px steps so they read as stacked pixel blocks. */
+  .bar { width: min(14px, 40%); min-height: 6px; }
+  .bar.rf { background: repeating-linear-gradient(0deg, var(--accent) 0 4px, transparent 4px 6px); }
+  .bar.ra { background: repeating-linear-gradient(0deg, var(--muted) 0 4px, transparent 4px 6px); opacity: .6; }
+  .bar-labels { display: flex; gap: 6px; }
+  .bar-label { flex: 1; text-align: center; font-size: 18px; color: var(--muted); padding-top: 4px; }
+  .legend { display: flex; gap: 16px; color: var(--muted); margin-top: 8px; }
+  .legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; }
+  .legend .rf::before { background: var(--accent); } .legend .ra::before { background: var(--muted); opacity: .6; }
+
+  .note { font-size: 18px; color: var(--gray); padding: 8px var(--pad) 28px; max-width: 1200px; margin: 0 auto; }
+  .note a { color: #fff; }
+  .empty { text-align: left; color: var(--muted); white-space: normal; }
+  .res { display: inline-grid; place-items: center; width: 24px; height: 24px; color: #fff; font: 10px/1 var(--pixel); box-shadow: 2px 2px 0 var(--edge); }
+  .res.W { background: var(--win); } .res.T { background: var(--tie); } .res.L { background: var(--loss); }
+  .tag { display: inline-block; margin-left: 6px; padding: 0 5px; border: 2px solid var(--muted); color: var(--muted); font-size: 16px; text-transform: uppercase; }
+  tr.upcoming td { color: var(--muted); }
+  td.box { padding-top: 4px; padding-bottom: 4px; }
+  table.line { width: auto; margin-left: auto; border-collapse: collapse; }
+  table.line th, table.line td {
+    padding: 0 4px; min-width: 18px; text-align: center; border: 0; font-size: 18px; line-height: 1.05; background: none !important; box-shadow: none !important;
+  }
+  table.line th { color: var(--muted); }
+  table.line th:first-child, table.line td:first-child { text-align: left; padding-right: 8px; }
+  table.line .rhe { border-left: 2px solid var(--line); padding-left: 6px; }
+  table.line tr.me td { color: var(--ink); font-weight: bold; }
+  table.line tbody tr:first-child td { border-bottom: 2px dotted var(--line); }
+  tr.upcoming table.line td { color: var(--muted); }
+
+  .show-sm { display: none; }
+  @media (max-width: 599px) {
+    .hide-sm { display: none; }
+    .show-sm { display: inline; }
+    table.line th, table.line td { padding: 0 2px; min-width: 14px; }
+    table.line th:first-child, table.line td:first-child { padding-right: 4px; }
+    table.line .rhe { padding-left: 4px; }
+    .tag { margin-left: 3px; padding: 0 3px; font-size: 14px; }
+    #games > tr > td { padding-left: 3px; padding-right: 3px; }
+    th, td { padding: 4px 4px; }
+    body { font-size: 19px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap top">
+    <div>
+      <h1><svg class="ball" viewBox="0 0 8 8" shape-rendering="crispEdges" aria-hidden="true"><rect x="2" y="0" width="1" height="1" fill="#fff"/><rect x="3" y="0" width="1" height="1" fill="#fff"/><rect x="4" y="0" width="1" height="1" fill="#fff"/><rect x="5" y="0" width="1" height="1" fill="#fff"/><rect x="1" y="1" width="1" height="1" fill="#fff"/><rect x="2" y="1" width="1" height="1" fill="#fff"/><rect x="3" y="1" width="1" height="1" fill="#fff"/><rect x="4" y="1" width="1" height="1" fill="#fff"/><rect x="5" y="1" width="1" height="1" fill="#fff"/><rect x="6" y="1" width="1" height="1" fill="#fff"/><rect x="0" y="2" width="1" height="1" fill="#fff"/><rect x="1" y="2" width="1" height="1" fill="#c8102e"/><rect x="2" y="2" width="1" height="1" fill="#fff"/><rect x="3" y="2" width="1" height="1" fill="#fff"/><rect x="4" y="2" width="1" height="1" fill="#fff"/><rect x="5" y="2" width="1" height="1" fill="#fff"/><rect x="6" y="2" width="1" height="1" fill="#c8102e"/><rect x="7" y="2" width="1" height="1" fill="#fff"/><rect x="0" y="3" width="1" height="1" fill="#fff"/><rect x="1" y="3" width="1" height="1" fill="#fff"/><rect x="2" y="3" width="1" height="1" fill="#c8102e"/><rect x="3" y="3" width="1" height="1" fill="#fff"/><rect x="4" y="3" width="1" height="1" fill="#fff"/><rect x="5" y="3" width="1" height="1" fill="#c8102e"/><rect x="6" y="3" width="1" height="1" fill="#fff"/><rect x="7" y="3" width="1" height="1" fill="#fff"/><rect x="0" y="4" width="1" height="1" fill="#fff"/><rect x="1" y="4" width="1" height="1" fill="#fff"/><rect x="2" y="4" width="1" height="1" fill="#c8102e"/><rect x="3" y="4" width="1" height="1" fill="#fff"/><rect x="4" y="4" width="1" height="1" fill="#fff"/><rect x="5" y="4" width="1" height="1" fill="#c8102e"/><rect x="6" y="4" width="1" height="1" fill="#fff"/><rect x="7" y="4" width="1" height="1" fill="#fff"/><rect x="0" y="5" width="1" height="1" fill="#fff"/><rect x="1" y="5" width="1" height="1" fill="#c8102e"/><rect x="2" y="5" width="1" height="1" fill="#fff"/><rect x="3" y="5" width="1" height="1" fill="#fff"/><rect x="4" y="5" width="1" height="1" fill="#fff"/><rect x="5" y="5" width="1" height="1" fill="#fff"/><rect x="6" y="5" width="1" height="1" fill="#c8102e"/><rect x="7" y="5" width="1" height="1" fill="#fff"/><rect x="1" y="6" width="1" height="1" fill="#fff"/><rect x="2" y="6" width="1" height="1" fill="#fff"/><rect x="3" y="6" width="1" height="1" fill="#fff"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="5" y="6" width="1" height="1" fill="#fff"/><rect x="6" y="6" width="1" height="1" fill="#fff"/><rect x="2" y="7" width="1" height="1" fill="#fff"/><rect x="3" y="7" width="1" height="1" fill="#fff"/><rect x="4" y="7" width="1" height="1" fill="#fff"/><rect x="5" y="7" width="1" height="1" fill="#fff"/></svg><span>Short Porch DB</span> <span class="badge" id="status">LOADING</span></h1>
+      <div class="tagline">Let's Go Yankees!</div>
+      <div class="sub" id="meta"></div>
+    </div>
+    <div class="actions">
+      <nav class="seasons" id="seasons" aria-label="Season"></nav>
+      <button type="button" class="lights" id="lights" aria-pressed="true" title="Stadium lights: light or dark mode"><svg class="flood" viewBox="0 0 25 21" shape-rendering="crispEdges" aria-hidden="true"><rect class="ray" x="6" y="0" width="1" height="1"/><rect class="ray" x="10" y="0" width="1" height="1"/><rect class="ray" x="14" y="0" width="1" height="1"/><rect class="ray" x="18" y="0" width="1" height="1"/><rect class="ray" x="3" y="2" width="1" height="1"/><rect class="ray" x="21" y="2" width="1" height="1"/><rect class="ray" x="2" y="5" width="1" height="1"/><rect class="ray" x="22" y="5" width="1" height="1"/><rect class="ray" x="4" y="1" width="1" height="1"/><rect class="ray" x="20" y="1" width="1" height="1"/><rect class="frame" x="4" y="2" width="17" height="7"/><rect class="lamp" x="5" y="3" width="3" height="2"/><rect class="lamp" x="9" y="3" width="3" height="2"/><rect class="lamp" x="13" y="3" width="3" height="2"/><rect class="lamp" x="17" y="3" width="3" height="2"/><rect class="lamp" x="5" y="6" width="3" height="2"/><rect class="lamp" x="9" y="6" width="3" height="2"/><rect class="lamp" x="13" y="6" width="3" height="2"/><rect class="lamp" x="17" y="6" width="3" height="2"/><rect class="pole" x="6" y="9" width="1" height="2"/><rect class="pole" x="18" y="9" width="1" height="2"/><rect class="frieze" x="0" y="11" width="25" height="1"/><rect class="frieze" x="0" y="11" width="1" height="10"/><rect class="frieze" x="8" y="11" width="1" height="10"/><rect class="frieze" x="16" y="11" width="1" height="10"/><rect class="frieze" x="24" y="11" width="1" height="10"/><rect class="frieze" x="2" y="12" width="1" height="4"/><rect class="frieze" x="4" y="12" width="1" height="4"/><rect class="frieze" x="6" y="12" width="1" height="4"/><rect class="frieze" x="1" y="16" width="7" height="1"/><rect class="frieze" x="1" y="17" width="2" height="1"/><rect class="frieze" x="6" y="17" width="2" height="1"/><rect class="frieze" x="1" y="18" width="1" height="1"/><rect class="frieze" x="7" y="18" width="1" height="1"/><rect class="frieze" x="10" y="12" width="1" height="4"/><rect class="frieze" x="12" y="12" width="1" height="4"/><rect class="frieze" x="14" y="12" width="1" height="4"/><rect class="frieze" x="9" y="16" width="7" height="1"/><rect class="frieze" x="9" y="17" width="2" height="1"/><rect class="frieze" x="14" y="17" width="2" height="1"/><rect class="frieze" x="9" y="18" width="1" height="1"/><rect class="frieze" x="15" y="18" width="1" height="1"/><rect class="frieze" x="18" y="12" width="1" height="4"/><rect class="frieze" x="20" y="12" width="1" height="4"/><rect class="frieze" x="22" y="12" width="1" height="4"/><rect class="frieze" x="17" y="16" width="7" height="1"/><rect class="frieze" x="17" y="17" width="2" height="1"/><rect class="frieze" x="22" y="17" width="2" height="1"/><rect class="frieze" x="17" y="18" width="1" height="1"/><rect class="frieze" x="23" y="18" width="1" height="1"/></svg><span class="visually-hidden">Stadium lights (light mode)</span></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <h2 id="kpi-title">Season overview</h2>
+    <div class="kpis" id="kpis"></div>
+  </section>
+
+  <div class="split">
+    <section class="card">
+      <div class="toolbar">
+        <h2>Standings</h2>
+        <label class="pos">Show
+          <select id="view">
+            <option value="division">AL East</option>
+            <option value="league">American League</option>
+          </select>
+        </label>
+      </div>
+      <div class="scroll">
+        <table>
+          <thead id="standings-head"></thead>
+          <tbody id="standings"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Runs by month</h2>
+      <div class="bars" id="bars"></div>
+      <div class="bar-labels" id="bar-labels"></div>
+      <div class="legend"><span class="rf">Scored</span><span class="ra">Allowed</span></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <div class="toolbar">
+      <h2>Player stats</h2>
+      <div class="controls">
+        <label class="pos">Group
+          <select id="group">
+            <option value="hitters">Hitting</option>
+            <option value="pitchers">Pitching</option>
+          </select>
+        </label>
+        <label class="pos">Sort by
+          <select id="sort"></select>
+        </label>
+      </div>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead id="players-head"></thead>
+        <tbody id="players"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="toolbar">
+      <h2>Results &amp; schedule</h2>
+      <label class="pos">Show
+        <select id="filter">
+          <option value="all">All games</option>
+          <option value="results">Results</option>
+          <option value="upcoming">Upcoming</option>
+        </select>
+      </label>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead>
+          <tr><th class="name">Date</th><th class="name">Opponent</th><th class="hide-sm">H/A</th><th>Box score</th><th>Result</th></tr>
+        </thead>
+        <tbody id="games"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<p class="note" id="note"></p>
+
+<script>
+  // Data is written to data/ by .github/workflows/update-data.yml, which reads
+  // the MLB Stats API (statsapi.mlb.com) on a schedule.
+  const DATA = "data";
+  const MONTHS = ["Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"];
+  const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const GAMES_PER_SEASON = 162;
+  const ROUND = { F: "Wild Card", D: "ALDS", L: "ALCS", W: "World Series" };
+  const NOT_PLAYED = /postponed|cancel|suspended/i;
+
+  // Rate stats need a minimum sample; players below it sort after those above.
+  const MIN_PA = 50;
+  const MIN_OUTS = 60; // 20 innings
+
+  const avg3 = v => v == null ? "–" : v.toFixed(3).replace(/^0/, "");
+  const fix2 = v => v == null ? "–" : v.toFixed(2);
+
+  const STATS = {
+    hitters: {
+      sorts: [
+        ["ops", "OPS"], ["hr", "Home runs"], ["rbi", "RBI"], ["avg", "Average"], ["sb", "Stolen bases"], ["pa", "Plate appearances"]
+      ],
+      rate: new Set(["ops", "avg"]),
+      qualified: p => p.pa >= MIN_PA,
+      head: `<tr><th class="name">Player</th><th>Pos</th><th>G</th><th class="hide-sm">PA</th><th>AVG</th><th>HR</th><th>RBI</th><th class="hide-sm">SB</th><th class="hide-sm">OBP</th><th class="hide-sm">SLG</th><th>OPS</th></tr>`,
+      row: p => `<td>${p.g}</td><td class="hide-sm">${p.pa}</td><td>${avg3(p.avg)}</td><td>${p.hr}</td><td>${p.rbi}</td><td class="hide-sm">${p.sb}</td><td class="hide-sm">${avg3(p.obp)}</td><td class="hide-sm">${avg3(p.slg)}</td><td>${avg3(p.ops)}</td>`
+    },
+    pitchers: {
+      sorts: [
+        ["outs", "Innings"], ["era", "ERA"], ["so", "Strikeouts"], ["whip", "WHIP"], ["w", "Wins"], ["sv", "Saves"]
+      ],
+      rate: new Set(["era", "whip"]),
+      ascending: new Set(["era", "whip"]),
+      qualified: p => p.outs >= MIN_OUTS,
+      head: `<tr><th class="name">Player</th><th>G</th><th class="hide-sm">GS</th><th>IP</th><th>W-L</th><th class="hide-sm">SV</th><th>ERA</th><th class="hide-sm">WHIP</th><th>K</th><th class="hide-sm">BB</th></tr>`,
+      row: p => `<td>${p.g}</td><td class="hide-sm">${p.gs}</td><td>${esc(p.ip)}</td><td>${p.w}-${p.l}</td><td class="hide-sm">${p.sv}</td><td>${fix2(p.era)}</td><td class="hide-sm">${fix2(p.whip)}</td><td>${p.so}</td><td class="hide-sm">${p.bb}</td>`
+    }
+  };
+
+  const CITY = { "New York": "NY", "Los Angeles": "LA", "Chicago": "CHI" };
+  const shortName = t => t.replace(/^(New York|Los Angeles|Chicago) /, (m, city) => `${CITY[city]} `);
+  const fmtDate = (iso, opts) => new Date(`${iso}T12:00:00`).toLocaleDateString("en-US", opts);
+  const fmtTime = iso => new Date(iso).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  const SUFFIX = ["th", "st", "nd", "rd"];
+  const ordinal = n => n + (SUFFIX[(n % 100 - 20) % 10] || SUFFIX[n % 100] || SUFFIX[0]);
+
+  function getJSON(path) {
+    return fetch(path, { cache: "no-cache" }).then(res => {
+      if (!res.ok) throw new Error(res.status === 404 ? "no data yet" : `HTTP ${res.status}`);
+      return res.json();
+    });
+  }
+
+  function withMonthly(s) {
+    const done = s.games.filter(g => g.result);
+    const monthOf = g => MONTH_NAMES[+g.date.slice(5, 7) - 1];
+    const used = new Set(done.map(monthOf));
+    const first = MONTHS.findIndex(m => used.has(m));
+    const last = MONTHS.findLastIndex(m => used.has(m));
+    s.monthly = first < 0 ? [] : MONTHS.slice(first, last + 1).map(m => {
+      const inMonth = done.filter(g => monthOf(g) === m);
+      return { m, rf: inMonth.reduce((t, g) => t + g.rf, 0), ra: inMonth.reduce((t, g) => t + g.ra, 0), n: inMonth.length };
+    });
+    return s;
+  }
+
+  const cache = {};
+  function getSeason(id) {
+    if (!cache[id]) {
+      cache[id] = getJSON(`${DATA}/${id}.json`)
+        .then(withMonthly)
+        .catch(err => { delete cache[id]; throw err; });
+    }
+    return cache[id];
+  }
+
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmtDiff = n => (n > 0 ? "+" : "") + n;
+  const fmtGB = v => (v == null || v === "-" || v === "0.0" ? "–" : v);
+
+  const $ = id => document.getElementById(id);
+  let seasons = [];
+  let current = null;
+  let filter = "all";
+  let view = "division";
+  let group = "hitters";
+  let sortKey = STATS.hitters.sorts[0][0];
+  let season = null;
+  let requestId = 0;
+
+  function renderSeasonButtons() {
+    $("seasons").innerHTML = seasons.map(id =>
+      `<button type="button" data-id="${id}" aria-pressed="${id === current}">${id}</button>`
+    ).join("");
+  }
+
+  function renderKpis(s) {
+    const me = s.standings.find(r => r.us);
+    $("kpi-title").textContent = `${s.label} · ${s.live ? "In progress" : "Final"}`;
+    if (!me) {
+      $("kpis").innerHTML = `<p class="pos">No standings for this season yet.</p>`;
+      $("meta").textContent = s.label;
+      return;
+    }
+    const played = me.w + me.l;
+    $("kpis").innerHTML = [
+      ["Record", `${me.w}-${me.l}`],
+      ["Win %", me.pct],
+      ["AL East", me.divRank ? ordinal(me.divRank) : "–"],
+      ["Games back", fmtGB(me.gb)],
+      ["Run diff", fmtDiff(me.rd)],
+      ["Runs / game", played ? (me.rs / played).toFixed(2) : "–"],
+      ["Streak", me.streak || "–"],
+      ["Last 10", me.l10 || "–"]
+    ].map(([l, v]) => `<div class="kpi"><div class="v">${esc(v)}</div><div class="l">${l}</div></div>`).join("");
+    const post = s.games.filter(g => g.type !== "R" && g.result);
+    const postNote = post.length ? ` · Postseason ${post.filter(g => g.result === "W").length}-${post.filter(g => g.result === "L").length}` : "";
+    $("meta").textContent = `${s.label} · ${played} of ${GAMES_PER_SEASON} played${postNote}`;
+  }
+
+  function renderStandings(s) {
+    const league = view === "league";
+    $("standings-head").innerHTML = `<tr><th>#</th><th class="name">Team</th><th>W</th><th>L</th><th>PCT</th><th>${league ? "WCGB" : "GB"}</th>
+      <th class="hide-sm">Home</th><th class="hide-sm">Away</th><th class="hide-sm">L10</th><th>Strk</th><th class="hide-sm">RD</th></tr>`;
+    const rows = league
+      ? s.standings.slice().sort((a, b) => (a.leagueRank ?? 99) - (b.leagueRank ?? 99) || parseFloat(b.pct) - parseFloat(a.pct))
+      : s.standings.filter(r => r.division).sort((a, b) => (a.divRank ?? 99) - (b.divRank ?? 99));
+    if (!rows.length) {
+      $("standings").innerHTML = `<tr><td class="empty" colspan="11">No standings for this season.</td></tr>`;
+      return;
+    }
+    $("standings").innerHTML = rows.map((r, i) => {
+      const streakType = (r.streak || "")[0];
+      return `
+      <tr class="${r.us ? "us" : ""}">
+        <td>${league ? r.leagueRank ?? i + 1 : r.divRank ?? i + 1}</td>
+        <td class="name">${esc(shortName(r.team))}${r.clinched ? `<span class="clinch">${esc(r.clinched)}</span>` : ""}</td>
+        <td>${r.w}</td><td>${r.l}</td><td>${esc(r.pct)}</td>
+        <td>${esc(fmtGB(league ? r.wcgb : r.gb))}</td>
+        <td class="hide-sm">${esc(r.home || "–")}</td><td class="hide-sm">${esc(r.away || "–")}</td><td class="hide-sm">${esc(r.l10 || "–")}</td>
+        <td><span class="streak ${streakType}">${esc(r.streak || "–")}</span></td>
+        <td class="hide-sm">${fmtDiff(r.rd)}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  // Bar heights snap to whole 6px blocks, matching the striped bar fill.
+  const BAR_HEIGHT = 168, BLOCK = 6;
+  const blocks = (v, max) => Math.max(1, Math.round((v / max) * BAR_HEIGHT / BLOCK)) * BLOCK;
+
+  function renderBars(s) {
+    if (!s.monthly.length) {
+      $("bars").innerHTML = `<p class="pos">No results yet.</p>`;
+      $("bar-labels").innerHTML = "";
+      return;
+    }
+    const max = Math.max(1, ...s.monthly.flatMap(m => [m.rf, m.ra]));
+    $("bars").innerHTML = s.monthly.map(m => `
+      <div class="bar-group" title="${m.m}: ${m.rf} scored, ${m.ra} allowed in ${m.n} games">
+        <div class="bar-pair">
+          <div class="bar rf" style="height:${blocks(m.rf, max)}px"></div>
+          <div class="bar ra" style="height:${blocks(m.ra, max)}px"></div>
+        </div>
+      </div>`).join("");
+    $("bar-labels").innerHTML = s.monthly.map(m => `<div class="bar-label">${m.m}</div>`).join("");
+  }
+
+  function renderSortOptions() {
+    $("sort").innerHTML = STATS[group].sorts.map(([k, l]) =>
+      `<option value="${k}"${k === sortKey ? " selected" : ""}>${l}</option>`).join("");
+  }
+
+  function renderPlayers(s) {
+    const cfg = STATS[group];
+    $("players-head").innerHTML = cfg.head;
+    const list = s[group] || [];
+    if (!list.length) {
+      $("players").innerHTML = `<tr><td class="empty" colspan="11">No ${group === "hitters" ? "hitting" : "pitching"} stats for this season.</td></tr>`;
+      return;
+    }
+    const dir = cfg.ascending?.has(sortKey) ? 1 : -1;
+    const rate = cfg.rate.has(sortKey);
+    const rows = [...list].sort((a, b) => {
+      if (rate && cfg.qualified(a) !== cfg.qualified(b)) return cfg.qualified(a) ? -1 : 1;
+      const av = a[sortKey], bv = b[sortKey];
+      if (av == null || bv == null) return (av == null) - (bv == null);
+      return dir * (av - bv) || (b.pa ?? b.outs) - (a.pa ?? a.outs);
+    });
+    $("players").innerHTML = rows.map(p => `
+      <tr>
+        <td class="name">${esc(p.name)}</td>
+        ${group === "hitters" ? `<td><span class="pos">${esc(p.pos || "")}</span></td>` : ""}
+        ${cfg.row(p)}
+      </tr>`).join("");
+  }
+
+  // Scoreboard-style line score: away team on top, innings, then R/H/E.
+  // Innings hide on narrow screens, leaving R/H/E.
+  function lineScore(g) {
+    const { away, home } = g.line;
+    const n = Math.max(9, away.innings.length, home.innings.length);
+    const nums = Array.from({ length: n }, (_, i) => i + 1);
+    const cell = (v, i, side) => v ?? (side === home && g.result && i === home.innings.length - 1 ? "x" : "");
+    const row = (t, isUs) => `<tr class="${isUs ? "me" : ""}"><td>${esc(t.team)}</td>`
+      + nums.map(i => `<td class="inn hide-sm">${cell(t.innings[i - 1], i - 1, t)}</td>`).join("")
+      + `<td class="rhe">${t.r ?? ""}</td><td>${t.h ?? ""}</td><td>${t.e ?? ""}</td></tr>`;
+    return `<table class="line"><thead><tr><th></th>${nums.map(i => `<th class="inn hide-sm">${i}</th>`).join("")}<th class="rhe">R</th><th>H</th><th>E</th></tr></thead>`
+      + `<tbody>${row(away, !g.home)}${row(home, g.home)}</tbody></table>`;
+  }
+
+  function renderGames(s) {
+    const rows = s.games.filter(g =>
+      filter === "all" || (filter === "results" ? g.result : !g.result));
+    if (!rows.length) {
+      $("games").innerHTML = `<tr><td class="empty" colspan="5">No ${filter === "upcoming" ? "upcoming games" : "games"} to show.</td></tr>`;
+      return;
+    }
+    $("games").innerHTML = rows.map(g => {
+      // Phones drop the weekday and use team abbreviations so the box score fits.
+      const date = `<span class="hide-sm">${fmtDate(g.date, { weekday: "short" })}, </span>${fmtDate(g.date, { month: "short", day: "numeric" })}`;
+      const opp = `<span class="hide-sm">${esc(shortName(g.opponent))}</span>`
+        + `<span class="show-sm">${g.home ? "vs" : "@"} ${esc(g.oppAbbr || shortName(g.opponent))}</span>`;
+      const tags = [g.series && (ROUND[g.type] || g.series), g.game && `Gm ${g.game}`].filter(Boolean)
+        .map(t => `<span class="tag">${esc(t)}</span>`).join("");
+      const live = !g.result && g.state === "Live";
+      const off = NOT_PLAYED.test(g.status);
+      const score = g.line ? lineScore(g)
+        : g.result ? `${g.rf}–${g.ra}` : off || live ? "–" : g.timeTBD ? "TBD" : fmtTime(g.start);
+      const result = g.result
+        ? `<span class="res ${g.result}">${g.result}</span>`
+        : `<span class="pos">${off ? esc(g.status) : live ? "Live" : "–"}</span>`;
+      return `
+      <tr class="${g.result ? "" : "upcoming"}">
+        <td class="name">${date}</td>
+        <td class="name">${opp}${tags}</td>
+        <td class="hide-sm">${g.home ? "vs" : "@"}</td>
+        <td class="box">${score}</td>
+        <td>${result}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  function setStatus(text) {
+    $("status").textContent = text;
+    $("status").classList.toggle("live", text === "LIVE");
+  }
+
+  function showError(message) {
+    season = null;
+    setStatus("OFFLINE");
+    $("meta").textContent = message;
+    $("kpis").innerHTML = `<p class="pos">${esc(message)}</p>`;
+    $("standings").innerHTML = $("bars").innerHTML = $("bar-labels").innerHTML = $("players").innerHTML = $("games").innerHTML = "";
+  }
+
+  async function render() {
+    const id = ++requestId;
+    setStatus("LOADING");
+    try {
+      const s = await getSeason(current);
+      if (id !== requestId) return;
+      season = s;
+      setStatus(s.live ? "LIVE" : "FINAL");
+      renderKpis(s);
+      renderStandings(s);
+      renderBars(s);
+      renderPlayers(s);
+      renderGames(s);
+      const updated = new Date(s.updated).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+      $("note").innerHTML = `${esc(s.label)} data from the <a href="https://statsapi.mlb.com/">MLB Stats API</a>. Player stats are regular season only. Last change ${esc(updated)}. `
+        + `Data © ${new Date().getFullYear()} MLB Advanced Media, L.P. Use of any content on this page acknowledges agreement to the terms posted at <a href="http://gdx.mlb.com/components/copyright.txt">gdx.mlb.com/components/copyright.txt</a>.`;
+    } catch (err) {
+      if (id !== requestId) return;
+      showError(`Couldn't load ${current}: ${err.message}. Pick the season again to retry.`);
+    }
+  }
+
+  $("seasons").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-id]");
+    if (!btn || (btn.dataset.id === current && season)) return;
+    current = btn.dataset.id;
+    renderSeasonButtons();
+    render();
+  });
+
+  $("view").addEventListener("change", e => {
+    view = e.target.value;
+    if (season) renderStandings(season);
+  });
+
+  $("group").addEventListener("change", e => {
+    group = e.target.value;
+    sortKey = STATS[group].sorts[0][0];
+    renderSortOptions();
+    if (season) renderPlayers(season);
+  });
+
+  $("sort").addEventListener("change", e => {
+    sortKey = e.target.value;
+    if (season) renderPlayers(season);
+  });
+
+  $("filter").addEventListener("change", e => {
+    filter = e.target.value;
+    if (season) renderGames(season);
+  });
+
+  // Stadium lights: on = light mode, off = dark mode. Follows the system
+  // setting until the viewer picks one.
+  const darkQuery = matchMedia("(prefers-color-scheme: dark)");
+  const theme = () => document.documentElement.dataset.theme || (darkQuery.matches ? "dark" : "light");
+  function renderLights() {
+    const on = theme() === "light";
+    $("lights").setAttribute("aria-pressed", String(on));
+    $("lights").querySelector(".visually-hidden").textContent = `Stadium lights (${on ? "light" : "dark"} mode)`;
+  }
+  $("lights").addEventListener("click", () => {
+    const next = theme() === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch {}
+    renderLights();
+  });
+  darkQuery.addEventListener("change", renderLights);
+  renderLights();
+
+  renderSortOptions();
+  getJSON(`${DATA}/index.json`)
+    .then(index => {
+      seasons = index.seasons;
+      if (!seasons.length) throw new Error("no data yet");
+      current = seasons[0];
+      renderSeasonButtons();
+      render();
+    })
+    .catch(err => showError(location.protocol === "file:"
+      ? "Open this page through GitHub Pages or a local web server; browsers block data files opened straight from disk."
+      : `Couldn't load data: ${err.message}. Run the "Update data" workflow on GitHub.`));
+</script>
+</body>
+</html>

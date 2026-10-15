@@ -4,7 +4,7 @@ A New York Yankees season dashboard: record, AL East and American League
 standings, runs by month, hitting and pitching stats, and the full schedule
 including the postseason.
 
-- `ShortPorch.html` is the page. Serve it through GitHub Pages or any web
+- `index.html` is the page. Serve it through GitHub Pages or any web
   server; it reads its data from `data/`.
 - `scripts/fetch-data.mjs` pulls data from the free
   [MLB Stats API](https://statsapi.mlb.com/) (no key needed) and writes one
