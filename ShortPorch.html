@@ -7,6 +7,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
+<script>
+  try {
+    const t = localStorage.getItem("theme");
+    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+  } catch {}
+</script>
 <style>
   :root {
     --navy: #0C2340; --stripe: rgba(255, 255, 255, .16); --gray: #C4CED3;
@@ -55,7 +61,28 @@
   @keyframes blink { 50% { opacity: .35; } }
   @media (prefers-reduced-motion: reduce) { .badge.live { animation: none; } }
 
-  .seasons { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 0 6px 6px 0; }
+  .actions { display: flex; align-items: center; gap: 12px; min-width: 0; max-width: 100%; }
+  .lights {
+    flex: none; width: 78px; height: 66px; padding: 3px 4px; margin: 0 3px 3px 0; cursor: pointer;
+    background: var(--navy); border: 3px solid #fff; box-shadow: 3px 3px 0 var(--edge);
+  }
+  .lights:hover { background: #17345c; }
+  .lights:active { transform: translate(3px, 3px); box-shadow: none; }
+  .lights:focus-visible, .seasons button:focus-visible, select:focus-visible { outline: 3px dashed var(--loss); outline-offset: 3px; }
+  .flood { display: block; width: 100%; height: 100%; }
+  .flood .frame { fill: #C4CED3; }
+  .flood .pole { fill: #7d8aa0; }
+  .flood .frieze { fill: #f2f1ea; }
+  .flood .lamp { fill: #2a3346; }
+  .flood .ray { fill: #ffe14d; visibility: hidden; }
+  .lights[aria-pressed="true"] .flood { filter: drop-shadow(0 0 6px rgba(255, 236, 140, .95)); }
+  .lights[aria-pressed="true"] .flood .lamp { fill: #fff8c4; }
+  .lights[aria-pressed="true"] .flood .ray { visibility: visible; animation: flicker 1.6s steps(1) infinite; }
+  @keyframes flicker { 50% { opacity: .45; } }
+  @media (prefers-reduced-motion: reduce) { .lights[aria-pressed="true"] .flood .ray { animation: none; } }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  .seasons { display: flex; gap: 8px; min-width: 0; overflow-x: auto; scrollbar-width: none; padding: 0 6px 6px 0; }
   .seasons::-webkit-scrollbar { display: none; }
   .seasons button {
     flex: none; border: 3px solid #fff; background: var(--navy); color: #fff;
@@ -143,7 +170,10 @@
       <div class="tagline">Let's Go Yankees!</div>
       <div class="sub" id="meta"></div>
     </div>
-    <nav class="seasons" id="seasons" aria-label="Season"></nav>
+    <div class="actions">
+      <nav class="seasons" id="seasons" aria-label="Season"></nav>
+      <button type="button" class="lights" id="lights" aria-pressed="true" title="Stadium lights: light or dark mode"><svg class="flood" viewBox="0 0 25 22" shape-rendering="crispEdges" aria-hidden="true"><rect class="ray" x="6" y="0" width="1" height="1"/><rect class="ray" x="10" y="0" width="1" height="1"/><rect class="ray" x="14" y="0" width="1" height="1"/><rect class="ray" x="18" y="0" width="1" height="1"/><rect class="ray" x="3" y="2" width="1" height="1"/><rect class="ray" x="21" y="2" width="1" height="1"/><rect class="ray" x="2" y="5" width="1" height="1"/><rect class="ray" x="22" y="5" width="1" height="1"/><rect class="ray" x="4" y="1" width="1" height="1"/><rect class="ray" x="20" y="1" width="1" height="1"/><rect class="frame" x="4" y="2" width="17" height="7"/><rect class="lamp" x="5" y="3" width="3" height="2"/><rect class="lamp" x="9" y="3" width="3" height="2"/><rect class="lamp" x="13" y="3" width="3" height="2"/><rect class="lamp" x="17" y="3" width="3" height="2"/><rect class="lamp" x="5" y="6" width="3" height="2"/><rect class="lamp" x="9" y="6" width="3" height="2"/><rect class="lamp" x="13" y="6" width="3" height="2"/><rect class="lamp" x="17" y="6" width="3" height="2"/><rect class="pole" x="6" y="9" width="1" height="2"/><rect class="pole" x="18" y="9" width="1" height="2"/><rect class="frieze" x="0" y="11" width="25" height="1"/><rect class="frieze" x="0" y="11" width="1" height="11"/><rect class="frieze" x="8" y="11" width="1" height="11"/><rect class="frieze" x="16" y="11" width="1" height="11"/><rect class="frieze" x="24" y="11" width="1" height="11"/><rect class="frieze" x="2" y="12" width="1" height="4"/><rect class="frieze" x="4" y="12" width="1" height="4"/><rect class="frieze" x="6" y="12" width="1" height="4"/><rect class="frieze" x="1" y="16" width="7" height="1"/><rect class="frieze" x="1" y="17" width="2" height="1"/><rect class="frieze" x="6" y="17" width="2" height="1"/><rect class="frieze" x="1" y="18" width="1" height="1"/><rect class="frieze" x="7" y="18" width="1" height="1"/><rect class="frieze" x="10" y="12" width="1" height="4"/><rect class="frieze" x="12" y="12" width="1" height="4"/><rect class="frieze" x="14" y="12" width="1" height="4"/><rect class="frieze" x="9" y="16" width="7" height="1"/><rect class="frieze" x="9" y="17" width="2" height="1"/><rect class="frieze" x="14" y="17" width="2" height="1"/><rect class="frieze" x="9" y="18" width="1" height="1"/><rect class="frieze" x="15" y="18" width="1" height="1"/><rect class="frieze" x="18" y="12" width="1" height="4"/><rect class="frieze" x="20" y="12" width="1" height="4"/><rect class="frieze" x="22" y="12" width="1" height="4"/><rect class="frieze" x="17" y="16" width="7" height="1"/><rect class="frieze" x="17" y="17" width="2" height="1"/><rect class="frieze" x="22" y="17" width="2" height="1"/><rect class="frieze" x="17" y="18" width="1" height="1"/><rect class="frieze" x="23" y="18" width="1" height="1"/></svg><span class="visually-hidden">Stadium lights (light mode)</span></button>
+    </div>
   </div>
 </header>
 
@@ -517,6 +547,24 @@
     filter = e.target.value;
     if (season) renderGames(season);
   });
+
+  // Stadium lights: on = light mode, off = dark mode. Follows the system
+  // setting until the viewer picks one.
+  const darkQuery = matchMedia("(prefers-color-scheme: dark)");
+  const theme = () => document.documentElement.dataset.theme || (darkQuery.matches ? "dark" : "light");
+  function renderLights() {
+    const on = theme() === "light";
+    $("lights").setAttribute("aria-pressed", String(on));
+    $("lights").querySelector(".visually-hidden").textContent = `Stadium lights (${on ? "light" : "dark"} mode)`;
+  }
+  $("lights").addEventListener("click", () => {
+    const next = theme() === "light" ? "dark" : "light";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch {}
+    renderLights();
+  });
+  darkQuery.addEventListener("change", renderLights);
+  renderLights();
 
   renderSortOptions();
   getJSON(`${DATA}/index.json`)
