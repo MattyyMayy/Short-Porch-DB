@@ -171,23 +171,31 @@ async function fielders(season) {
 }
 
 // Team batting by month, and the same line for opponents (the pitching
-// group's stats are what was hit against us). Regular season only.
-// Counting stats are kept so the page can total a season.
+// group's stats are what was hit against us). Regular season only. The API
+// has no team split by month, so per-game logs are added up; the page works
+// out the rate stats from these counts.
+const LINE = {
+  g: "gamesPlayed", r: "runs", ab: "atBats", h: "hits", d: "doubles", t: "triples", hr: "homeRuns",
+  bb: "baseOnBalls", hbp: "hitByPitch", sf: "sacFlies", so: "strikeOuts"
+};
+
 async function byMonth(season, group) {
-  const body = await api(`teams/${TEAM}/stats?stats=byMonth&group=${group}&season=${season}&gameType=R&sportId=1`);
-  return new Map((body.stats?.[0]?.splits || []).map(({ month, stat: s }) => [Number(month), {
-    g: s.gamesPlayed, r: s.runs,
-    pa: s.plateAppearances ?? s.battersFaced, ab: s.atBats,
-    h: s.hits, d: s.doubles, t: s.triples, hr: s.homeRuns,
-    bb: s.baseOnBalls, hbp: s.hitByPitch, sf: s.sacFlies, so: s.strikeOuts,
-    avg: num(s.avg), obp: num(s.obp), slg: num(s.slg), ops: num(s.ops)
-  }]));
+  const body = await api(`teams/${TEAM}/stats?stats=gameLog&group=${group}&season=${season}&gameType=R`);
+  const months = new Map();
+  for (const { date, stat: s } of body.stats?.[0]?.splits || []) {
+    const m = Number(date?.slice(5, 7));
+    if (!m) continue;
+    const line = months.get(m) || Object.fromEntries(["pa", ...Object.keys(LINE)].map(k => [k, 0]));
+    for (const [k, field] of Object.entries(LINE)) line[k] += s[field] ?? 0;
+    line.pa += s.plateAppearances ?? s.battersFaced ?? 0;
+    months.set(m, line);
+  }
+  return months;
 }
 
 async function monthly(season) {
   const [bat, opp] = await Promise.all([byMonth(season, "hitting"), byMonth(season, "pitching")]);
   return [...new Set([...bat.keys(), ...opp.keys()])]
-    .filter(m => m >= 1 && m <= 12)
     .sort((a, b) => a - b)
     .map(m => ({ m, bat: bat.get(m) || null, opp: opp.get(m) || null }));
 }
