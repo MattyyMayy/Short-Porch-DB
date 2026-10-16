@@ -113,8 +113,8 @@
   th, td { padding: 5px 7px; text-align: right; border-bottom: 2px dotted var(--line); white-space: nowrap; }
   th { font-size: 18px; color: var(--muted); font-weight: normal; text-transform: uppercase; border-bottom: 3px solid var(--ink); }
   th:first-child, td:first-child, th.name, td.name { text-align: left; }
-  /* Source matches display size; nearest-neighbor keeps a faint pixel edge on high-DPI screens. */
-  .hs { width: 40px; height: 40px; object-fit: cover; object-position: 50% 0; image-rendering: pixelated; vertical-align: middle; margin-right: 8px; background: var(--hi); border: 2px solid var(--ink); }
+  /* Headshots are portrait (~2:3); crop to a centered square so neither the cap nor the chin is lost. */
+  .hs { width: 40px; height: 40px; object-fit: cover; object-position: center; vertical-align: middle; margin-right: 8px; background: var(--hi); border: 2px solid var(--ink); }
   tbody tr:last-child td { border-bottom: 0; }
   tbody tr:hover td { background: var(--hi); }
   tr.us td { background: var(--hi); }
@@ -499,7 +499,7 @@
   }
 
   // MLB's image CDN, keyed by the Stats API player id; falls back to a generic silhouette.
-  const headshot = id => `https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_40,q_auto:best/v1/people/${id}/headshot/67/current`;
+  const headshot = id => `https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_80,q_auto:best/v1/people/${id}/headshot/67/current`;
 
   // Scoreboard-style line score: away team on top, innings, then R/H/E.
   // Innings hide on narrow screens, leaving R/H/E.
