@@ -113,8 +113,8 @@
   th, td { padding: 5px 7px; text-align: right; border-bottom: 2px dotted var(--line); white-space: nowrap; }
   th { font-size: 18px; color: var(--muted); font-weight: normal; text-transform: uppercase; border-bottom: 3px solid var(--ink); }
   th:first-child, td:first-child, th.name, td.name { text-align: left; }
-  /* 16px-wide source upscaled 2x with nearest-neighbor, then posterized: an 8-bit portrait. */
-  .hs { width: 32px; height: 32px; object-fit: cover; object-position: 50% 0; image-rendering: pixelated; filter: url(#posterize); vertical-align: middle; margin-right: 8px; background: var(--hi); border: 2px solid var(--ink); }
+  /* Source matches display size; nearest-neighbor keeps a faint pixel edge on high-DPI screens. */
+  .hs { width: 40px; height: 40px; object-fit: cover; object-position: 50% 0; image-rendering: pixelated; vertical-align: middle; margin-right: 8px; background: var(--hi); border: 2px solid var(--ink); }
   tbody tr:last-child td { border-bottom: 0; }
   tbody tr:hover td { background: var(--hi); }
   tr.us td { background: var(--hi); }
@@ -183,15 +183,6 @@
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <filter id="posterize" color-interpolation-filters="sRGB">
-    <feComponentTransfer>
-      <feFuncR type="discrete" tableValues="0 .25 .5 .75 1"/>
-      <feFuncG type="discrete" tableValues="0 .25 .5 .75 1"/>
-      <feFuncB type="discrete" tableValues="0 .25 .5 .75 1"/>
-    </feComponentTransfer>
-  </filter>
-</svg>
 
 <header>
   <div class="wrap top">
@@ -501,15 +492,14 @@
     });
     $("players").innerHTML = rows.map(p => `
       <tr>
-        <td class="name"><img class="hs" loading="lazy" alt="" width="32" height="32" src="${headshot(p.id)}" onerror="this.style.visibility='hidden'">${esc(p.name)}</td>
+        <td class="name"><img class="hs" loading="lazy" alt="" width="40" height="40" src="${headshot(p.id)}" onerror="this.style.visibility='hidden'">${esc(p.name)}</td>
         ${group === "hitters" ? `<td><span class="pos">${esc(p.pos || "")}</span></td>` : ""}
         ${cfg.row(p)}
       </tr>`).join("");
   }
 
   // MLB's image CDN, keyed by the Stats API player id; falls back to a generic silhouette.
-  // Fetched tiny on purpose: CSS scales it up into chunky pixels.
-  const headshot = id => `https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_16,q_auto:best/v1/people/${id}/headshot/67/current`;
+  const headshot = id => `https://img.mlbstatic.com/mlb-photos/image/upload/d_people:generic:headshot:67:current.png/w_40,q_auto:best/v1/people/${id}/headshot/67/current`;
 
   // Scoreboard-style line score: away team on top, innings, then R/H/E.
   // Innings hide on narrow screens, leaving R/H/E.
