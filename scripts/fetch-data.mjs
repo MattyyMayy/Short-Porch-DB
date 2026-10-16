@@ -20,7 +20,7 @@ const NOT_PLAYED = /postponed|cancel|suspended/i;
 
 // Bump when the shape of the season files changes, so past seasons (which
 // are otherwise only fetched once) are fetched again.
-const DATA_VERSION = 2;
+const DATA_VERSION = 3;
 
 // The first season is the current one and is refreshed on every run; the
 // others are only fetched once, when their file is missing. A new season
@@ -157,9 +157,22 @@ async function pitchers(season) {
     }));
 }
 
+// One row per player per position played; DH has no fielding to show.
+async function fielders(season) {
+  return (await playerStats(season, "fielding"))
+    .filter(p => p.pos && p.pos !== "DH" && outs(p.s.innings) > 0)
+    .map(({ s, ...p }) => ({
+      ...p,
+      g: s.gamesPlayed, gs: s.gamesStarted,
+      inn: String(s.innings), outs: outs(s.innings),
+      tc: s.chances, po: s.putOuts, a: s.assists, e: s.errors, dp: s.doublePlays,
+      fpct: num(s.fielding), rf9: num(s.rangeFactorPer9Inn)
+    }));
+}
+
 async function fetchSeason(season) {
-  const [table, games, bats, arms] = await Promise.all([
-    standings(season), schedule(season), hitters(season), pitchers(season)
+  const [table, games, bats, arms, gloves] = await Promise.all([
+    standings(season), schedule(season), hitters(season), pitchers(season), fielders(season)
   ]);
   return {
     season,
@@ -171,7 +184,8 @@ async function fetchSeason(season) {
     standings: table,
     games,
     hitters: bats,
-    pitchers: arms
+    pitchers: arms,
+    fielders: gloves
   };
 }
 
@@ -211,7 +225,7 @@ for (const [i, season] of SEASONS.entries()) {
       continue;
     }
     changed = (await save(file, data)) || changed;
-    console.log(`${season}: ${data.standings.length} teams, ${data.games.length} games, ${data.hitters.length} hitters, ${data.pitchers.length} pitchers`);
+    console.log(`${season}: ${data.standings.length} teams, ${data.games.length} games, ${data.hitters.length} hitters, ${data.pitchers.length} pitchers, ${data.fielders.length} fielders`);
   } catch (err) {
     failures.push(`${season}: ${err.message}`);
     console.error(`${season}: ${err.message}`);

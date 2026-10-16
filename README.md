@@ -1,7 +1,7 @@
 # Short Porch DB
 
 A New York Yankees season dashboard: record, AL East and American League
-standings, runs by month, hitting and pitching stats, and the full schedule
+standings, runs by month, hitting, pitching and fielding stats, and the full schedule
 including the postseason.
 
 - `index.html` is the page. Serve it through GitHub Pages or any web
