@@ -170,9 +170,31 @@ async function fielders(season) {
     }));
 }
 
+// Team batting by month, and the same line for opponents (the pitching
+// group's stats are what was hit against us). Regular season only.
+// Counting stats are kept so the page can total a season.
+async function byMonth(season, group) {
+  const body = await api(`teams/${TEAM}/stats?stats=byMonth&group=${group}&season=${season}&gameType=R&sportId=1`);
+  return new Map((body.stats?.[0]?.splits || []).map(({ month, stat: s }) => [Number(month), {
+    g: s.gamesPlayed, r: s.runs,
+    pa: s.plateAppearances ?? s.battersFaced, ab: s.atBats,
+    h: s.hits, d: s.doubles, t: s.triples, hr: s.homeRuns,
+    bb: s.baseOnBalls, hbp: s.hitByPitch, sf: s.sacFlies, so: s.strikeOuts,
+    avg: num(s.avg), obp: num(s.obp), slg: num(s.slg), ops: num(s.ops)
+  }]));
+}
+
+async function monthly(season) {
+  const [bat, opp] = await Promise.all([byMonth(season, "hitting"), byMonth(season, "pitching")]);
+  return [...new Set([...bat.keys(), ...opp.keys()])]
+    .filter(m => m >= 1 && m <= 12)
+    .sort((a, b) => a - b)
+    .map(m => ({ m, bat: bat.get(m) || null, opp: opp.get(m) || null }));
+}
+
 async function fetchSeason(season) {
-  const [table, games, bats, arms, gloves] = await Promise.all([
-    standings(season), schedule(season), hitters(season), pitchers(season), fielders(season)
+  const [table, games, bats, arms, gloves, months] = await Promise.all([
+    standings(season), schedule(season), hitters(season), pitchers(season), fielders(season), monthly(season)
   ]);
   return {
     season,
@@ -185,7 +207,8 @@ async function fetchSeason(season) {
     games,
     hitters: bats,
     pitchers: arms,
-    fielders: gloves
+    fielders: gloves,
+    months
   };
 }
 

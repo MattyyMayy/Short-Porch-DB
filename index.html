@@ -143,9 +143,10 @@
   .bar { width: min(14px, 40%); min-height: 6px; }
   .bar.rf { background: repeating-linear-gradient(0deg, var(--accent) 0 4px, transparent 4px 6px); }
   .bar.ra { background: repeating-linear-gradient(0deg, var(--muted) 0 4px, transparent 4px 6px); opacity: .6; }
+  .bar.none { min-height: 0; }
   .bar-labels { display: flex; gap: 6px; }
   .bar-label { flex: 1; text-align: center; font-size: 18px; color: var(--muted); padding-top: 4px; }
-  .legend { display: flex; gap: 16px; color: var(--muted); margin-top: 8px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 16px; color: var(--muted); margin-top: 8px; }
   .legend span::before { content: ""; display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; }
   .legend .rf::before { background: var(--accent); } .legend .ra::before { background: var(--muted); opacity: .6; }
 
@@ -225,10 +226,25 @@
     </section>
 
     <section class="card">
-      <h2>Runs by month</h2>
+      <div class="toolbar">
+        <h2>By month</h2>
+        <label class="pos">Stat
+          <select id="trend">
+            <option value="ops">OPS</option>
+            <option value="avg">Average</option>
+            <option value="obp">On-base %</option>
+            <option value="slg">Slugging %</option>
+            <option value="rpg">Runs / game</option>
+            <option value="hrpg">Home runs / game</option>
+            <option value="kpct">Strikeout %</option>
+            <option value="bbpct">Walk %</option>
+            <option value="runs">Runs (total)</option>
+          </select>
+        </label>
+      </div>
       <div class="bars" id="bars"></div>
       <div class="bar-labels" id="bar-labels"></div>
-      <div class="legend"><span class="rf">Scored</span><span class="ra">Allowed</span></div>
+      <div class="legend" id="legend"></div>
     </section>
   </div>
 
@@ -336,6 +352,28 @@
     }
   };
 
+  // Month chart: Yankees beside opponents. Runs come from the schedule and
+  // include the postseason; the rest are regular-season team stats, where
+  // "opponents" is what was hit against Yankees pitching.
+  const pct1 = v => v == null ? "–" : (v * 100).toFixed(1) + "%";
+  const ratio = (a, b) => (b > 0 && Number.isFinite(a / b) ? a / b : null);
+  const add = (a, b) => (a == null || b == null ? null : a + b);
+  const OBP = l => ratio(l.h + l.bb + l.hbp, l.ab + l.bb + l.hbp + l.sf);
+  const SLG = l => ratio(l.h + l.d + 2 * l.t + 3 * l.hr, l.ab);
+  const TRENDS = {
+    ops: { fmt: avg3, of: l => l.ops ?? add(OBP(l), SLG(l)) },
+    avg: { fmt: avg3, of: l => l.avg ?? ratio(l.h, l.ab) },
+    obp: { fmt: avg3, of: l => l.obp ?? OBP(l) },
+    slg: { fmt: avg3, of: l => l.slg ?? SLG(l) },
+    rpg: { fmt: fix2, of: l => ratio(l.r, l.g), schedule: true },
+    hrpg: { fmt: fix2, of: l => ratio(l.hr, l.g) },
+    kpct: { fmt: pct1, of: l => ratio(l.so, l.pa) },
+    bbpct: { fmt: pct1, of: l => ratio(l.bb, l.pa) },
+    runs: { fmt: v => Number.isFinite(v) ? v : "–", of: l => l.r, schedule: true }
+  };
+  const LINE_KEYS = ["g", "r", "pa", "ab", "h", "d", "t", "hr", "bb", "hbp", "sf", "so"];
+  const sumLines = lines => Object.fromEntries(LINE_KEYS.map(k => [k, lines.reduce((t, l) => t + (l[k] ?? NaN), 0)]));
+
   const CITY = { "New York": "NY", "Los Angeles": "LA", "Chicago": "CHI" };
   const shortName = t => t.replace(/^(New York|Los Angeles|Chicago) /, (m, city) => `${CITY[city]} `);
   const fmtDate = (iso, opts) => new Date(`${iso}T12:00:00`).toLocaleDateString("en-US", opts);
@@ -382,6 +420,7 @@
   let current = null;
   let filter = "all";
   let view = "division";
+  let trend = "ops";
   let group = "hitters";
   let sortKey = STATS.hitters.sorts[0][0];
   let season = null;
@@ -470,20 +509,36 @@
   const blocks = (v, max) => Math.max(1, Math.round((v / max) * BAR_HEIGHT / BLOCK)) * BLOCK;
 
   function renderBars(s) {
-    if (!s.monthly.length) {
-      $("bars").innerHTML = `<p class="pos">No results yet.</p>`;
-      $("bar-labels").innerHTML = "";
+    const cfg = TRENDS[trend];
+    const label = $("trend").selectedOptions[0].textContent;
+    const rows = cfg.schedule
+      ? s.monthly.map(x => ({ m: x.m, us: { r: x.rf, g: x.n }, them: { r: x.ra, g: x.n } }))
+      : (s.months || []).filter(x => x.bat || x.opp).map(x => ({ m: MONTH_NAMES[x.m - 1], us: x.bat, them: x.opp }));
+    const val = l => (l ? cfg.of(l) : null);
+    const names = cfg.schedule && trend === "runs" ? ["Scored", "Allowed"] : ["Yankees", "Opponents"];
+    if (!rows.length) {
+      $("bars").innerHTML = `<p class="pos">${cfg.schedule ? "No results yet." : `No monthly ${esc(label)} for this season yet.`}</p>`;
+      $("bar-labels").innerHTML = $("legend").innerHTML = "";
       return;
     }
-    const max = Math.max(1, ...s.monthly.flatMap(m => [m.rf, m.ra]));
-    $("bars").innerHTML = s.monthly.map(m => `
-      <div class="bar-group" title="${m.m}: ${m.rf} scored, ${m.ra} allowed in ${m.n} games">
-        <div class="bar-pair">
-          <div class="bar rf" style="height:${blocks(m.rf, max)}px"></div>
-          <div class="bar ra" style="height:${blocks(m.ra, max)}px"></div>
-        </div>
-      </div>`).join("");
-    $("bar-labels").innerHTML = s.monthly.map(m => `<div class="bar-label">${m.m}</div>`).join("");
+    const max = Math.max(...rows.flatMap(x => [val(x.us), val(x.them)]).filter(v => v != null), 0) || 1;
+    const bar = (cls, v) => v == null
+      ? `<div class="bar ${cls} none"></div>`
+      : `<div class="bar ${cls}" style="height:${blocks(v, max)}px"></div>`;
+    $("bars").innerHTML = rows.map(x => {
+      const games = cfg.schedule ? ` in ${x.us.g} games` : "";
+      return `
+      <div class="bar-group" title="${x.m} ${esc(label)}: ${names[0]} ${cfg.fmt(val(x.us))}, ${names[1].toLowerCase()} ${cfg.fmt(val(x.them))}${games}">
+        <div class="bar-pair">${bar("rf", val(x.us))}${bar("ra", val(x.them))}</div>
+      </div>`;
+    }).join("");
+    $("bar-labels").innerHTML = rows.map(x => `<div class="bar-label">${x.m}</div>`).join("");
+    // The legend carries the season figure for each side.
+    const season = side => {
+      const lines = rows.map(x => x[side]).filter(Boolean);
+      return lines.length ? cfg.fmt(cfg.of(sumLines(lines))) : "–";
+    };
+    $("legend").innerHTML = `<span class="rf">${names[0]} ${season("us")}</span><span class="ra">${names[1]} ${season("them")}</span>`;
   }
 
   function renderSortOptions() {
@@ -574,7 +629,7 @@
     setStatus("OFFLINE");
     $("meta").textContent = message;
     $("kpis").innerHTML = `<p class="pos">${esc(message)}</p>`;
-    $("standings").innerHTML = $("bars").innerHTML = $("bar-labels").innerHTML = $("players").innerHTML = $("games").innerHTML = "";
+    $("standings").innerHTML = $("bars").innerHTML = $("bar-labels").innerHTML = $("legend").innerHTML = $("players").innerHTML = $("games").innerHTML = "";
   }
 
   async function render() {
@@ -591,7 +646,7 @@
       renderPlayers(s);
       renderGames(s);
       const updated = new Date(s.updated).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
-      $("note").innerHTML = `${esc(s.label)} data from the <a href="https://statsapi.mlb.com/">MLB Stats API</a>. Player stats are regular season only. Last change ${esc(updated)}. `
+      $("note").innerHTML = `${esc(s.label)} data from the <a href="https://statsapi.mlb.com/">MLB Stats API</a>. Player stats and monthly team stats other than runs are regular season only. Last change ${esc(updated)}. `
         + `Data © ${new Date().getFullYear()} MLB Advanced Media, L.P. Use of any content on this page acknowledges agreement to the terms posted at <a href="http://gdx.mlb.com/components/copyright.txt">gdx.mlb.com/components/copyright.txt</a>.`;
     } catch (err) {
       if (id !== requestId) return;
@@ -617,6 +672,11 @@
     sortKey = STATS[group].sorts[0][0];
     renderSortOptions();
     if (season) renderPlayers(season);
+  });
+
+  $("trend").addEventListener("change", e => {
+    trend = e.target.value;
+    if (season) renderBars(season);
   });
 
   $("sort").addEventListener("change", e => {
