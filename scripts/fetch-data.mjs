@@ -33,11 +33,32 @@ const resultOf = (f, a) => (f > a ? "W" : f < a ? "L" : "T");
 const num = v => (v == null || v === "" || v === "-" || v === ".---" ? null : Number(v));
 let calls = 0;
 
+// Network blips ("fetch failed"), timeouts, rate limits and server errors
+// are retried with backoff; other HTTP errors fail at once.
+const RETRIES = 4;
+const TIMEOUT_MS = 30_000;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
 async function api(path) {
-  calls++;
-  const res = await fetch(`${API}/${path}`, { headers: { "user-agent": "short-porch-db" } });
-  if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
-  return res.json();
+  for (let attempt = 0; ; attempt++) {
+    calls++;
+    let res, problem;
+    try {
+      res = await fetch(`${API}/${path}`, {
+        headers: { "user-agent": "short-porch-db" },
+        signal: AbortSignal.timeout(TIMEOUT_MS)
+      });
+      if (res.ok) return await res.json();
+      problem = `HTTP ${res.status}`;
+    } catch (err) {
+      const cause = err.cause?.code || err.cause?.message;
+      problem = `${err.message}${cause ? ` (${cause})` : ""}`;
+    }
+    if (res && !res.ok && res.status !== 429 && res.status < 500) throw new Error(`${path}: ${problem}`);
+    if (attempt >= RETRIES) throw new Error(`${path}: ${problem}`);
+    console.warn(`${path}: ${problem}, retrying`);
+    await sleep(1000 * 2 ** attempt);
+  }
 }
 
 function split(teamRecord, type) {
