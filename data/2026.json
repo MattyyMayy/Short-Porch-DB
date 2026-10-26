@@ -3,7 +3,7 @@
  "label": "2026",
  "source": "mlb-statsapi",
  "version": 3,
- "updated": "2026-10-26T14:58:38.273Z",
+ "updated": "2026-10-26T19:07:18.961Z",
  "live": false,
  "standings": [
   {
@@ -7953,7 +7953,7 @@
      ],
      "r": 1,
      "h": 3,
-     "e": 0
+     "e": 1
     }
    }
   },
