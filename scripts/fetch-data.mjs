@@ -20,7 +20,7 @@ const NOT_PLAYED = /postponed|cancel|suspended/i;
 
 // Bump when the shape of the season files changes, so past seasons (which
 // are otherwise only fetched once) are fetched again.
-const DATA_VERSION = 3;
+const DATA_VERSION = 4;
 
 // The first season is the current one and is refreshed on every run; the
 // others are only fetched once, when their file is missing. A new season
@@ -221,10 +221,89 @@ async function monthly(season) {
     .map(m => ({ m, bat: bat.get(m) || null, opp: opp.get(m) || null }));
 }
 
+// Per-player lines by month, as counts so the page can work out any rate
+// stat and compare it with the league. Regular season only.
+const HIT_MONTH = {
+  g: "gamesPlayed", pa: "plateAppearances", ab: "atBats", h: "hits", d: "doubles", t: "triples",
+  hr: "homeRuns", r: "runs", rbi: "rbi", bb: "baseOnBalls", hbp: "hitByPitch", sf: "sacFlies",
+  so: "strikeOuts", sb: "stolenBases"
+};
+const PITCH_MONTH = {
+  g: "gamesPlayed", gs: "gamesStarted", w: "wins", l: "losses", sv: "saves", hld: "holds",
+  er: "earnedRuns", h: "hits", bb: "baseOnBalls", so: "strikeOuts", hr: "homeRuns", bf: "battersFaced"
+};
+
+function monthLine(stat, fields, pitching) {
+  const line = Object.fromEntries(Object.entries(fields).map(([k, f]) => [k, stat[f] ?? 0]));
+  if (pitching) line.outs = outs(stat.inningsPitched);
+  return line;
+}
+
+// One request per batch of players: the people endpoint can hydrate each
+// player's byMonth splits for both groups.
+async function playerMonths(season, ids) {
+  const out = new Map();
+  for (let i = 0; i < ids.length; i += 40) {
+    const batch = ids.slice(i, i + 40);
+    const body = await api(`people?personIds=${batch.join(",")}&hydrate=stats(group=[hitting,pitching],type=[byMonth],season=${season},gameType=R)`);
+    for (const person of body.people || []) {
+      const entry = { hitting: [], pitching: [] };
+      for (const block of person.stats || []) {
+        const group = block.group?.displayName;
+        if (group !== "hitting" && group !== "pitching") continue;
+        for (const sp of block.splits || []) {
+          const m = Number(sp.month);
+          if (!m || (sp.season && String(sp.season) !== String(season))) continue;
+          entry[group].push({ m, ...monthLine(sp.stat, group === "hitting" ? HIT_MONTH : PITCH_MONTH, group === "pitching") });
+        }
+      }
+      entry.hitting.sort((a, b) => a.m - b.m);
+      entry.pitching.sort((a, b) => a.m - b.m);
+      out.set(person.id, entry);
+    }
+  }
+  return out;
+}
+
+// All of MLB by month: every team's byMonth split, added up. The page
+// divides these for league-average rates.
+async function leagueMonths(season, group) {
+  const body = await api(`teams/stats?stats=byMonth&group=${group}&season=${season}&sportIds=1&gameType=R`);
+  const fields = group === "hitting" ? HIT_MONTH : PITCH_MONTH;
+  const months = new Map();
+  for (const sp of body.stats?.[0]?.splits || []) {
+    const m = Number(sp.month);
+    if (!m) continue;
+    const line = monthLine(sp.stat, fields, group === "pitching");
+    const total = months.get(m);
+    if (!total) months.set(m, line);
+    else for (const k of Object.keys(line)) total[k] += line[k];
+  }
+  return [...months.entries()].sort((a, b) => a[0] - b[0]).map(([m, line]) => ({ m, ...line }));
+}
+
+// Monthly data is extra: if any of it fails, the season still saves without it.
+async function optional(promise, what, season) {
+  try {
+    return await promise;
+  } catch (err) {
+    console.warn(`${season}: no ${what} (${err.message})`);
+    return null;
+  }
+}
+
 async function fetchSeason(season) {
-  const [table, games, bats, arms, gloves, months] = await Promise.all([
-    standings(season), schedule(season), hitters(season), pitchers(season), fielders(season), monthly(season)
+  const [table, games, bats, arms, gloves, months, lgHit, lgPitch] = await Promise.all([
+    standings(season), schedule(season), hitters(season), pitchers(season), fielders(season), monthly(season),
+    optional(leagueMonths(season, "hitting"), "MLB hitting by month", season),
+    optional(leagueMonths(season, "pitching"), "MLB pitching by month", season)
   ]);
+  const ids = [...new Set([...bats, ...arms].map(p => p.id))];
+  const byPlayer = await optional(playerMonths(season, ids), "player stats by month", season);
+  if (byPlayer) {
+    for (const p of bats) p.months = byPlayer.get(p.id)?.hitting || [];
+    for (const p of arms) p.months = byPlayer.get(p.id)?.pitching || [];
+  }
   return {
     season,
     label: String(season),
@@ -237,7 +316,8 @@ async function fetchSeason(season) {
     hitters: bats,
     pitchers: arms,
     fielders: gloves,
-    months
+    months,
+    league: { hitting: lgHit, pitching: lgPitch }
   };
 }
 

@@ -2,7 +2,8 @@
 
 A New York Yankees season dashboard: record, AL East and American League
 standings, runs by month, hitting, pitching and fielding stats, and the full schedule
-including the postseason.
+including the postseason. Click a hitter or pitcher to chart any of their stats
+month by month against the MLB average for the same months.
 
 - `index.html` is the page. Serve it through GitHub Pages or any web
   server; it reads its data from `data/`.
