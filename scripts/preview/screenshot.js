@@ -26,6 +26,17 @@ const { chromium } = require("playwright");
     await players.screenshot({ path: `${out}/desktop-player-chart.png` });
   }
 
+  // Each player table, with age, height and weight at the right end.
+  for (const g of ["hitters", "pitchers", "fielders"]) {
+    await p.selectOption("#group", g).catch(() => {});
+    await p.waitForTimeout(200);
+    await players.screenshot({ path: `${out}/desktop-${g}.png` });
+  }
+  await p.selectOption("#group", "hitters").catch(() => {});
+  await p.selectOption("#sort", "age").catch(() => {});
+  await p.waitForTimeout(200);
+  await players.screenshot({ path: `${out}/desktop-hitters-by-age.png` });
+
   const m = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
   watch(m);
   await m.goto(url, { waitUntil: "networkidle" }).catch(() => {});
@@ -33,6 +44,10 @@ const { chromium } = require("playwright");
   await m.screenshot({ path: `${out}/mobile-full.png`, fullPage: true });
   await m.emulateMedia({ colorScheme: "dark" });
   await m.screenshot({ path: `${out}/mobile-dark.png` });
+  const mPlayers = m.locator("section.card", { has: m.locator("#players") });
+  await mPlayers.screenshot({ path: `${out}/mobile-dark-players.png` });
+  await m.locator("#players-box").evaluate(el => { el.scrollLeft = el.scrollWidth; });
+  await mPlayers.screenshot({ path: `${out}/mobile-dark-players-right.png` });
 
   await b.close();
 })();

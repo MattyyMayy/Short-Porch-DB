@@ -126,6 +126,7 @@
   #players tr.open td { background: var(--hi); }
   #players tr.open td:first-child { box-shadow: inset 4px 0 0 var(--loss); }
   #players td.picked { outline: 3px solid var(--loss); outline-offset: -3px; }
+  #players-box .bio { border-left: 3px dashed var(--line); }
   .caret { display: inline-block; width: 14px; color: var(--muted); }
   tr.detail > td { padding: 10px 12px 14px; background: var(--hi); text-align: left; white-space: normal; }
   #players tr.detail:hover td { background: var(--hi); }
@@ -368,41 +369,47 @@
 
   const avg3 = v => v == null ? "–" : v.toFixed(3).replace(/^0/, "");
   const fix2 = v => v == null ? "–" : v.toFixed(2);
+  const htFmt = v => v == null ? "–" : `${Math.floor(v / 12)}'${v % 12}"`;
+  const dash = v => v ?? "–";
+
+  // Age, height and weight sit at the right end of every player table.
+  const BIO_HEAD = `<th class="bio" title="Age on June 30 of the season">Age</th><th class="hide-sm">Ht</th><th class="hide-sm">Wt</th>`;
+  const bio = p => [["age", dash(p.age), "bio"], ["ht", htFmt(p.ht), "hide-sm"], ["wt", dash(p.wt), "hide-sm"]];
 
   const STATS = {
     hitters: {
       label: "hitting",
       pos: true,
       sorts: [
-        ["ops", "OPS"], ["hr", "Home runs"], ["rbi", "RBI"], ["avg", "Average"], ["sb", "Stolen bases"], ["pa", "Plate appearances"]
+        ["ops", "OPS"], ["hr", "Home runs"], ["rbi", "RBI"], ["avg", "Average"], ["sb", "Stolen bases"], ["pa", "Plate appearances"], ["age", "Age"]
       ],
       rate: new Set(["ops", "avg"]),
       qualified: p => p.pa >= MIN_PA,
-      head: `<tr><th class="name">Player</th><th>Pos</th><th>G</th><th class="hide-sm">PA</th><th>AVG</th><th>HR</th><th>RBI</th><th class="hide-sm">SB</th><th class="hide-sm">OBP</th><th class="hide-sm">SLG</th><th>OPS</th></tr>`,
-      row: p => [["g", p.g], ["pa", p.pa, "hide-sm"], ["avg", avg3(p.avg)], ["hr", p.hr], ["rbi", p.rbi], ["sb", p.sb, "hide-sm"], ["obp", avg3(p.obp), "hide-sm"], ["slg", avg3(p.slg), "hide-sm"], ["ops", avg3(p.ops)]]
+      head: `<tr><th class="name">Player</th><th>Pos</th><th>G</th><th class="hide-sm">PA</th><th>AVG</th><th>HR</th><th>RBI</th><th class="hide-sm">SB</th><th class="hide-sm">OBP</th><th class="hide-sm">SLG</th><th>OPS</th>${BIO_HEAD}</tr>`,
+      row: p => [["g", p.g], ["pa", p.pa, "hide-sm"], ["avg", avg3(p.avg)], ["hr", p.hr], ["rbi", p.rbi], ["sb", p.sb, "hide-sm"], ["obp", avg3(p.obp), "hide-sm"], ["slg", avg3(p.slg), "hide-sm"], ["ops", avg3(p.ops)], ...bio(p)]
     },
     pitchers: {
       label: "pitching",
       sorts: [
-        ["outs", "Innings"], ["era", "ERA"], ["so", "Strikeouts"], ["whip", "WHIP"], ["w", "Wins"], ["sv", "Saves"]
+        ["outs", "Innings"], ["era", "ERA"], ["so", "Strikeouts"], ["whip", "WHIP"], ["w", "Wins"], ["sv", "Saves"], ["age", "Age"]
       ],
       rate: new Set(["era", "whip"]),
       ascending: new Set(["era", "whip"]),
       qualified: p => p.outs >= MIN_OUTS,
-      head: `<tr><th class="name">Player</th><th>G</th><th class="hide-sm">GS</th><th>IP</th><th>W-L</th><th class="hide-sm">SV</th><th>ERA</th><th class="hide-sm">WHIP</th><th>K</th><th class="hide-sm">BB</th></tr>`,
-      row: p => [["g", p.g], ["gs", p.gs, "hide-sm"], ["ip", esc(p.ip)], ["w", `${p.w}-${p.l}`], ["sv", p.sv, "hide-sm"], ["era", fix2(p.era)], ["whip", fix2(p.whip), "hide-sm"], ["so", p.so], ["bb", p.bb, "hide-sm"]]
+      head: `<tr><th class="name">Player</th><th>G</th><th class="hide-sm">GS</th><th>IP</th><th>W-L</th><th class="hide-sm">SV</th><th>ERA</th><th class="hide-sm">WHIP</th><th>K</th><th class="hide-sm">BB</th>${BIO_HEAD}</tr>`,
+      row: p => [["g", p.g], ["gs", p.gs, "hide-sm"], ["ip", esc(p.ip)], ["w", `${p.w}-${p.l}`], ["sv", p.sv, "hide-sm"], ["era", fix2(p.era)], ["whip", fix2(p.whip), "hide-sm"], ["so", p.so], ["bb", p.bb, "hide-sm"], ...bio(p)]
     },
     // One row per player per position.
     fielders: {
       label: "fielding",
       pos: true,
       sorts: [
-        ["outs", "Innings"], ["fpct", "Fielding %"], ["po", "Putouts"], ["a", "Assists"], ["dp", "Double plays"], ["e", "Errors"], ["rf9", "Range factor"]
+        ["outs", "Innings"], ["fpct", "Fielding %"], ["po", "Putouts"], ["a", "Assists"], ["dp", "Double plays"], ["e", "Errors"], ["rf9", "Range factor"], ["age", "Age"]
       ],
       rate: new Set(["fpct", "rf9"]),
       qualified: p => p.outs >= MIN_FIELD_OUTS,
-      head: `<tr><th class="name">Player</th><th>Pos</th><th>G</th><th class="hide-sm">GS</th><th>Inn</th><th class="hide-sm">TC</th><th>PO</th><th>A</th><th>E</th><th class="hide-sm">DP</th><th>FLD%</th><th class="hide-sm">RF/9</th></tr>`,
-      row: p => [["g", p.g], ["gs", p.gs, "hide-sm"], ["inn", esc(p.inn)], ["tc", p.tc, "hide-sm"], ["po", p.po], ["a", p.a], ["e", p.e], ["dp", p.dp, "hide-sm"], ["fpct", avg3(p.fpct)], ["rf9", fix2(p.rf9), "hide-sm"]]
+      head: `<tr><th class="name">Player</th><th>Pos</th><th>G</th><th class="hide-sm">GS</th><th>Inn</th><th class="hide-sm">TC</th><th>PO</th><th>A</th><th>E</th><th class="hide-sm">DP</th><th>FLD%</th><th class="hide-sm">RF/9</th>${BIO_HEAD}</tr>`,
+      row: p => [["g", p.g], ["gs", p.gs, "hide-sm"], ["inn", esc(p.inn)], ["tc", p.tc, "hide-sm"], ["po", p.po], ["a", p.a], ["e", p.e], ["dp", p.dp, "hide-sm"], ["fpct", avg3(p.fpct)], ["rf9", fix2(p.rf9), "hide-sm"], ...bio(p)]
     }
   };
 
@@ -652,7 +659,7 @@
     $("players-head").innerHTML = cfg.head;
     const list = s[group] || [];
     if (!list.length) {
-      $("players").innerHTML = `<tr><td class="empty" colspan="12">No ${cfg.label} stats for this season.</td></tr>`;
+      $("players").innerHTML = `<tr><td class="empty" colspan="15">No ${cfg.label} stats for this season.</td></tr>`;
       return;
     }
     const dir = cfg.ascending?.has(sortKey) ? 1 : -1;

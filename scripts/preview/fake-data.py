@@ -1,5 +1,5 @@
-# Builds a preview copy of data/ with made-up monthly splits and MLB monthly
-# totals, for screenshots. Never commit its output.
+# Builds a preview copy of data/ with made-up monthly splits, MLB monthly
+# totals and player ages/heights/weights, for screenshots. Never commit its output.
 # Usage: python3 scripts/preview/fake-data.py data <out-dir>
 import json, random, sys, os, math
 src, dst = sys.argv[1], sys.argv[2]
@@ -15,6 +15,11 @@ def split(total, w):
 MONTHS=[3,4,5,6,7,8,9]
 for season in idx["seasons"]:
     d=json.load(open(f"{src}/{season}.json"))
+    # Same made-up bio per player id across seasons; age moves with the season.
+    for p in d["hitters"]+d["pitchers"]+d["fielders"]:
+        r=random.Random(p["id"])
+        p["age"]=int(season)-r.randint(1986,2002); p["ht"]=r.randint(69,80); p["wt"]=r.randint(175,265)
+        if r.random()<.04: p["age"]=p["ht"]=p["wt"]=None
     for p in d["hitters"]:
         n=random.choice([7,7,7,5,4,3,2]); start=random.randint(0,7-n); ms=MONTHS[start:start+n]
         w=[ (0.3 if m==3 else 1)*random.uniform(.7,1.3) for m in ms]

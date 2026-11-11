@@ -20,7 +20,7 @@ const NOT_PLAYED = /postponed|cancel|suspended/i;
 
 // Bump when the shape of the season files changes, so past seasons (which
 // are otherwise only fetched once) are fetched again.
-const DATA_VERSION = 4;
+const DATA_VERSION = 5;
 
 // The first season is the current one and is refreshed on every run; the
 // others are only fetched once, when their file is missing. A new season
@@ -239,15 +239,32 @@ function monthLine(stat, fields, pitching) {
   return line;
 }
 
+// Age on June 30 of the season (the usual "season age"), from "YYYY-MM-DD".
+function seasonAge(birthDate, season) {
+  const [y, m, d] = String(birthDate || "").split("-").map(Number);
+  if (!y || !m || !d) return null;
+  return season - y - (m > 6 || (m === 6 && d > 30) ? 1 : 0);
+}
+
+// Height comes as 6' 2"; kept as inches.
+function inches(height) {
+  const m = /(\d+)'\s*(\d+)?/.exec(height || "");
+  return m ? Number(m[1]) * 12 + Number(m[2] || 0) : null;
+}
+
 // One request per batch of players: the people endpoint can hydrate each
-// player's byMonth splits for both groups.
+// player's byMonth splits for both groups, and carries their birth date,
+// height and weight.
 async function playerMonths(season, ids) {
   const out = new Map();
   for (let i = 0; i < ids.length; i += 40) {
     const batch = ids.slice(i, i + 40);
     const body = await api(`people?personIds=${batch.join(",")}&hydrate=stats(group=[hitting,pitching],type=[byMonth],season=${season},gameType=R)`);
     for (const person of body.people || []) {
-      const entry = { hitting: [], pitching: [] };
+      const entry = {
+        hitting: [], pitching: [],
+        bio: { age: seasonAge(person.birthDate, season), ht: inches(person.height), wt: num(person.weight) }
+      };
       for (const block of person.stats || []) {
         const group = block.group?.displayName;
         if (group !== "hitting" && group !== "pitching") continue;
@@ -298,11 +315,12 @@ async function fetchSeason(season) {
     optional(leagueMonths(season, "hitting"), "MLB hitting by month", season),
     optional(leagueMonths(season, "pitching"), "MLB pitching by month", season)
   ]);
-  const ids = [...new Set([...bats, ...arms].map(p => p.id))];
-  const byPlayer = await optional(playerMonths(season, ids), "player stats by month", season);
+  const ids = [...new Set([...bats, ...arms, ...gloves].map(p => p.id))];
+  const byPlayer = await optional(playerMonths(season, ids), "player bios and stats by month", season);
   if (byPlayer) {
     for (const p of bats) p.months = byPlayer.get(p.id)?.hitting || [];
     for (const p of arms) p.months = byPlayer.get(p.id)?.pitching || [];
+    for (const p of [...bats, ...arms, ...gloves]) Object.assign(p, byPlayer.get(p.id)?.bio || { age: null, ht: null, wt: null });
   }
   return {
     season,
